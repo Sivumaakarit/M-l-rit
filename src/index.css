@@ -50,6 +50,7 @@
     --mint: 150 40% 90%;
     --sand: 45 50% 92%;
     --forest-green: 140 50% 28%;
+    --hero-green: 126 45% 60%;
 
     /* Sidebar - keeping defaults */
     --sidebar-background: 0 0% 98%;
@@ -231,11 +232,7 @@
   }
 
   .bg-gradient-forest {
-    background: linear-gradient(180deg, 
-      hsl(var(--secondary)) 0%, 
-      hsl(150 50% 85%) 50%,
-      hsl(var(--mint)) 100%
-    );
+    background: #d1eedf;
   }
 
   .bg-gradient-sand {

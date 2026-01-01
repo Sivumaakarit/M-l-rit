@@ -57,7 +57,7 @@ const MusicSection = () => {
             </h3>
             <div className="rounded-2xl overflow-hidden">
               <iframe
-                src="https://open.spotify.com/embed/track/4iV5W9uYEdYUVa79Axb7Rh?utm_source=generator&theme=0"
+                src="https://open.spotify.com/embed/track/6Hvh5yfRseTfJE88S2f0kU?utm_source=generator"
                 width="100%"
                 height="152"
                 frameBorder="0"

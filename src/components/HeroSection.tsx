@@ -60,7 +60,7 @@ const HeroSection = ({}: HeroSectionProps) => {
             Tervetuloa Mölymetsään! 🌲
           </h1>
           <p className="font-body text-xl md:text-2xl text-[hsl(30_35%_30%)] max-w-2xl mx-auto font-semibold">
-            Täällä apinalaumassa pidetään hauskaa ja tanssitaan yhdessä!
+            Täällä apinalaumassa pidetään hauskaa ja tanssitaan yhdessä! Mölyapinat takaa, että hymy on herkässä ja banaanit lentää. Nähdään keikalla!
           </p>
         </motion.div>
 
@@ -82,7 +82,7 @@ const HeroSection = ({}: HeroSectionProps) => {
             </div>
           </div>
           <p className="text-center mt-4 font-heading text-2xl text-bright-orange">
-            🍌 Banaanitanssi 🍌
+            🍌 Harjoittele Banaanitanssi 🍌
           </p>
         </motion.div>
       </div>
