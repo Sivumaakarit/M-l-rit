@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Bubblegum Sans", "cursive"],
+        heading: ["Luckiest Guy", "cursive"],
         body: ["Quicksand", "sans-serif"],
       },
       colors: {

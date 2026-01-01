@@ -33,7 +33,7 @@ const ContactSection = () => {
           className="text-center mb-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
-            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               📬 Tilaa Mölyapinat 📬
             </h2>
           </div>
@@ -103,7 +103,7 @@ const ContactSection = () => {
 
             <motion.button
               type="submit"
-              className="w-full bg-bright-orange text-primary-foreground font-display text-xl py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-xl transition-shadow"
+              className="w-full bg-bright-orange text-primary-foreground font-heading text-xl py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-xl transition-shadow"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

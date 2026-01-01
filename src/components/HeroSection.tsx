@@ -56,7 +56,7 @@ const HeroSection = ({}: HeroSectionProps) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-[hsl(30_35%_25%)] mb-4 drop-shadow-lg">
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-[hsl(30_35%_25%)] mb-4 drop-shadow-lg">
             Tervetuloa Mölymetsään! 🌲
           </h1>
           <p className="font-body text-xl md:text-2xl text-[hsl(30_35%_30%)] max-w-2xl mx-auto font-semibold">
@@ -81,7 +81,7 @@ const HeroSection = ({}: HeroSectionProps) => {
               />
             </div>
           </div>
-          <p className="text-center mt-4 font-display text-2xl text-bright-orange">
+          <p className="text-center mt-4 font-heading text-2xl text-bright-orange">
             🍌 Banaanitanssi 🍌
           </p>
         </motion.div>

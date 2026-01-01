@@ -16,7 +16,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <motion.a
               href="#hero"
-              className="font-display text-2xl md:text-3xl text-wood-dark hover:scale-105 transition-transform"
+              className="font-heading text-2xl md:text-3xl text-wood-dark hover:scale-105 transition-transform"
               whileHover={{ rotate: [-2, 2, -2, 0] }}
               transition={{ duration: 0.4 }}
             >

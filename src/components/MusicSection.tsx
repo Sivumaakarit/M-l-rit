@@ -34,7 +34,7 @@ const MusicSection = () => {
           className="text-center mb-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
-            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎵 Musiikkia korville 🎵
             </h2>
           </div>
@@ -52,7 +52,7 @@ const MusicSection = () => {
             viewport={{ once: true }}
             className="bg-card rounded-3xl p-4 shadow-xl mb-12"
           >
-            <h3 className="font-display text-2xl text-center text-foreground mb-4">
+            <h3 className="font-heading text-2xl text-center text-foreground mb-4">
               🏴‍☠️ Merirosvot - Uusi single! 🏴‍☠️
             </h3>
             <div className="rounded-2xl overflow-hidden">
@@ -76,7 +76,7 @@ const MusicSection = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h3 className="font-display text-2xl text-foreground mb-6">
+            <h3 className="font-heading text-2xl text-foreground mb-6">
               Seuraa meitä! 📱
             </h3>
             <div className="flex justify-center gap-6 flex-wrap">

@@ -77,7 +77,7 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
               🎵
             </motion.div>
           </div>
-          <h3 className="font-display text-2xl text-foreground mb-2">
+          <h3 className="font-heading text-2xl text-foreground mb-2">
             {member.name}
           </h3>
           <p className="font-body text-muted-foreground text-sm">
@@ -101,7 +101,7 @@ const BandMembers = () => {
           className="text-center mb-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
-            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🐒 Mölyapinat-jäsenet 🐒
             </h2>
           </div>

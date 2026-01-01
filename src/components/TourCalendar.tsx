@@ -50,7 +50,7 @@ const TourCalendar = () => {
           className="text-center mb-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
-            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎪 Möly-kiertue 2026 🎪
             </h2>
           </div>
@@ -75,12 +75,12 @@ const TourCalendar = () => {
                   <div className="flex items-center gap-4">
                     <div className="bg-primary rounded-2xl p-3 text-center min-w-[80px]">
                       <Calendar className="w-6 h-6 mx-auto text-primary-foreground mb-1" />
-                      <span className="font-display text-sm text-primary-foreground">
+                      <span className="font-heading text-sm text-primary-foreground">
                         {gig.date}
                       </span>
                     </div>
                     <div>
-                      <h3 className="font-display text-xl text-foreground">
+                      <h3 className="font-heading text-xl text-foreground">
                         {gig.city}
                       </h3>
                       <p className="font-body text-muted-foreground flex items-center gap-1">
@@ -93,7 +93,7 @@ const TourCalendar = () => {
                     href={gig.ticketUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-bright-orange text-primary-foreground font-display text-lg px-6 py-3 rounded-2xl shadow-md flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
+                    className="bg-bright-orange text-primary-foreground font-heading text-lg px-6 py-3 rounded-2xl shadow-md flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

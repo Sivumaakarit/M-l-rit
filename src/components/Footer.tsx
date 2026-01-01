@@ -11,7 +11,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="font-display text-2xl text-primary mb-2">
+          <p className="font-heading text-2xl text-primary mb-2">
             🐒 Mölyapinat 🐒
           </p>
           <p className="font-body text-wood-light text-sm">
