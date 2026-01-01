@@ -14,7 +14,7 @@ interface BandMember {
 
 const bandMembers: BandMember[] = [
   {
-    name: "Make",
+    name: "Muka",
     image: makeMonkey,
     description: "Keltaiset aurinkolasit ja villit tanssiliikkeet!",
     color: "bg-primary",
@@ -26,7 +26,7 @@ const bandMembers: BandMember[] = [
     color: "bg-neon-green",
   },
   {
-    name: "Muka",
+    name: "Make",
     image: mukaMonkey,
     description: "Punaiset lasit ja täynnä energiaa!",
     color: "bg-destructive",
