@@ -45,7 +45,6 @@ const MusicSection = () => {
         </motion.div>
 
         <div className="max-w-3xl mx-auto space-y-8">
-          {/* Spotify-soittimet */}
           <motion.div className="bg-card rounded-3xl p-4 shadow-xl">
              <h3 className="font-heading text-2xl text-center text-foreground mb-4">🏴‍☠️ Merirosvot 🏴‍☠️</h3>
              <iframe src="https://open.spotify.com/embed/track/6Hvh5yfRseTfJE88S2f0kU?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
@@ -56,26 +55,33 @@ const MusicSection = () => {
              <iframe src="https://open.spotify.com/embed/track/2H2zbhXQSm2SdSXXM14nfs?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
           </motion.div>
 
-          {/* Some-napit */}
-          <div className="flex justify-center gap-4 md:gap-6 flex-wrap pt-4 pb-20">
+          {/* Some-napit mobiiliskaalauksella */}
+          <div className="flex justify-center gap-3 md:gap-6 flex-wrap pt-4 pb-20">
             {socialLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${link.color} text-white rounded-full p-4 md:p-5 shadow-lg transition-all`}
+                /* MUUTOS: p-3 mobiilissa, p-5 tietokoneella */
+                className={`${link.color} text-white rounded-full p-3 md:p-5 shadow-lg transition-all`}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
               >
-                <link.icon size={28} className="md:w-8 md:h-8" />
+                {/* MUUTOS: w-6 h-6 mobiilissa, w-8 h-8 tietokoneella */}
+                <link.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <span className="sr-only">{link.name}</span>
               </motion.a>
             ))}
           </div>
         </div>
       </div>
 
-      {/* --- TÄMÄ ON SE PUUTTUVA AALTO --- */}
+      {/* --- Aalto palautettu paikalleen --- */}
       <div className="mt-0 leading-[0]">
         <svg
           viewBox="0 0 1440 120"
