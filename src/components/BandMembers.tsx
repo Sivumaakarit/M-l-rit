@@ -115,8 +115,45 @@ const BandMembers = () => {
             <MemberCard key={member.name} member={member} index={index} />
           ))}
         </div>
-      </div>
+        {/* --- UUSI ESITTELYTEKSTI ALKAA --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-16 max-w-4xl mx-auto bg-card/50 rounded-3xl p-8 md:p-10 shadow-inner border-2 border-dashed border-wood-dark/20"
+        >
+          <div className="space-y-6 text-center md:text-left">
+            <p className="font-body text-xl text-wood-dark leading-relaxed font-semibold">
+              Mölyapinat soittavat menevää koko perheen musiikkia, joka pistää peput heilumaan! 🍌
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 text-muted-foreground font-body text-lg leading-relaxed">
+              <div className="space-y-4">
+                <p>
+                  Mölyapinat-keikalla on paljon osallistavia lauluja ja vuorovaikutusta – ja tietysti mahdollisuus liikkua. 
+                  Huomioimme aina lasten iän ja säädämme volyymin paikan mukaan. Tarvittaessa soitamme vaikka täysin akustisesti!
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p>
+                  Ohjelmistomme koostuu pääasiassa omista kappaleista, mutta mukana on myös tuttuja biisejä apinamaisilla sanoituksilla, 
+                  kuten <em>Banaanin metsästys</em> (Leijonan metsästys). Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make-Mölyapina myös yksin.
 
+
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-wood-dark/10 text-center">
+              <p className="font-body text-md text-muted-foreground italic">
+                Apinointia jo vuodesta 2014 – meidät on nähty niin laivoilla, Linnanmäellä kuin päiväkodeissakin!
+              </p>
+            </div>
+          </div>
+        </motion.div>
+        {/* --- UUSI ESITTELYTEKSTI PÄÄTTYY --- */}
+      </div>          
       {/* Wave divider */}
       <div className="mt-16">
         <svg
