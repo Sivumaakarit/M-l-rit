@@ -16,31 +16,31 @@ const bandMembers: BandMember[] = [
   {
     name: "Muka",
     image: mukaMonkey,
-    description: "Keltaiset aurinkolasit ja villit tanssiliikkeet!",
+    description: "Keltaiset aurinkolasit, basso ja villit tanssiliikkeet!",
     color: "bg-primary",
   },
   {
     name: "Mökä",
     image: mokaMonkey,
-    description: "Vihreät lasit ja aina valmis mölyämään!",
+    description: "Vihreät lasit, rummutus ja aina valmis mölyämään!",
     color: "bg-neon-green",
   },
   {
     name: "Make",
     image: makeMonkey,
-    description: "Punaiset lasit ja täynnä energiaa!",
+    description: "Oranssit aurinkolasit, kitara ja täynnä apinaenergiaa!",
     color: "bg-destructive",
   },
   {
     name: "Bansku-Ansku",
     image: banskuAnsku,
-    description: "Mölymetsän pörröisin energiapakkaus!",
+    description: "Metsän hattaraisin kampaus ja laulu!",
     color: "bg-primary",
   },
   {
     name: "Soffi",
     image: soffi,
-    description: "Pitää apinalauman järjestyksessä!",
+    description: "Laulu ja tanssi - pitää apinalauman järjestyksessä!",
     color: "bg-bright-orange",
   },
 ];
@@ -106,7 +106,7 @@ const BandMembers = () => {
             </h2>
           </div>
           <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
-            Tutustu Mölymetsän hulluun apinakaartiin!
+            Tutustu Mölymetsän hauskaan apinakaartiin!
           </p>
         </motion.div>
 

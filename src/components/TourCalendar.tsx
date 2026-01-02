@@ -12,27 +12,15 @@ const tourDates = [
     ticketUrl: "https://lippu.fi",
   },
   {
-    date: "22.2.2026",
-    city: "Tampere",
-    venue: "Tullikamarin klubi",
-    ticketUrl: "https://lippu.fi",
-  },
-  {
     date: "1.3.2026",
     city: "Turku",
     venue: "Logomo",
     ticketUrl: "https://lippu.fi",
   },
   {
-    date: "8.3.2026",
-    city: "Oulu",
-    venue: "Tullisali",
-    ticketUrl: "https://lippu.fi",
-  },
-  {
-    date: "15.3.2026",
-    city: "Jyväskylä",
-    venue: "Paviljonki",
+    date: "16.5.2026",
+    city: "Pielavesi",
+    venue: "Liikuntasali",
     ticketUrl: "https://lippu.fi",
   },
 ];
