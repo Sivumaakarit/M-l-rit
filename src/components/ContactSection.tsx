@@ -33,7 +33,7 @@ const ContactSection = () => {
           className="text-center mb-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
-            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
               📬 Tilaa Mölyapinat 📬
             </h2>
           </div>
@@ -51,8 +51,12 @@ const ContactSection = () => {
         >
           <form
             onSubmit={handleSubmit}
+            name="contact"
+            method="POST"
+            data-netlify="true"
             className="bg-card rounded-3xl p-6 md:p-8 shadow-xl space-y-6"
           >
+            <input type="hidden" name="form-name" value="contact" />
             <div>
               <label className="font-body font-semibold text-foreground flex items-center gap-2 mb-2">
                 <User className="w-5 h-5 text-bright-orange" />
@@ -60,6 +64,7 @@ const ContactSection = () => {
               </label>
               <input
                 type="text"
+                name="name"
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -76,6 +81,7 @@ const ContactSection = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
@@ -91,6 +97,7 @@ const ContactSection = () => {
                 Viesti
               </label>
               <textarea
+                name="message"
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
@@ -103,7 +110,7 @@ const ContactSection = () => {
 
             <motion.button
               type="submit"
-              className="w-full bg-bright-orange text-primary-foreground font-heading text-xl py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-xl transition-shadow"
+              className="w-full bg-bright-orange text-primary-foreground font-display text-xl py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-xl transition-shadow"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
