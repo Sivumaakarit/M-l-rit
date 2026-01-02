@@ -12,14 +12,31 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form validation
+
+    // 1. Tarkistetaan, että kentät on täytetty
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Täytä kaikki kentät!");
       return;
     }
-    // Here you would typically send the form data
-    toast.success("Kiitos viestistäsi! 🍌 Palaamme asiaan pian!");
-    setFormData({ name: "", email: "", message: "" });
+
+    // 2. Lähetetään tiedot Netliffylle taustalla (AJAX/Fetch)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": "contact", // Tämän on oltava täsmälleen sama kuin <form name="contact">
+        ...formData,
+      }).toString(),
+    })
+      .then(() => {
+        // 3. Jos lähetys onnistuu, näytetään viesti ja tyhjennetään lomake
+        toast.success("Kiitos viestistäsi! 🍌 Palaamme asiaan pian!");
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch((error) => {
+        // 4. Jos tapahtuu virhe, näytetään siitä ilmoitus
+        toast.error("Hups! Lähetys epäonnistui: " + error);
+      });
   };
 
   return (
