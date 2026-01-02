@@ -24,7 +24,7 @@ const MusicSection = () => {
   ];
 
   return (
-    <section id="music" className="py-16 bg-secondary">
+    <section id="music" className="pt-0 pb-0 bg-secondary">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

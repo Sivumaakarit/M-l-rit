@@ -77,7 +77,7 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
               🎵
             </motion.div>
           </div>
-          <h3 className="font-heading text-2xl text-foreground mb-2">
+          <h3 className="font-display text-2xl text-foreground mb-2">
             {member.name}
           </h3>
           <p className="font-body text-muted-foreground text-sm">
@@ -91,7 +91,7 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
 
 const BandMembers = () => {
   return (
-    <section id="members" className="py-16 bg-sand">
+    <section id="members" className="pt-16 pb-0 bg-sand">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -40,14 +40,16 @@ const tourDates = [
 
 const TourCalendar = () => {
   return (
-    <section id="tour" className="py-16 bg-sand">
+    /* MUUTOS: pt-0 poistaa yläpalkin, pb-0 poistaa alapalkin aallon alta */
+    <section id="tour" className="pt-0 pb-0 bg-sand">
       <div className="container mx-auto px-4">
+        {/* Lisätty pt-12, jotta otsikko ei ala aivan aallon rajasta */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-12 pt-12"
         >
           <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
@@ -107,8 +109,8 @@ const TourCalendar = () => {
         </div>
       </div>
 
-      {/* Wave divider */}
-      <div className="mt-16">
+      {/* MUUTOS: mt-0 poistaa raon kalenterin ja aallon väliltä */}
+      <div className="mt-12">
         <svg
           viewBox="0 0 1440 120"
           fill="none"
