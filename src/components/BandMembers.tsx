@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import makeMonkey from "@/assets/make-monkey.png";
-import mokaMonkey from "@/assets/moka-monkey.png";
-import mukaMonkey from "@/assets/muka-monkey.png";
-import banskuAnsku from "@/assets/bansku-ansku.png";
-import soffi from "@/assets/soffi.png";
+import makeMonkey from "@/assets/make.png";
+import mokaMonkey from "@/assets/moka.png";
+import mukaMonkey from "@/assets/muka5.png";
+import banskuAnsku from "@/assets/ansku1.png";
+import soffi from "@/assets/soffi2.png";
 
 interface BandMember {
   name: string;
@@ -15,7 +15,7 @@ interface BandMember {
 const bandMembers: BandMember[] = [
   {
     name: "Muka",
-    image: makeMonkey,
+    image: mukaMonkey,
     description: "Keltaiset aurinkolasit ja villit tanssiliikkeet!",
     color: "bg-primary",
   },
@@ -27,7 +27,7 @@ const bandMembers: BandMember[] = [
   },
   {
     name: "Make",
-    image: mukaMonkey,
+    image: makeMonkey,
     description: "Punaiset lasit ja täynnä energiaa!",
     color: "bg-destructive",
   },
