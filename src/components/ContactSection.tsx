@@ -41,17 +41,19 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="pt-0 pb-16 bg-secondary relative overflow-hidden">
+    /* MUUTOS: Nostettu pt-20 -> pt-40 (lisää sinistä tilaa ylös) */
+    <section id="contact" className="pt-6 pb-16 bg-secondary relative overflow-hidden">
       {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
+        {/* MUUTOS: Lisätty mt-12 (siirtää koko otsikkoryhmää alemmas) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-12 mt-12"
         >
           {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 

@@ -26,7 +26,7 @@ const MusicSection = () => {
     { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/molyapinat/", color: "bg-[#1877F2]" },
     { name: "Instagram", icon: Instagram, url: "https://instagram.com/molyapinat", color: "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]" },
     { name: "TikTok", icon: TikTokIcon, url: "https://tiktok.com/@molyapinat", color: "bg-black" },
-    { name: "YouTube", icon: Youtube, url: "https://https://www.youtube.com/@molytv9220", color: "bg-[#FF0000]" },
+    { name: "YouTube", icon: Youtube, url: "https://www.youtube.com/@molytv9220", color: "bg-[#FF0000]" },
   ];
 
   return (
