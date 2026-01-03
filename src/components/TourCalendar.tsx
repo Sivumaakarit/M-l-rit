@@ -38,11 +38,19 @@ const TourCalendar = () => {
           viewport={{ once: true }}
           className="text-center mb-12 pt-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
+          {/* MUUTOS: Lisätty hitaampi ja pehmeämpi heilunta (duration: 1.2 ja easeInOut) */}
+          <motion.div 
+            whileHover={{ 
+              rotate: [0, -2, 2, -1, 1, 0], 
+              transition: { duration: 1.2, ease: "easeInOut" } 
+            }}
+            style={{ transformOrigin: "top center" }}
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+          >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎪 Möly-kiertue 2026 🎪
             </h2>
-          </div>
+          </motion.div>
           <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
             Tule tanssimaan kanssamme livenä!
           </p>
@@ -79,7 +87,7 @@ const TourCalendar = () => {
                     </div>
                   </div>
 
-                  {/* MUUTOS: Nappi näkyy vain jos ticketUrl on annettu. Teksti ja ikoni päivitetty. */}
+                  {/* Nappi näkyy vain jos ticketUrl on annettu. Teksti ja ikoni päivitetty. */}
                   {gig.ticketUrl && (
                     <motion.a
                       href={gig.ticketUrl}

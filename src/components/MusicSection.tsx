@@ -21,7 +21,7 @@ const MusicSection = () => {
     { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/molyapinat/", color: "bg-[#1877F2]" },
     { name: "Instagram", icon: Instagram, url: "https://instagram.com/molyapinat", color: "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]" },
     { name: "TikTok", icon: TikTokIcon, url: "https://tiktok.com/@molyapinat", color: "bg-black" },
-    { name: "YouTube", icon: Youtube, url: "https://youtube.com/@molyapinat", color: "bg-[#FF0000]" },
+    { name: "YouTube", icon: Youtube, url: "https://https://www.youtube.com/@molytv9220", color: "bg-[#FF0000]" },
   ];
 
   return (
@@ -34,11 +34,19 @@ const MusicSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
+          {/* MUUTOS: Lisätty hitaampi ja pehmeämpi heilunta (duration: 1.2 ja easeInOut) */}
+          <motion.div 
+            whileHover={{ 
+              rotate: [0, -2, 2, -1, 1, 0], 
+              transition: { duration: 1.2, ease: "easeInOut" } 
+            }}
+            style={{ transformOrigin: "top center" }}
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+          >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎵 Musiikkia korville 🎵
             </h2>
-          </div>
+          </motion.div>
           <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
             Kuuntele Mölyapinoiden uusimmat biisit ja seuraa kanavilla!
           </p>
@@ -63,7 +71,6 @@ const MusicSection = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                /* MUUTOS: p-3 mobiilissa, p-5 tietokoneella */
                 className={`${link.color} text-white rounded-full p-3 md:p-5 shadow-lg transition-all duration-75`}
                 whileHover={{ scale: 1.15, rotate: 5, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.95 }}
@@ -72,7 +79,6 @@ const MusicSection = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                {/* MUUTOS: w-6 h-6 mobiilissa, w-8 h-8 tietokoneella */}
                 <link.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 <span className="sr-only">{link.name}</span>
               </motion.a>
@@ -81,7 +87,7 @@ const MusicSection = () => {
         </div>
       </div>
 
-      {/* --- Aalto palautettu paikalleen --- */}
+      {/* --- Aalto --- */}
       <div className="mt-0 leading-[0]">
         <svg
           viewBox="0 0 1440 120"

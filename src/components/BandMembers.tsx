@@ -100,11 +100,19 @@ const BandMembers = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
+          {/* PÄIVITETTY: Hitaampi ja pehmeämpi heilunta (duration: 1.2 ja ease) */}
+          <motion.div 
+            whileHover={{ 
+              rotate: [0, -2, 2, -1, 1, 0], 
+              transition: { duration: 1.2, ease: "easeInOut" } 
+            }}
+            style={{ transformOrigin: "top center" }}
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+          >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🐒 Mölyapinat-jäsenet 🐒
             </h2>
-          </div>
+          </motion.div>
           <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
             Tutustu Mölymetsän hauskaan apinakaartiin!
           </p>
@@ -115,7 +123,8 @@ const BandMembers = () => {
             <MemberCard key={member.name} member={member} index={index} />
           ))}
         </div>
-        {/* --- UUSI ESITTELYTEKSTI ALKAA --- */}
+
+        {/* --- ESITTELYTEKSTI --- */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,16 +140,14 @@ const BandMembers = () => {
             <div className="grid md:grid-cols-2 gap-8 text-muted-foreground font-body text-lg leading-relaxed">
               <div className="space-y-4">
                 <p>
-                  Mölyapinat-keikalla on paljon osallistavia lauluja ja vuorovaikutusta – ja tietysti mahdollisuus liikkua. 
-                  Huomioimme aina lasten iän ja säädämme volyymin paikan mukaan. Tarvittaessa soitamme vaikka täysin akustisesti!
+                  Mölyapinat-keikalla koet paljon mukaansa tempaavia lauluja ja vuorovaikutusta – aina on mahdollisuus myös liikkua. 
+                  Huomioimme myös lasten iän ja säädämme volyymin paikan mukaan. Tarvittaessa soitamme vaikka täysin akustisesti!
                 </p>
               </div>
               <div className="space-y-4">
                 <p>
                   Ohjelmistomme koostuu pääasiassa omista kappaleista, mutta mukana on myös tuttuja biisejä apinamaisilla sanoituksilla, 
                   kuten <em>Banaanin metsästys</em> (Leijonan metsästys). Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make-Mölyapina myös yksin.
-
-
                 </p>
               </div>
             </div>
@@ -152,8 +159,8 @@ const BandMembers = () => {
             </div>
           </div>
         </motion.div>
-        {/* --- UUSI ESITTELYTEKSTI PÄÄTTYY --- */}
       </div>          
+
       {/* Wave divider */}
       <div className="mt-16">
         <svg

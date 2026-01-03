@@ -13,28 +13,24 @@ const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Tarkistetaan, että kentät on täytetty
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Täytä kaikki kentät!");
       return;
     }
 
-    // 2. Lähetetään tiedot Netliffylle taustalla (AJAX/Fetch)
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        "form-name": "contact", // Tämän on oltava täsmälleen sama kuin <form name="contact">
+        "form-name": "contact",
         ...formData,
       }).toString(),
     })
       .then(() => {
-        // 3. Jos lähetys onnistuu, näytetään viesti ja tyhjennetään lomake
         toast.success("Kiitos viestistäsi! 🍌 Palaamme asiaan pian!");
         setFormData({ name: "", email: "", message: "" });
       })
       .catch((error) => {
-        // 4. Jos tapahtuu virhe, näytetään siitä ilmoitus
         toast.error("Hups! Lähetys epäonnistui: " + error);
       });
   };
@@ -49,11 +45,19 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
+          {/* MUUTOS: Lisätty hidas heilunta-animaatio, transformOrigin ja overflow-hidden */}
+          <motion.div 
+            whileHover={{ 
+              rotate: [0, -2, 2, -1, 1, 0], 
+              transition: { duration: 1.2, ease: "easeInOut" } 
+            }}
+            style={{ transformOrigin: "top center" }}
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+          >
             <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
               📬 Tilaa Mölyapinat 📬
             </h2>
-          </div>
+          </motion.div>
           <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
             Haluatko meidät esiintymään? Ota yhteyttä!
           </p>
