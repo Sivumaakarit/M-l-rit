@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const FloatingElements = () => {
   const elements = [
@@ -38,14 +39,32 @@ const FloatingElements = () => {
   );
 };
 
-interface HeroSectionProps {}
+const HeroSection = () => {
+  const [monkeyPos, setMonkeyPos] = useState({ x: 0, y: 0, rotate: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
-const HeroSection = ({}: HeroSectionProps) => {
+  const handleMouseEnter = () => {
+    const side = Math.random() > 0.5 ? 1 : -1;
+    
+    // MUUTOS: Tehty kurkkauksesta "ujompi" (pienemmät arvot)
+    // Jos side on 1 (oikea), liike on vain 15-18px. Vasemmalla 18-22px.
+    const xMove = side === 1 
+      ? (15 + Math.random() * 3) // Oikea puoli (erittäin ujo)
+      : (18 + Math.random() * 4) * -1; // Vasen puoli
+    
+    setMonkeyPos({
+      x: xMove,
+      y: -40 - Math.random() * 10, // Pysyy korkealla latvassa
+      rotate: (10 + Math.random() * 10) * side,
+    });
+    setIsHovered(true);
+  };
+
   return (
     <section
       id="hero"
       style={{ scrollMarginTop: "60px" }}
-      className="relative min-h-screen pt-24 pb-12 bg-gradient-forest overflow-hidden"
+      className="relative min-h-screen pt-24 pb-12 bg-gradient-forest overflow-visible z-30"
     >
       <FloatingElements />
 
@@ -56,14 +75,55 @@ const HeroSection = ({}: HeroSectionProps) => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-[hsl(30_35%_25%)] mb-4 drop-shadow-lg">
-            Tervetuloa Mölymetsään! 🌲
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-[hsl(30_35%_25%)] mb-4 drop-shadow-lg flex items-center justify-center gap-3 flex-wrap">
+            <span>Tervetuloa Mölymetsään!</span>
+            
+            <span 
+              className="relative inline-block cursor-pointer"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{ zIndex: isHovered ? 100 : 10 }} 
+            >
+              {/* Apina: Lähtee täysin kuusen keskeltä piilosta */}
+              <motion.span
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl md:text-5xl pointer-events-none"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={isHovered ? { 
+                  opacity: 1, 
+                  scale: 1,
+                  x: monkeyPos.x, 
+                  y: monkeyPos.y, 
+                  rotate: monkeyPos.rotate 
+                } : { 
+                  opacity: 0, 
+                  scale: 0, 
+                  x: 0, 
+                  y: 0, 
+                  rotate: 0 
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                🐒
+              </motion.span>
+
+              {/* Kuusi: Skaalaus pidetty maltillisena (1.35) */}
+              <motion.span
+                className="relative z-20 inline-block text-5xl md:text-7xl"
+                style={{ transformOrigin: "bottom center" }}
+                animate={isHovered ? { scale: 1.35, rotate: -2 } : { scale: 1, rotate: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                🌲
+              </motion.span>
+            </span>
           </h1>
+
           <p className="font-body text-xl md:text-2xl text-[hsl(30_35%_30%)] max-w-2xl mx-auto font-semibold">
-          Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus riemukasta teatteria. Lähdetään seikkailemaan!
+            Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus riemukasta teatteria. Lähdetään seikkailemaan!
           </p>
         </motion.div>
 
+        {/* Video-osio pidetty ennallaan */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -87,8 +147,7 @@ const HeroSection = ({}: HeroSectionProps) => {
         </motion.div>
       </div>
 
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute bottom-0 left-0 right-0 z-0">
         <svg
           viewBox="0 0 1440 120"
           fill="none"
