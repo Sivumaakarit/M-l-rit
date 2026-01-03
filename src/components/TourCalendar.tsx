@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Ticket } from "lucide-react";
+/* MUUTOS: Ticket vaihdettu Info-ikoniin */
+import { Calendar, MapPin, Info } from "lucide-react";
 
 // ============================================
 // KEIKKAKALENTERI - Muokkaa tätä listaa!
@@ -8,30 +9,28 @@ const tourDates = [
   {
     date: "15.2.2026",
     city: "Helsinki",
-    venue: "Kulttuuritalo",
-    ticketUrl: "https://lippu.fi",
+    venue: "Yksityistilaisuus",
+    ticketUrl: "", // TYHJÄ = Ei nappia
   },
   {
     date: "1.3.2026",
     city: "Turku",
-    venue: "Logomo",
-    ticketUrl: "https://lippu.fi",
+    venue: "Yksityistilaisuus",
+    ticketUrl: "", // TYHJÄ = Ei nappia
   },
   {
     date: "16.5.2026",
     city: "Pielavesi",
     venue: "Liikuntasali",
-    ticketUrl: "https://lippu.fi",
+    ticketUrl: "https://pielavesi.fi/tapahtumat/kevatkarkelot/", // LINKKI = Nappi näkyy
   },
 ];
 // ============================================
 
 const TourCalendar = () => {
   return (
-    /* MUUTOS: pt-0 poistaa yläpalkin, pb-0 poistaa alapalkin aallon alta */
     <section id="tour" className="pt-0 pb-0 bg-sand">
       <div className="container mx-auto px-4">
-        {/* Lisätty pt-12, jotta otsikko ei ala aivan aallon rajasta */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +38,7 @@ const TourCalendar = () => {
           viewport={{ once: true }}
           className="text-center mb-12 pt-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
+          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎪 Möly-kiertue 2026 🎪
             </h2>
@@ -58,7 +57,7 @@ const TourCalendar = () => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="wood-texture rounded-3xl p-1 shadow-lg"
+              className="wood-texture rounded-3xl p-1 shadow-lg overflow-hidden"
             >
               <div className="bg-card/95 rounded-2xl p-4 md:p-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -79,17 +78,21 @@ const TourCalendar = () => {
                       </p>
                     </div>
                   </div>
-                  <motion.a
-                    href={gig.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-bright-orange text-primary-foreground font-heading text-lg px-6 py-3 rounded-2xl shadow-md flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Ticket className="w-5 h-5" />
-                    Osta liput
-                  </motion.a>
+
+                  {/* MUUTOS: Nappi näkyy vain jos ticketUrl on annettu. Teksti ja ikoni päivitetty. */}
+                  {gig.ticketUrl && (
+                    <motion.a
+                      href={gig.ticketUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-bright-orange text-primary-foreground font-heading text-lg px-6 py-3 rounded-2xl shadow-md flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Info className="w-5 h-5" />
+                      Katso lisää
+                    </motion.a>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -97,7 +100,6 @@ const TourCalendar = () => {
         </div>
       </div>
 
-      {/* MUUTOS: mt-0 poistaa raon kalenterin ja aallon väliltä */}
       <div className="mt-12">
         <svg
           viewBox="0 0 1440 120"

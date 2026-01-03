@@ -100,7 +100,7 @@ const BandMembers = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
+          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🐒 Mölyapinat-jäsenet 🐒
             </h2>

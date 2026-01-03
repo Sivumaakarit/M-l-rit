@@ -34,7 +34,7 @@ const MusicSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4">
+          <div className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden">
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎵 Musiikkia korville 🎵
             </h2>
@@ -64,8 +64,8 @@ const MusicSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 /* MUUTOS: p-3 mobiilissa, p-5 tietokoneella */
-                className={`${link.color} text-white rounded-full p-3 md:p-5 shadow-lg transition-all`}
-                whileHover={{ scale: 1.15, rotate: 5 }}
+                className={`${link.color} text-white rounded-full p-3 md:p-5 shadow-lg transition-all duration-75`}
+                whileHover={{ scale: 1.15, rotate: 5, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

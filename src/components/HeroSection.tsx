@@ -60,7 +60,7 @@ const HeroSection = ({}: HeroSectionProps) => {
             Tervetuloa Mölymetsään! 🌲
           </h1>
           <p className="font-body text-xl md:text-2xl text-[hsl(30_35%_30%)] max-w-2xl mx-auto font-semibold">
-          Mölyapinat on energinen lastenmusiikkibändi, joka tarjoilee menevää musiikkia koko perheelle. Keikoillamme luvassa on osallistavia lauluja, vauhdikasta vuorovaikutusta ja ripaus riemukasta teatteria.
+          Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus riemukasta teatteria. Lähdetään seikkailemaan!
           </p>
         </motion.div>
 
@@ -82,7 +82,7 @@ const HeroSection = ({}: HeroSectionProps) => {
             </div>
           </div>
           <p className="text-center mt-4 font-heading text-2xl text-bright-orange">
-            🍌 Harjoittele Banaanitanssi 🍌
+            🍌 Katso video ja harjoittele Banaanitanssi 🍌
           </p>
         </motion.div>
       </div>

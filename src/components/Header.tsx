@@ -7,7 +7,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { label: "Koti", href: "#hero" },
+    { label: "Alkuun", href: "#hero" },
     { label: "Bändi", href: "#members" },
     { label: "Musiikki", href: "#music" },
     { label: "Keikat", href: "#tour" },
