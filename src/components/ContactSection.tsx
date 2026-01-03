@@ -2,8 +2,13 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Send, User, Mail, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
+/* 1. TUOTU UUDET PALIKAT */
+import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 
 const ContactSection = () => {
+  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
+  const { particles, triggerRain } = useMolyRain();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +41,10 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="pt-0 pb-16 bg-secondary">
+    <section id="contact" className="pt-0 pb-16 bg-secondary relative overflow-hidden">
+      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+      <MolyRainDisplay particles={particles} />
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,14 +53,16 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          {/* MUUTOS: Lisätty hidas heilunta-animaatio, transformOrigin ja overflow-hidden */}
+          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 
+            onClick={triggerRain}
             whileHover={{ 
               rotate: [0, -2, 2, -1, 1, 0], 
               transition: { duration: 1.2, ease: "easeInOut" } 
             }}
+            whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
             <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
               📬 Tilaa Mölyapinat 📬

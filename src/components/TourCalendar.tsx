@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 /* MUUTOS: Ticket vaihdettu Info-ikoniin */
 import { Calendar, MapPin, Info } from "lucide-react";
+/* 1. TUOTU UUDET PALIKAT */
+import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 
 // ============================================
 // KEIKKAKALENTERI - Muokkaa tätä listaa!
@@ -28,8 +30,14 @@ const tourDates = [
 // ============================================
 
 const TourCalendar = () => {
+  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
+  const { particles, triggerRain } = useMolyRain();
+
   return (
-    <section id="tour" className="pt-0 pb-0 bg-sand">
+    <section id="tour" className="pt-0 pb-0 bg-sand relative overflow-hidden">
+      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+      <MolyRainDisplay particles={particles} />
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -38,14 +46,16 @@ const TourCalendar = () => {
           viewport={{ once: true }}
           className="text-center mb-12 pt-12"
         >
-          {/* MUUTOS: Lisätty hitaampi ja pehmeämpi heilunta (duration: 1.2 ja easeInOut) */}
+          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 
+            onClick={triggerRain}
             whileHover={{ 
               rotate: [0, -2, 2, -1, 1, 0], 
               transition: { duration: 1.2, ease: "easeInOut" } 
             }}
+            whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎪 Möly-kiertue 2026 🎪
@@ -87,7 +97,6 @@ const TourCalendar = () => {
                     </div>
                   </div>
 
-                  {/* Nappi näkyy vain jos ticketUrl on annettu. Teksti ja ikoni päivitetty. */}
                   {gig.ticketUrl && (
                     <motion.a
                       href={gig.ticketUrl}

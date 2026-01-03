@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Youtube, Instagram, Facebook } from "lucide-react";
+/* 1. TUOTU UUDET PALIKAT */
+import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 
 // --- CUSTOM TIKTOK-IKONI ---
 const TikTokIcon = ({ size = 24, className = "" }) => (
@@ -16,6 +18,9 @@ const SpotifyIcon = ({ size = 24, className = "" }) => (
 );
 
 const MusicSection = () => {
+  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
+  const { particles, triggerRain } = useMolyRain();
+
   const socialLinks = [
     { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/5VWE6cH7u5YksJLpJfBgEm", color: "bg-[#1DB954]" },
     { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/molyapinat/", color: "bg-[#1877F2]" },
@@ -25,7 +30,10 @@ const MusicSection = () => {
   ];
 
   return (
-    <section id="music" className="pt-24 pb-0 bg-secondary overflow-hidden">
+    <section id="music" className="pt-24 pb-0 bg-secondary relative overflow-hidden">
+      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+      <MolyRainDisplay particles={particles} />
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -34,14 +42,16 @@ const MusicSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          {/* MUUTOS: Lisätty hitaampi ja pehmeämpi heilunta (duration: 1.2 ja easeInOut) */}
+          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 
+            onClick={triggerRain}
             whileHover={{ 
               rotate: [0, -2, 2, -1, 1, 0], 
               transition: { duration: 1.2, ease: "easeInOut" } 
             }}
+            whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🎵 Musiikkia korville 🎵
@@ -87,7 +97,6 @@ const MusicSection = () => {
         </div>
       </div>
 
-      {/* --- Aalto --- */}
       <div className="mt-0 leading-[0]">
         <svg
           viewBox="0 0 1440 120"

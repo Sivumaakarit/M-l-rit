@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+/* 1. TUOTU UUDET PALIKAT */
+import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 import makeMonkey from "@/assets/make.png";
 import mokaMonkey from "@/assets/moka.png";
 import mukaMonkey from "@/assets/muka5.png";
@@ -90,8 +92,14 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
 };
 
 const BandMembers = () => {
+  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
+  const { particles, triggerRain } = useMolyRain();
+
   return (
-    <section id="members" className="pt-16 pb-0 bg-sand">
+    <section id="members" className="pt-16 pb-0 bg-sand relative overflow-hidden">
+      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+      <MolyRainDisplay particles={particles} />
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -100,14 +108,16 @@ const BandMembers = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          {/* PÄIVITETTY: Hitaampi ja pehmeämpi heilunta (duration: 1.2 ja ease) */}
+          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 
+            onClick={triggerRain}
             whileHover={{ 
               rotate: [0, -2, 2, -1, 1, 0], 
               transition: { duration: 1.2, ease: "easeInOut" } 
             }}
+            whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-default"
+            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
             <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
               🐒 Mölyapinat-jäsenet 🐒
@@ -161,7 +171,6 @@ const BandMembers = () => {
         </motion.div>
       </div>          
 
-      {/* Wave divider */}
       <div className="mt-16">
         <svg
           viewBox="0 0 1440 120"
