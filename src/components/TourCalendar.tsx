@@ -57,7 +57,7 @@ const TourCalendar = () => {
               🎪 Keikat & Seikkailut 🎪
             </h2>
           </div>
-          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
+          <p className="font-body text-lg md:text-xl text-wood-dark max-w-xl mx-auto font-bold px-4">
             Tule mukaan banaanitanssiin! Täältä löydät tulevat <span className="text-forest-green">keikkamme.</span>
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ const TourCalendar = () => {
               whileHover={{ scale: 1.02 }}
               className="group"
             >
-              <div className="lauta-clean p-4 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 shadow-xl border-l-8 border-bright-orange w-full">
+              <div className="lauta-clean p-3 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 shadow-xl border-l-8 border-bright-orange w-full">
                 <div className="flex items-center gap-4 md:gap-6 overflow-hidden">
                   <div className="bg-primary rounded-2xl p-3 md:p-4 text-center min-w-[80px] md:min-w-[100px] shadow-inner border-2 border-wood-dark/10 flex-shrink-0">
                     <Calendar className="w-6 h-6 md:w-8 md:h-8 mx-auto text-wood-dark mb-1" />

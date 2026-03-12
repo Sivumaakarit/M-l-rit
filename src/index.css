@@ -46,7 +46,7 @@
     --neon-green: 120 80% 50%;
     --bright-orange: 25 100% 55%;
     --wood-light: 35 40% 80%;
-    --wood-dark: 30 35% 45%;
+    --wood-dark: 25 35% 22%; /* Softened from 20 40% 12% for better clarity */
     --mint: 150 40% 90%;
     --sand: 45 50% 92%;
     --forest-green: 140 50% 28%;
@@ -64,14 +64,22 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: clip; /* Safely prevent horizontal overflow without locking scroll */
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+  }
+
+  /* Fix for sticky header alignment */
+  section {
+    scroll-margin-top: 100px;
   }
 }
 
@@ -144,6 +152,7 @@
   .floating-element-delayed {
     animation: float 6s ease-in-out infinite;
     animation-delay: -3s;
+    will-change: transform;
   }
 
   @keyframes float {
@@ -170,7 +179,7 @@
 
 @layer utilities {
   .text-shadow-fun {
-    text-shadow: 2px 2px 0px hsl(var(--wood-dark));
+    text-shadow: 2px 2px 0px hsla(var(--wood-dark) / 0.3); /* Made transparent for legibility */
   }
   
   .bg-banana {

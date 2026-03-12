@@ -19,7 +19,7 @@ const FloatingElements = () => {
       {elements.map((element, index) => (
         <motion.div
           key={index}
-          className="absolute text-4xl md:text-6xl opacity-30 select-none"
+          className="absolute text-4xl md:text-6xl opacity-30 select-none will-change-transform"
           style={{ left: element.left, top: element.top }}
           initial={{ y: 0, rotate: 0 }}
           animate={{
@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] pt-32 pb-48 bg-gradient-forest overflow-visible flex items-center justify-center"
+      className="relative min-h-[90vh] pt-24 md:pt-32 pb-48 bg-gradient-forest overflow-x-hidden flex items-center justify-center"
     >
       <FloatingElements />
 
@@ -73,7 +73,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <div className="flex justify-center mb-8">
+          <div className="hidden md:flex justify-center mb-8">
             <motion.div
               animate={{ rotate: [0, -5, 5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -81,14 +81,14 @@ const HeroSection = () => {
               <img 
                 src={logoImage} 
                 alt="Mölyapinat logo" 
-                className="h-32 md:h-48 w-auto drop-shadow-2xl" 
+                className="h-20 md:h-48 w-auto drop-shadow-2xl" 
                 fetchPriority="high"
               />
             </motion.div>
           </div>
 
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-wood-dark mb-6 drop-shadow-sm flex items-center justify-center gap-4 flex-wrap">
-            <span className="text-shadow-fun">Tervetuloa Mölymetsään!</span>
+          <h1 className="font-heading text-[10vw] min-[375px]:text-5xl md:text-6xl lg:text-7xl text-wood-dark mb-6 drop-shadow-sm flex items-center justify-center gap-4 flex-wrap">
+            <span className="text-shadow-fun text-center px-4">Tervetuloa Mölymetsään!</span>
             
             <span 
               className="relative inline-block cursor-pointer"
@@ -117,34 +117,34 @@ const HeroSection = () => {
               </motion.span>
 
               <motion.span
-                className="relative z-20 inline-block text-6xl md:text-8xl"
+                className="relative z-20 inline-block text-4xl md:text-8xl"
                 style={{ transformOrigin: "bottom center" }}
                 animate={isHovered ? { scale: 1.25, rotate: -3 } : { scale: 1, rotate: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 🌲
                 {!isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 2, duration: 1 }}
-                    className="absolute -right-48 -top-6 whitespace-nowrap hidden lg:block"
-                  >
-                    <div className="flex flex-col items-start">
-                      <span className="font-heading text-xl text-forest-green animate-bounce text-shadow-fun">
-                        Kuka kurkkaa?
-                      </span>
-                      <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mt-2">
-                        <path 
-                          d="M50 10 Q30 10 10 30 M10 30 L25 30 M10 30 L10 15" 
-                          stroke="currentColor" 
-                          strokeWidth="3" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                        />
-                      </svg>
-                    </div>
-                  </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 2, duration: 1 }}
+                  className="absolute -right-36 -top-10 whitespace-nowrap hidden lg:block"
+                >
+                  <div className="flex flex-col items-start">
+                    <span className="font-heading text-xl text-forest-green animate-bounce text-shadow-fun">
+                      Kuka kurkkaa?
+                    </span>
+                    <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mt-2">
+                      <path 
+                        d="M50 10 Q30 10 10 30 M10 30 L25 30 M10 30 L10 15" 
+                        stroke="currentColor" 
+                        strokeWidth="3" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                      />
+                    </svg>
+                  </div>
+                </motion.div>
                 )}
               </motion.span>
             </span>

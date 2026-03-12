@@ -39,7 +39,7 @@ export const useMolyRain = () => {
 };
 
 export const MolyRainDisplay = ({ particles }: { particles: Particle[] }) => (
-  <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+  <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden" style={{ contain: 'layout style' }}>
     <AnimatePresence>
       {particles.map((p) => (
         <motion.div

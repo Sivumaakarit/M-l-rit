@@ -79,11 +79,11 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto"
         >
-          <form
-            onSubmit={handleSubmit}
-            className="lauta-clean p-8 md:p-12 shadow-2xl space-y-8"
-          >
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-inner space-y-6 border-4 border-wood-dark/10">
+            <form
+              onSubmit={handleSubmit}
+              className="lauta-clean p-2 md:p-12 shadow-2xl space-y-6 md:space-y-8"
+            >
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-2 py-4 md:p-6 shadow-inner space-y-6 border-2 md:border-4 border-wood-dark/10">
               <div>
                 <label className="font-heading text-xl text-wood-dark flex items-center gap-3 mb-3">
                   <User className="w-6 h-6 text-bright-orange" />
@@ -96,7 +96,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
                   placeholder="Kirjoita nimesi"
                 />
               </div>
@@ -113,7 +113,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
                   placeholder="sinun@email.fi"
                 />
               </div>
@@ -129,8 +129,8 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  rows={4}
-                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm resize-none"
+                  rows={12}
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm resize-none"
                   placeholder="Kerro meille miten voimme auttaa!"
                 />
               </div>
