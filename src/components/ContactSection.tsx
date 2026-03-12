@@ -2,11 +2,9 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Send, User, Mail, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
-/* 1. TUOTU UUDET PALIKAT */
 import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 
 const ContactSection = () => {
-  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
   const { particles, triggerRain } = useMolyRain();
 
   const [formData, setFormData] = useState({
@@ -15,7 +13,7 @@ const ContactSection = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.message) {
@@ -23,39 +21,38 @@ const ContactSection = () => {
       return;
     }
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        "form-name": "contact",
-        ...formData,
-      }).toString(),
-    })
-      .then(() => {
+    try {
+      const response = await fetch("https://formspree.io/f/xeerkkak", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
         toast.success("Kiitos viestistäsi! 🍌 Palaamme asiaan pian!");
         setFormData({ name: "", email: "", message: "" });
-      })
-      .catch((error) => {
-        toast.error("Hups! Lähetys epäonnistui: " + error);
-      });
+      } else {
+        toast.error("Hups! Jotain meni vikaan. Yritä myöhemmin uudelleen.");
+      }
+    } catch (error) {
+      toast.error("Lähetys epäonnistui. Tarkista verkkoyhteys.");
+    }
   };
 
   return (
-    /* MUUTOS: Nostettu pt-20 -> pt-40 (lisää sinistä tilaa ylös) */
-    <section id="contact" className="pt-6 pb-16 bg-secondary relative overflow-hidden">
-      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+    <section id="contact" className="pt-24 pb-20 bg-secondary relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
-        {/* MUUTOS: Lisätty mt-12 (siirtää koko otsikkoryhmää alemmas) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 mt-12"
+          className="text-center mb-16"
         >
-          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
           <motion.div 
             onClick={triggerRain}
             whileHover={{ 
@@ -64,14 +61,14 @@ const ContactSection = () => {
             }}
             whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
+            className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
-            <h2 className="font-display text-3xl md:text-4xl text-wood-dark">
+            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
               📬 Tilaa Mölyapinat 📬
             </h2>
           </motion.div>
-          <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
-            Haluatko meidät esiintymään? Ota yhteyttä!
+          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
+            Haluatko meidät esiintymään? <span className="text-forest-green">Ota yhteyttä! 🍌</span>
           </p>
         </motion.div>
 
@@ -80,74 +77,72 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="max-w-xl mx-auto"
+          className="max-w-2xl mx-auto"
         >
           <form
             onSubmit={handleSubmit}
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            className="bg-card rounded-3xl p-6 md:p-8 shadow-xl space-y-6"
+            className="lauta-clean p-8 md:p-12 shadow-2xl space-y-8"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <div>
-              <label className="font-body font-semibold text-foreground flex items-center gap-2 mb-2">
-                <User className="w-5 h-5 text-bright-orange" />
-                Nimi
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full bg-background border-2 border-border rounded-2xl px-4 py-3 font-body focus:border-primary focus:outline-none transition-colors"
-                placeholder="Kirjoita nimesi"
-              />
-            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-inner space-y-6 border-4 border-wood-dark/10">
+              <div>
+                <label className="font-heading text-xl text-wood-dark flex items-center gap-3 mb-3">
+                  <User className="w-6 h-6 text-bright-orange" />
+                  Nimi
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  placeholder="Kirjoita nimesi"
+                />
+              </div>
 
-            <div>
-              <label className="font-body font-semibold text-foreground flex items-center gap-2 mb-2">
-                <Mail className="w-5 h-5 text-neon-green" />
-                Sähköposti
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full bg-background border-2 border-border rounded-2xl px-4 py-3 font-body focus:border-primary focus:outline-none transition-colors"
-                placeholder="sinun@email.fi"
-              />
-            </div>
+              <div>
+                <label className="font-heading text-xl text-wood-dark flex items-center gap-3 mb-3">
+                  <Mail className="w-6 h-6 text-neon-green" />
+                  Sähköposti
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  placeholder="sinun@email.fi"
+                />
+              </div>
 
-            <div>
-              <label className="font-body font-semibold text-foreground flex items-center gap-2 mb-2">
-                <MessageSquare className="w-5 h-5 text-primary" />
-                Viesti
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                rows={4}
-                className="w-full bg-background border-2 border-border rounded-2xl px-4 py-3 font-body focus:border-primary focus:outline-none transition-colors resize-none"
-                placeholder="Kerro meille miten voimme auttaa!"
-              />
+              <div>
+                <label className="font-heading text-xl text-wood-dark flex items-center gap-3 mb-3">
+                  <MessageSquare className="w-6 h-6 text-primary" />
+                  Viesti
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  rows={4}
+                  className="w-full bg-white border-4 border-wood-light/50 rounded-2xl px-5 py-4 font-body text-lg focus:border-primary focus:outline-none transition-all shadow-sm resize-none"
+                  placeholder="Kerro meille miten voimme auttaa!"
+                />
+              </div>
             </div>
 
             <motion.button
               type="submit"
-              className="w-full bg-bright-orange text-primary-foreground font-display text-xl py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-xl transition-shadow"
+              className="w-full bg-bright-orange text-white font-heading text-2xl py-5 rounded-2xl shadow-xl flex items-center justify-center gap-4 hover:shadow-2xl transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Send className="w-6 h-6" />
+              <Send className="w-8 h-8" />
               Lähetä viesti 🍌
             </motion.button>
           </form>

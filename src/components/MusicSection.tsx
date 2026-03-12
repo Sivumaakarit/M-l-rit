@@ -1,115 +1,197 @@
 import { motion } from "framer-motion";
-import { Youtube, Instagram, Facebook } from "lucide-react";
-/* 1. TUOTU UUDET PALIKAT */
-import { useMolyRain, MolyRainDisplay } from "./MolyRain";
+import { Music, Music2, Share2, Facebook, Instagram } from "lucide-react";
 
-// --- CUSTOM TIKTOK-IKONI ---
-const TikTokIcon = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0 7.75 6.82V9.12a8.16 8.16 0 0 0 4.93 2.15V7.79a4.77 4.77 0 0 1-3.45-1.1z" />
+const TikTokIcon = () => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className="w-6 h-6"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.33-.85.51-1.44 1.42-1.55 2.42-.14 1.01.23 2.1 1.01 2.8.81.75 2.01.93 3 .53.86-.31 1.52-1.07 1.71-1.97.12-.44.12-.9.12-1.35l.02-16.05Z" />
   </svg>
 );
 
-// --- CUSTOM SPOTIFY-IKONI ---
-const SpotifyIcon = ({ size = 24, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.502 17.302c-.218.358-.684.474-1.038.255-2.852-1.743-6.443-2.134-10.672-1.168-.411.095-.82-.162-.914-.573-.095-.411.162-.82.573-.914 4.63-1.059 8.598-.614 11.798 1.344.354.218.47.684.253 1.056zm1.47-3.253c-.276.448-.862.593-1.309.317-3.264-2.007-8.24-2.589-12.098-1.417-.506.154-1.04-.136-1.194-.643-.154-.506.136-1.04.643-1.194 4.41-1.338 9.894-.691 13.642 1.616.447.276.592.862.316 1.321zm.126-3.402C15.087 8.236 8.442 8.016 4.606 9.182c-.615.187-1.263-.163-1.45-.778-.187-.615.163-1.263.778-1.45 4.408-1.338 11.734-1.082 16.31 1.635.553.328.738 1.04.41 1.593-.328.553-1.04.738-1.593.41z"/>
+const SpotifyIcon = () => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className="w-6 h-6"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.508 17.304c-.216.354-.672.468-1.026.252-2.862-1.746-6.462-2.142-10.704-1.176-.408.096-.816-.162-.912-.57-.096-.408.162-.816.57-.912 4.644-1.062 8.622-.612 11.82 1.338.354.216.468.672.252 1.026zm1.47-3.258c-.276.45-.858.594-1.308.318-3.276-2.016-8.274-2.598-12.144-1.422-.51.156-1.044-.144-1.194-.654-.15-.51.144-1.044.654-1.194 4.41-1.338 9.924-.702 13.686 1.614.45.276.594.858.318 1.308zm.138-3.39c-3.93-2.334-10.422-2.55-14.19-1.41-.606.186-1.248-.168-1.434-.774-.186-.606.168-1.248.774-1.434 4.332-1.314 11.49-1.062 16.038 1.638.546.33.726 1.044.396 1.59-.33.546-1.044.726-1.59.396z" />
   </svg>
 );
 
 const MusicSection = () => {
-  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
-  const { particles, triggerRain } = useMolyRain();
-
-  const socialLinks = [
-    { name: "Spotify", icon: SpotifyIcon, url: "https://open.spotify.com/artist/5VWE6cH7u5YksJLpJfBgEm", color: "bg-[#1DB954]" },
-    { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/molyapinat/", color: "bg-[#1877F2]" },
-    { name: "Instagram", icon: Instagram, url: "https://instagram.com/molyapinat", color: "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]" },
-    { name: "TikTok", icon: TikTokIcon, url: "https://tiktok.com/@molyapinat", color: "bg-black" },
-    { name: "YouTube", icon: Youtube, url: "https://www.youtube.com/@molytv9220", color: "bg-[#FF0000]" },
-  ];
-
   return (
-    <section id="music" className="pt-24 pb-0 bg-secondary relative overflow-hidden">
-      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
-      <MolyRainDisplay particles={particles} />
-
-      <div className="container mx-auto px-4">
+    <section id="music" className="py-24 pb-48 bg-secondary relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
-          <motion.div 
-            onClick={triggerRain}
-            whileHover={{ 
-              rotate: [0, -2, 2, -1, 1, 0], 
-              transition: { duration: 1.2, ease: "easeInOut" } 
-            }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
-          >
-            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
-              🎵 Musiikkia korville 🎵
+          <div className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6">
+            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
+              🐒 Kuuntele Mölyä 🐒
             </h2>
-          </motion.div>
-          <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
-            Kuuntele Mölyapinoiden uusimmat biisit ja seuraa kanavilla!
+          </div>
+          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
+            Löydät meidät kaikista suosituimmista <span className="text-forest-green">suoratoistopalveluista!</span>
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-8">
-          <motion.div className="bg-card rounded-3xl p-4 shadow-xl">
-             <h3 className="font-heading text-2xl text-center text-foreground mb-4">🏴‍☠️ Merirosvot 🏴‍☠️</h3>
-             <iframe src="https://open.spotify.com/embed/track/6Hvh5yfRseTfJE88S2f0kU?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
+        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lauta-clean p-6 shadow-2xl"
+          >
+            <div className="bg-white rounded-2xl overflow-hidden shadow-inner border-4 border-wood-dark/10">
+              <iframe
+                src="https://open.spotify.com/embed/artist/5VWE6cH7u5YksJLpJfBgEm"
+                width="100%"
+                height="400"
+                frameBorder="0"
+                allowTransparency={true}
+                allow="encrypted-media"
+                className="w-full"
+                loading="lazy"
+              />
+            </div>
           </motion.div>
 
-          <motion.div className="bg-card rounded-3xl p-4 shadow-xl mb-12">
-             <h3 className="font-heading text-2xl text-center text-foreground mb-4">☕ Mukana tee ☕</h3>
-             <iframe src="https://open.spotify.com/embed/track/2H2zbhXQSm2SdSXXM14nfs?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
-          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h3 className="font-heading text-3xl text-wood-dark mb-6 text-center md:text-left">
+              Seuraa apinalaumaa! 🍌
+            </h3>
 
-          {/* Some-napit mobiiliskaalauksella */}
-          <div className="flex justify-center gap-3 md:gap-6 flex-wrap pt-4 pb-20">
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.url}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+              <motion.a 
+                href="https://youtu.be/QZPYsE5D0qo?si=4nvqeYMgZ3nEV16m"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${link.color} text-white rounded-full p-3 md:p-5 shadow-lg transition-all duration-75`}
-                whileHover={{ scale: 1.15, rotate: 5, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-white rounded-2xl shadow-lg border-2 border-red-500 hover:border-bright-orange transition-all group"
               >
-                <link.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                <span className="sr-only">{link.name}</span>
+                <div className="bg-red-500 text-white p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <Music2 className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">YouTube</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Katso videot!</span>
+                </div>
               </motion.a>
-            ))}
-          </div>
+
+              <motion.a 
+                href="https://open.spotify.com/artist/5VWE6cH7u5YksJLpJfBgEm"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-white rounded-2xl shadow-lg border-2 border-neon-green hover:border-bright-orange transition-all group"
+              >
+                <div className="bg-neon-green text-white p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <SpotifyIcon />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">Spotify</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Mölyä korviin!</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href="https://facebook.com/molyapinat"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-white rounded-2xl shadow-lg border-2 border-blue-600 hover:border-bright-orange transition-all group"
+              >
+                <div className="bg-blue-600 text-white p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <Facebook className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">Facebook</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Meikkis somessa!</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href="https://instagram.com/molyapinat"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-white rounded-2xl shadow-lg border-2 border-pink-500 hover:border-bright-orange transition-all group"
+              >
+                <div className="bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <Instagram className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">Instagram</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Kuvia ja tunnelmia!</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href="https://www.tiktok.com/@molyapinat"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-white rounded-2xl shadow-lg border-2 border-primary hover:border-bright-orange transition-all group"
+              >
+                <div className="bg-primary text-primary-foreground p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <TikTokIcon />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">TikTok</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Banaanitanssit!</span>
+                </div>
+              </motion.a>
+
+              <motion.button 
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: 'Mölyapinat',
+                      text: 'Tule mukaan Mölymetsän seikkailuihin!',
+                      url: window.location.href,
+                    }).catch(() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      alert('Linkki kopioitu leikepöydälle!');
+                    });
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Linkki kopioitu leikepöydälle!');
+                  }
+                }}
+                whileHover={{ scale: 1.05, x: 10 }}
+                className="flex items-center gap-3 p-2 md:p-3 bg-sand/30 rounded-2xl shadow-lg border-2 border-dashed border-wood-dark/20 hover:border-bright-orange transition-all group w-full text-left"
+              >
+                <div className="bg-bright-orange text-white p-2 rounded-xl shadow-md group-hover:rotate-12 transition-transform">
+                  <Share2 className="w-4 h-4 md:w-5 md:h-5" />
+                </div>
+                <div>
+                  <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">Jaapas!</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Kerro kaverille! 🐵</span>
+                </div>
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      <div className="mt-0 leading-[0]">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
-        >
-          <path
-            d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-            className="fill-sand"
-          />
-        </svg>
-      </div>
+{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
     </section>
   );
 };

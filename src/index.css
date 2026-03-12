@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&family=Bubblegum+Sans&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Mölyapinat Color Palette */
+    /* Mölyapinat Original Polished Palette */
     --background: 45 100% 96%;
     --foreground: 25 40% 20%;
 
@@ -51,55 +51,9 @@
     --sand: 45 50% 92%;
     --forest-green: 140 50% 28%;
     --hero-green: 126 45% 60%;
-
-    /* Sidebar - keeping defaults */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 25 30% 12%;
-    --foreground: 45 80% 95%;
-
-    --card: 25 25% 18%;
-    --card-foreground: 45 80% 95%;
-
-    --popover: 25 25% 18%;
-    --popover-foreground: 45 80% 95%;
-
-    --primary: 48 100% 55%;
-    --primary-foreground: 25 40% 10%;
-
-    --secondary: 140 30% 20%;
-    --secondary-foreground: 45 80% 95%;
-
-    --accent: 120 70% 45%;
-    --accent-foreground: 25 40% 10%;
-
-    --destructive: 25 100% 50%;
-    --destructive-foreground: 0 0% 100%;
-
-    --muted: 25 20% 25%;
-    --muted-foreground: 40 30% 70%;
-
-    --border: 25 20% 30%;
-    --input: 25 20% 30%;
-    --ring: 48 100% 50%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(139, 119, 101, 0.2);
   }
 }
 
@@ -123,40 +77,59 @@
 
 @layer components {
   .wood-texture {
-    background: linear-gradient(135deg, 
+    /* Horisontaalinen lautateema lankkulinjoilla */
+    background: linear-gradient(to bottom, 
       hsl(35 45% 78%) 0%, 
-      hsl(32 40% 72%) 25%,
+      hsl(35 45% 82%) 15%,
+      hsl(35 45% 75%) 16%, /* Lankun reuna */
+      hsl(32 40% 72%) 20%,
       hsl(35 45% 80%) 50%,
-      hsl(30 38% 70%) 75%,
+      hsl(32 40% 74%) 80%,
+      hsl(35 45% 75%) 84%, /* Lankun reuna */
       hsl(35 42% 76%) 100%
     );
+    background-size: 100% 40px; /* Lankun korkeus */
+    background-repeat: repeat-y;
     position: relative;
+    border: 3px solid hsl(var(--wood-dark));
+    box-shadow: 4px 4px 0px hsl(var(--wood-dark));
   }
 
-  .wood-texture::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 8px,
-      rgba(139, 119, 101, 0.1) 8px,
-      rgba(139, 119, 101, 0.1) 10px
+  /* Clean wood for text fields and tables - natural planks */
+  .wood-clean {
+    background: linear-gradient(to bottom, 
+      hsl(35 40% 92%) 0%, 
+      hsl(35 40% 95%) 50%,
+      hsl(35 30% 88%) 100%
     );
-    pointer-events: none;
+    background-size: 100% 30px;
+    border: 3px solid hsl(var(--wood-dark));
+    box-shadow: 4px 4px 0px hsl(var(--wood-dark));
+  }
+
+  .lauta-bg {
+    @apply wood-texture rounded-xl;
+  }
+
+  .lauta-clean {
+    @apply wood-clean rounded-xl;
   }
 
   .wave-divider {
-    position: relative;
-    height: 80px;
-    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 20;
+    pointer-events: none;
+    overflow: visible;
   }
 
   .wave-divider::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -1px; /* Overlap slightly to prevent stripe */
     left: 0;
     right: 0;
     height: 100%;
@@ -174,71 +147,54 @@
   }
 
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0) rotate(0deg);
-    }
-    25% {
-      transform: translateY(-15px) rotate(5deg);
-    }
-    50% {
-      transform: translateY(-5px) rotate(0deg);
-    }
-    75% {
-      transform: translateY(-20px) rotate(-5deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
   }
 
-  @keyframes bounce-wiggle {
-    0%, 100% {
-      transform: scale(1) rotate(0deg);
-    }
-    25% {
-      transform: scale(1.05) rotate(-3deg);
-    }
-    50% {
-      transform: scale(1.08) rotate(0deg);
-    }
-    75% {
-      transform: scale(1.05) rotate(3deg);
-    }
+  .glass-bg {
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
   }
 
-  .hover-bounce:hover {
-    animation: bounce-wiggle 0.5s ease-in-out;
+  /* Poistetaan ne epämääräiset tötteröt */
+  .tent-icon {
+    display: none;
   }
 
-  @keyframes sparkle {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: scale(1.2);
-    }
-  }
-
-  .sparkle {
-    animation: sparkle 1.5s ease-in-out infinite;
+  .back-to-top {
+    @apply fixed bottom-8 right-8 z-50 w-16 h-16 flex items-center justify-center text-3xl shadow-2xl transition-all duration-500;
   }
 }
 
 @layer utilities {
   .text-shadow-fun {
-    text-shadow: 3px 3px 0 hsl(var(--wood-dark)), 
-                 -1px -1px 0 hsl(var(--wood-dark)),
-                 1px -1px 0 hsl(var(--wood-dark)),
-                 -1px 1px 0 hsl(var(--wood-dark));
+    text-shadow: 2px 2px 0px hsl(var(--wood-dark));
+  }
+  
+  .bg-banana {
+    background-color: hsl(var(--primary));
+  }
+  
+  .bg-forest {
+    background-color: hsl(var(--forest-green));
   }
 
   .bg-gradient-forest {
-    background: #d1eedf;
+    background: linear-gradient(180deg, #d1eedf 0%, #a8d5ba 100%);
   }
 
-  .bg-gradient-sand {
-    background: linear-gradient(180deg, 
-      hsl(var(--sand)) 0%, 
-      hsl(45 60% 88%) 100%
-    );
+  @keyframes banana-fall {
+    0% { transform: translateY(-100%) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(400%) rotate(360deg); opacity: 0; }
+  }
+
+  .animate-banana-fall {
+    animation: banana-fall linear infinite;
+    will-change: transform;
   }
 }
+

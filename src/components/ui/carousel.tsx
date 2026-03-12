@@ -38,8 +38,9 @@ function useCarousel() {
   return context;
 }
 
-const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
+const CarouselComponent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
   ({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }, ref) => {
+    // ... rest of component logic remains the same ...
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
@@ -129,7 +130,7 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
     );
   },
 );
-Carousel.displayName = "Carousel";
+CarouselComponent.displayName = "Carousel";
 
 const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
@@ -221,4 +222,4 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 );
 CarouselNext.displayName = "CarouselNext";
 
-export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };
+export { type CarouselApi, CarouselComponent as Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };

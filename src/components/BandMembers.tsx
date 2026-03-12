@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-/* 1. TUOTU UUDET PALIKAT */
 import { useMolyRain, MolyRainDisplay } from "./MolyRain";
-import makeMonkey from "@/assets/make.png";
-import mokaMonkey from "@/assets/moka.png";
-import mukaMonkey from "@/assets/muka5.png";
-import banskuAnsku from "@/assets/ansku1.png";
-import soffi from "@/assets/soffi2.png";
+import makeMonkey from "@/assets/make.webp";
+import mokaMonkey from "@/assets/moka.webp";
+import mukaMonkey from "@/assets/muka5.webp";
+import banskuAnsku from "@/assets/ansku1.webp";
+import soffi from "@/assets/soffi2.webp";
 
 interface BandMember {
   name: string;
@@ -19,7 +18,7 @@ const bandMembers: BandMember[] = [
     name: "Muka",
     image: mukaMonkey,
     description: "Keltaiset aurinkolasit, basso ja villit tanssiliikkeet!",
-    color: "bg-primary",
+    color: "bg-banana",
   },
   {
     name: "Mökä",
@@ -31,13 +30,13 @@ const bandMembers: BandMember[] = [
     name: "Make",
     image: makeMonkey,
     description: "Oranssit aurinkolasit, kitara ja täynnä apinaenergiaa!",
-    color: "bg-destructive",
+    color: "bg-bright-orange",
   },
   {
     name: "Bansku-Ansku",
     image: banskuAnsku,
     description: "Metsän hattaraisin kampaus ja laulu!",
-    color: "bg-primary",
+    color: "bg-banana",
   },
   {
     name: "Soffi",
@@ -46,6 +45,26 @@ const bandMembers: BandMember[] = [
     color: "bg-bright-orange",
   },
 ];
+
+const BananaRain = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-xl animate-banana-fall"
+          style={{
+            left: `${15 + i * 15}%`,
+            animationDelay: `${i * 0.2}s`,
+            animationDuration: `${1.5 + Math.random()}s`,
+          }}
+        >
+          🍌
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const MemberCard = ({ member, index }: { member: BandMember; index: number }) => {
   return (
@@ -59,8 +78,9 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
         rotate: [0, -2, 2, -2, 0],
         transition: { duration: 0.4 },
       }}
-      className="group cursor-pointer"
+      className="group cursor-pointer relative"
     >
+      <BananaRain />
       <div
         className={`rounded-3xl p-4 shadow-xl transition-shadow group-hover:shadow-2xl ${member.color}`}
       >
@@ -70,6 +90,7 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
               src={member.image}
               alt={member.name}
               className="w-full h-full object-cover rounded-full border-4 border-wood-light shadow-lg"
+              loading="lazy"
             />
             <motion.div
               className="absolute -top-2 -right-2 text-2xl"
@@ -79,10 +100,10 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
               🎵
             </motion.div>
           </div>
-          <h3 className="font-display text-2xl text-foreground mb-2">
+          <h3 className="font-heading text-2xl text-foreground mb-2">
             {member.name}
           </h3>
-          <p className="font-body text-muted-foreground text-sm">
+          <p className="font-body text-muted-foreground text-sm font-medium">
             {member.description}
           </p>
         </div>
@@ -92,12 +113,10 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
 };
 
 const BandMembers = () => {
-  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
   const { particles, triggerRain } = useMolyRain();
 
   return (
-    <section id="members" className="pt-16 pb-0 bg-sand relative overflow-hidden">
-      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
+    <section id="members" className="pt-24 pb-48 bg-background relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
@@ -106,88 +125,104 @@ const BandMembers = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16 relative"
         >
-          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
-          <motion.div 
-            onClick={triggerRain}
-            whileHover={{ 
-              rotate: [0, -2, 2, -1, 1, 0], 
-              transition: { duration: 1.2, ease: "easeInOut" } 
-            }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
-          >
-            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
-              🐒 Mölyapinat-jäsenet 🐒
-            </h2>
-          </motion.div>
-          <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
-            Tutustu Mölymetsän hauskaan apinakaartiin!
+          <div className="relative inline-block group/header">
+            {/* "Älä vaan paina tästä!" Vinkki */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 3, duration: 1 }}
+              className="absolute -left-56 lg:-left-72 -top-4 whitespace-nowrap hidden sm:block pointer-events-none group-hover/header:opacity-0 transition-opacity duration-300"
+            >
+              <div className="flex flex-col items-end gap-2 text-right">
+                <span className="font-heading text-lg lg:text-xl text-destructive animate-pulse text-shadow-fun">
+                  Älä vaan paina tästä!
+                </span>
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mr-8">
+                  <path 
+                    d="M10 10 Q30 10 50 30 M50 30 L35 30 M50 30 L50 15" 
+                    stroke="currentColor" 
+                    strokeWidth="3" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="text-destructive"
+                  />
+                </svg>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              onClick={triggerRain}
+              whileHover={{ 
+                rotate: [0, -2, 2, -1, 1, 0], 
+                transition: { duration: 1.2, ease: "easeInOut" } 
+              }}
+              whileTap={{ scale: 0.95 }}
+              style={{ transformOrigin: "top center" }}
+              className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all relative z-10"
+            >
+              <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
+                🐒 Mölyapinat-jäsenet 🐒
+              </h2>
+            </motion.div>
+          </div>
+          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-medium">
+            Tutustu Mölymetsän hauskaan apinakaartiin! <span className="text-forest-green underline decoration-primary decoration-2 underline-offset-4 sm:hidden">Paina kylttiä nähdäksesi banaanisadetta!</span> 🍌
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
           {bandMembers.map((member, index) => (
             <MemberCard key={member.name} member={member} index={index} />
           ))}
         </div>
 
-        {/* --- ESITTELYTEKSTI --- */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-16 max-w-4xl mx-auto bg-card/50 rounded-3xl p-8 md:p-10 shadow-inner border-2 border-dashed border-wood-dark/20"
+          className="mt-20 max-w-5xl mx-auto bg-sand/60 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border-4 border-dashed border-wood-dark/20"
         >
-          <div className="space-y-6 text-center md:text-left">
-            <p className="font-body text-xl text-wood-dark leading-relaxed font-semibold">
-              Mölyapinat soittavat menevää koko perheen musiikkia, joka pistää peput heilumaan! 🍌
-            </p>
+          <div className="space-y-8">
+            <h3 className="font-heading text-3xl text-wood-dark text-center underline decoration-primary decoration-8 underline-offset-4">
+              Apinointia jo vuodesta 2014! 🍌
+            </h3>
             
-            <div className="grid md:grid-cols-2 gap-8 text-muted-foreground font-body text-lg leading-relaxed">
-              <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-12 text-wood-dark font-body text-lg md:text-xl leading-relaxed">
+              <div className="space-y-6">
+                <p className="font-bold text-forest-green text-2xl">
+                  Menevää musiikkia koko perheelle!
+                </p>
                 <p>
                   Mölyapinat-keikalla koet paljon mukaansa tempaavia lauluja ja vuorovaikutusta – aina on mahdollisuus myös liikkua. 
                   Huomioimme myös lasten iän ja säädämme volyymin paikan mukaan. Tarvittaessa soitamme vaikka täysin akustisesti!
                 </p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <p>
                   Ohjelmistomme koostuu pääasiassa omista kappaleista, mutta mukana on myös tuttuja biisejä apinamaisilla sanoituksilla, 
-                  kuten <em>Banaanin metsästys</em> (Leijonan metsästys). Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make-Mölyapina myös yksin.
+                  kuten <em className="text-forest-green font-bold">Banaanin metsästys</em>.
                 </p>
+                <div className="bg-primary p-4 rounded-2xl border-2 border-wood-dark/20 italic text-base shadow-inner">
+                  &quot;Meidät on nähty niin laivoilla, Linnanmäellä kuin päiväkodeissakin!&quot;
+                </div>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-wood-dark/10 text-center">
-              <p className="font-body text-md text-muted-foreground italic">
-                Apinointia jo vuodesta 2014 – meidät on nähty niin laivoilla, Linnanmäellä kuin päiväkodeissakin!
+            {/* Uusi koko leveyden infolaatikko */}
+            <div className="mt-8 bg-primary/20 p-6 rounded-3xl border-4 border-dashed border-primary/40 w-full">
+              <p className="font-heading text-xl md:text-3xl text-forest-green text-center leading-relaxed font-bold">
+                🍌 <span className="underline decoration-bright-orange decoration-4 underline-offset-8">Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make-Mölyapina myös yksin!</span> 🐒
               </p>
             </div>
-          </div>
+            </div>
         </motion.div>
       </div>          
 
-      <div className="mt-16">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 0L48 10C96 20 192 40 288 50C384 60 480 60 576 55C672 50 768 40 864 35C960 30 1056 30 1152 35C1248 40 1344 50 1392 55L1440 60V0H1392C1344 0 1248 0 1152 0C1056 0 960 0 864 0C768 0 672 0 576 0C480 0 384 0 288 0C192 0 96 0 48 0H0Z"
-            className="fill-sand"
-          />
-          <path
-            d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-            className="fill-secondary"
-          />
-        </svg>
-      </div>
+{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
     </section>
   );
 };

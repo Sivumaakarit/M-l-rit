@@ -1,135 +1,118 @@
 import { motion } from "framer-motion";
-/* MUUTOS: Ticket vaihdettu Info-ikoniin */
 import { Calendar, MapPin, Info } from "lucide-react";
-/* 1. TUOTU UUDET PALIKAT */
-import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 
-// ============================================
-// KEIKKAKALENTERI - Muokkaa tätä listaa!
-// ============================================
-const tourDates = [
+interface Gig {
+  date: string;
+  city: string;
+  venue: string;
+  ticketUrl?: string;
+}
+
+const gigs: Gig[] = [
   {
-    date: "15.2.2026",
+    date: "14.03.2026",
     city: "Helsinki",
-    venue: "Yksityistilaisuus",
-    ticketUrl: "", // TYHJÄ = Ei nappia
+    venue: "Tiivistämö",
+    ticketUrl: "#"
   },
   {
-    date: "1.3.2026",
+    date: "28.03.2026",
+    city: "Tampere",
+    venue: "Pakkahuone",
+    ticketUrl: "#"
+  },
+  {
+    date: "11.04.2026",
     city: "Turku",
-    venue: "Yksityistilaisuus",
-    ticketUrl: "", // TYHJÄ = Ei nappia
+    venue: "Logomo",
+    ticketUrl: "#"
   },
   {
-    date: "16.5.2026",
-    city: "Pielavesi",
-    venue: "Liikuntasali",
-    ticketUrl: "https://pielavesi.fi/tapahtumat/kevatkarkelot/", // LINKKI = Nappi näkyy
+    date: "25.04.2026",
+    city: "Lahti",
+    venue: "Sibeliustalo",
+    ticketUrl: "#"
   },
+  {
+    date: "09.05.2026",
+    city: "Oulu",
+    venue: "Energia Areena",
+    ticketUrl: "#"
+  }
 ];
-// ============================================
 
 const TourCalendar = () => {
-  /* 2. OTETTU EFEKTI KÄYTTÖÖN KOMPONENTISSA */
-  const { particles, triggerRain } = useMolyRain();
-
   return (
-    <section id="tour" className="pt-0 pb-0 bg-sand relative overflow-hidden">
-      {/* 3. LISÄTTY NÄYTTÖELEMENTTI */}
-      <MolyRainDisplay particles={particles} />
-
-      <div className="container mx-auto px-4">
+    <section id="tour" className="py-24 pb-48 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 pt-12"
+          className="text-center mb-16"
         >
-          {/* 4. LISÄTTY onClick, whileTap JA PÄIVITETTY LUOKAT */}
-          <motion.div 
-            onClick={triggerRain}
-            whileHover={{ 
-              rotate: [0, -2, 2, -1, 1, 0], 
-              transition: { duration: 1.2, ease: "easeInOut" } 
-            }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformOrigin: "top center" }}
-            className="inline-block wood-texture rounded-3xl px-8 py-4 shadow-lg mb-4 overflow-hidden cursor-pointer active:brightness-95 transition-all"
-          >
-            <h2 className="font-heading text-3xl md:text-4xl text-wood-dark">
-              🎪 Möly-kiertue 2026 🎪
+          <div className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 relative">
+            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun relative z-10">
+              🎪 Keikat & Seikkailut 🎪
             </h2>
-          </motion.div>
-          <p className="font-body text-lg text-muted-foreground max-w-xl mx-auto">
-            Tule tanssimaan kanssamme livenä!
+          </div>
+          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
+            Tule mukaan banaanitanssiin! Täältä löydät tulevat <span className="text-forest-green">keikkamme.</span>
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {tourDates.map((gig, index) => (
+        <div className="grid gap-6 max-w-4xl mx-auto">
+          {gigs.map((gig, index) => (
             <motion.div
-              key={`${gig.date}-${gig.city}`}
-              initial={{ opacity: 0, x: -30 }}
+              key={gig.date + gig.city}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="wood-texture rounded-3xl p-1 shadow-lg overflow-hidden"
+              className="group"
             >
-              <div className="bg-card/95 rounded-2xl p-4 md:p-6">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="bg-primary rounded-2xl p-3 text-center min-w-[80px]">
-                      <Calendar className="w-6 h-6 mx-auto text-primary-foreground mb-1" />
-                      <span className="font-heading text-sm text-primary-foreground">
-                        {gig.date}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-xl text-foreground">
-                        {gig.city}
-                      </h3>
-                      <p className="font-body text-muted-foreground flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {gig.venue}
-                      </p>
-                    </div>
+              <div className="lauta-clean p-4 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 shadow-xl border-l-8 border-bright-orange w-full">
+                <div className="flex items-center gap-4 md:gap-6 overflow-hidden">
+                  <div className="bg-primary rounded-2xl p-3 md:p-4 text-center min-w-[80px] md:min-w-[100px] shadow-inner border-2 border-wood-dark/10 flex-shrink-0">
+                    <Calendar className="w-6 h-6 md:w-8 md:h-8 mx-auto text-wood-dark mb-1" />
+                    <span className="font-heading text-sm md:text-lg text-wood-dark whitespace-nowrap">
+                      {gig.date}
+                    </span>
                   </div>
-
-                  {gig.ticketUrl && (
-                    <motion.a
-                      href={gig.ticketUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-bright-orange text-primary-foreground font-heading text-lg px-6 py-3 rounded-2xl shadow-md flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Info className="w-5 h-5" />
-                      Katso lisää
-                    </motion.a>
-                  )}
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-heading text-xl md:text-2xl text-wood-dark mb-1 truncate">
+                      {gig.city}
+                    </h3>
+                    <p className="font-body text-forest-green text-base md:text-lg flex items-center gap-2 font-bold truncate">
+                      <MapPin className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                      {gig.venue}
+                    </p>
+                  </div>
                 </div>
+
+                {gig.ticketUrl && (
+                  <motion.a
+                    href={gig.ticketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-bright-orange text-white font-heading text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-2xl transition-all w-full md:w-auto mt-2 md:mt-0"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Info className="w-5 h-5 md:w-6 md:h-6" />
+                    Osta liput! 🍌
+                  </motion.a>
+                )}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <div className="mt-12">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-            className="fill-secondary"
-          />
-        </svg>
-      </div>
+{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
     </section>
   );
 };

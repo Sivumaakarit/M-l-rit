@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import logoImage from "@/assets/logo.webp";
 
 const FloatingElements = () => {
   const elements = [
@@ -18,15 +19,16 @@ const FloatingElements = () => {
       {elements.map((element, index) => (
         <motion.div
           key={index}
-          className="absolute text-3xl md:text-5xl opacity-60"
+          className="absolute text-4xl md:text-6xl opacity-30 select-none"
           style={{ left: element.left, top: element.top }}
           initial={{ y: 0, rotate: 0 }}
           animate={{
-            y: [-20, 20, -20],
-            rotate: [-10, 10, -10],
+            y: [-25, 25, -25],
+            rotate: [-15, 15, -15],
+            scale: [0.9, 1.1, 0.9],
           }}
           transition={{
-            duration: 6,
+            duration: 8,
             repeat: Infinity,
             delay: element.delay,
             ease: "easeInOut",
@@ -45,17 +47,14 @@ const HeroSection = () => {
 
   const handleMouseEnter = () => {
     const side = Math.random() > 0.5 ? 1 : -1;
-    
-    // MUUTOS: Tehty kurkkauksesta "ujompi" (pienemmät arvot)
-    // Jos side on 1 (oikea), liike on vain 15-18px. Vasemmalla 18-22px.
     const xMove = side === 1 
-      ? (15 + Math.random() * 3) // Oikea puoli (erittäin ujo)
-      : (18 + Math.random() * 4) * -1; // Vasen puoli
+      ? (15 + Math.random() * 5)
+      : (18 + Math.random() * 6) * -1;
     
     setMonkeyPos({
       x: xMove,
-      y: -40 - Math.random() * 10, // Pysyy korkealla latvassa
-      rotate: (10 + Math.random() * 10) * side,
+      y: -45 - Math.random() * 15,
+      rotate: (15 + Math.random() * 15) * side,
     });
     setIsHovered(true);
   };
@@ -63,8 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      style={{ scrollMarginTop: "60px" }}
-      className="relative min-h-screen pt-24 pb-12 bg-gradient-forest overflow-visible z-30"
+      className="relative min-h-[90vh] pt-32 pb-48 bg-gradient-forest overflow-visible flex items-center justify-center"
     >
       <FloatingElements />
 
@@ -73,20 +71,32 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-[hsl(30_35%_25%)] mb-4 drop-shadow-lg flex items-center justify-center gap-3 flex-wrap">
-            <span>Tervetuloa Mölymetsään!</span>
+          <div className="flex justify-center mb-8">
+            <motion.div
+              animate={{ rotate: [0, -5, 5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <img 
+                src={logoImage} 
+                alt="Mölyapinat logo" 
+                className="h-32 md:h-48 w-auto drop-shadow-2xl" 
+                fetchPriority="high"
+              />
+            </motion.div>
+          </div>
+
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl text-wood-dark mb-6 drop-shadow-sm flex items-center justify-center gap-4 flex-wrap">
+            <span className="text-shadow-fun">Tervetuloa Mölymetsään!</span>
             
             <span 
               className="relative inline-block cursor-pointer"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={() => setIsHovered(false)}
-              style={{ zIndex: isHovered ? 100 : 10 }} 
             >
-              {/* Apina: Lähtee täysin kuusen keskeltä piilosta */}
               <motion.span
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl md:text-5xl pointer-events-none"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl md:text-6xl pointer-events-none"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={isHovered ? { 
                   opacity: 1, 
@@ -101,65 +111,76 @@ const HeroSection = () => {
                   y: 0, 
                   rotate: 0 
                 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
                 🐒
               </motion.span>
 
-              {/* Kuusi: Skaalaus pidetty maltillisena (1.35) */}
               <motion.span
-                className="relative z-20 inline-block text-5xl md:text-7xl"
+                className="relative z-20 inline-block text-6xl md:text-8xl"
                 style={{ transformOrigin: "bottom center" }}
-                animate={isHovered ? { scale: 1.35, rotate: -2 } : { scale: 1, rotate: 0 }}
+                animate={isHovered ? { scale: 1.25, rotate: -3 } : { scale: 1, rotate: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 🌲
+                {!isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute -right-48 -top-6 whitespace-nowrap hidden lg:block"
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="font-heading text-xl text-forest-green animate-bounce text-shadow-fun">
+                        Kuka kurkkaa?
+                      </span>
+                      <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mt-2">
+                        <path 
+                          d="M50 10 Q30 10 10 30 M10 30 L25 30 M10 30 L10 15" 
+                          stroke="currentColor" 
+                          strokeWidth="3" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                        />
+                      </svg>
+                    </div>
+                  </motion.div>
+                )}
               </motion.span>
             </span>
           </h1>
 
-          <p className="font-body text-xl md:text-2xl text-[hsl(30_35%_30%)] max-w-2xl mx-auto font-semibold">
-            Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus riemukasta teatteria. Lähdetään seikkailemaan!
+          <p className="font-body text-xl md:text-2xl text-wood-dark max-w-2xl mx-auto font-bold leading-relaxed">
+            Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus teatteria! 🍌
           </p>
         </motion.div>
 
-        {/* Video-osio pidetty ennallaan */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-wood-dark/10 p-2">
-            <div className="aspect-video rounded-2xl overflow-hidden">
+          <div className="lauta-bg p-4 md:p-6 shadow-2xl">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-inner bg-black/10">
               <iframe
                 src="https://www.youtube.com/embed/-zA1vEvMvxA"
                 title="Mölyapinat - Banaanitanssi"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
+                loading="lazy"
               />
             </div>
+            <p className="text-center mt-6 font-heading text-2xl md:text-3xl text-bright-orange text-shadow-fun">
+              🍌 Katso video ja harjoittele Banaanitanssi 🍌
+            </p>
           </div>
-          <p className="text-center mt-4 font-heading text-2xl text-bright-orange">
-            🍌 Katso video ja harjoittele Banaanitanssi 🍌
-          </p>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-0">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-            className="fill-sand"
-          />
-        </svg>
-      </div>
+{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
     </section>
   );
 };

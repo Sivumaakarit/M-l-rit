@@ -13,6 +13,7 @@ interface Particle {
   drift: number;
 }
 
+/* eslint-disable react-refresh/only-export-components */
 export const useMolyRain = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
