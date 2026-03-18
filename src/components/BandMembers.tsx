@@ -171,7 +171,7 @@ const BandMembers = () => {
               className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all relative z-10"
             >
               <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
-                🐒 Mölyapinat-jäsenet 🐒
+                🐒 Mölyapinat-jäsenet & Kokoonpanot 🐒
               </h2>
             </motion.div>
           </div>

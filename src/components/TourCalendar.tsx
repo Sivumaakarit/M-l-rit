@@ -43,7 +43,7 @@ const TourCalendar = () => {
           <div className="inline-block wood-clean rounded-full px-6 py-4 md:px-12 md:py-6 shadow-2xl border-4 border-wood-dark relative overflow-hidden mb-6 max-w-[95vw]">
             <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl text-wood-dark text-shadow-fun flex items-center justify-center gap-2 md:gap-4 flex-wrap">
               <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange" />
-              Keikkakalenteri
+              Mölyapinat Keikkakalenteri 2026
               <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange rotate-180" />
             </h2>
             {/* Shine effect */}

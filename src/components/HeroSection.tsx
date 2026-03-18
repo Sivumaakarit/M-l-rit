@@ -90,6 +90,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="font-heading text-[10vw] min-[375px]:text-5xl md:text-6xl lg:text-7xl text-wood-dark mb-6 drop-shadow-sm flex items-center justify-center gap-4 flex-wrap">
+            <span className="sr-only">Mölyapinat - Suomen paras lastenmusiikkibändi keikalle ja tapahtumiin.</span>
             <span className="text-shadow-fun text-center px-4">Tervetuloa Mölymetsään!</span>
             
             <span 
