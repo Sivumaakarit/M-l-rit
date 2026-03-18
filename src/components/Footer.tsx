@@ -22,7 +22,7 @@ const Footer = () => {
             Lastenmusiikkia suurella sydämellä ja kovalla metelillä! 🍌
           </p>
           
-          <div className="flex justify-center gap-8 items-center mb-10 text-4xl">
+          <div className="flex justify-center gap-8 items-center mb-10 text-4xl group/emojis">
             {[ "🍌", "🎵", "🐒", "🎶", "🍌" ].map((emoji, idx) => (
               <motion.span
                 key={idx}
@@ -31,6 +31,11 @@ const Footer = () => {
                   y: [0, -12, 0],
                   scale: [1, 1.25, 1],
                   rotate: [0, 15, -15, 0]
+                }}
+                whileHover={{ 
+                  scale: 1.5,
+                  rotate: [0, -20, 20, 0],
+                  transition: { duration: 0.3 } 
                 }}
                 transition={{ 
                   duration: 3 + idx * 0.2, 

@@ -96,7 +96,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:bg-primary/5 focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all shadow-sm"
                   placeholder="Kirjoita nimesi"
                 />
               </div>
@@ -113,7 +113,7 @@ const ContactSection = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm"
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:bg-primary/5 focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all shadow-sm"
                   placeholder="sinun@email.fi"
                 />
               </div>
@@ -130,7 +130,7 @@ const ContactSection = () => {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   rows={12}
-                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:outline-none transition-all shadow-sm resize-none"
+                  className="w-full bg-white border-2 md:border-4 border-wood-light/50 rounded-2xl px-3 py-2 md:px-5 md:py-4 font-body text-base md:text-lg focus:border-primary focus:bg-primary/5 focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all shadow-sm resize-none"
                   placeholder="Kerro meille miten voimme auttaa!"
                 />
               </div>

@@ -6,10 +6,24 @@ import hamburgerIcon from "@/assets/Hampurilainen.webp";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [hasShadow, setHasShadow] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      
+      // Control background change (glass effect)
+      setScrolled(currentScrollY > 20);
+      // Control visibility (hide on scroll down, show on up)
+      if (currentScrollY > lastScrollY && currentScrollY > 300) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
     const handleResize = () => {
@@ -19,20 +33,22 @@ const Header = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isOpen]);
+  }, [isOpen, lastScrollY]);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     }
   }, [isOpen]);
 
@@ -67,8 +83,17 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 pt-2 md:pt-4">
-      <nav className={`mx-auto max-w-7xl rounded-2xl md:rounded-[2rem] transition-all duration-300 ${isOpen ? 'glass-bg border-2 border-slate-900/10 shadow-xl' : scrolled ? 'glass-bg' : 'wood-texture'} shadow-xl`}>
+    <motion.header 
+      className="fixed top-0 left-0 right-0 z-50 px-4 pt-2 md:pt-4"
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -120 }}
+      transition={{ duration: 1.0, ease: "easeInOut" }}
+    >
+      <nav className={`mx-auto max-w-7xl rounded-2xl md:rounded-[2rem] transition-all duration-500 ease-in-out ${
+        isOpen || scrolled 
+          ? 'glass-bg border-2 border-slate-900/10 shadow-xl' 
+          : 'wood-texture border-[3px] border-wood-dark shadow-[4px_4px_0px_hsl(var(--wood-dark))]'
+      }`}>
         <div className="container mx-auto px-4 py-2 md:px-6 md:py-4">
           <div className="flex items-center justify-between gap-4">
             <motion.a
@@ -169,7 +194,7 @@ const Header = () => {
           )}
         </AnimatePresence>
       </nav>
-    </header>
+    </motion.header>
   );
 };
 

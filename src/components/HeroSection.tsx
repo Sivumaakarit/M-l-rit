@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] pt-24 md:pt-32 pb-48 bg-gradient-forest overflow-x-hidden flex items-center justify-center"
+      className="relative min-h-[90vh] pt-24 md:pt-32 pb-48 bg-gradient-forest flex items-center justify-center"
     >
       <FloatingElements />
 
@@ -128,7 +128,7 @@ const HeroSection = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 2, duration: 1 }}
-                  className="absolute -right-36 -top-10 whitespace-nowrap hidden lg:block"
+                  className="absolute -right-36 -top-14 whitespace-nowrap hidden lg:block"
                 >
                   <div className="flex flex-col items-start">
                     <span className="font-heading text-xl text-forest-green animate-bounce text-shadow-fun">
@@ -172,7 +172,7 @@ const HeroSection = () => {
                 loading="lazy"
               />
             </div>
-            <p className="text-center mt-6 font-heading text-2xl md:text-3xl text-bright-orange text-shadow-fun">
+            <p className="text-center mt-6 font-heading text-2xl md:text-3xl text-bright-orange [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000]">
               🍌 Katso video ja harjoittele Banaanitanssi 🍌
             </p>
           </div>

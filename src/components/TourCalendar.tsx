@@ -1,117 +1,131 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Info } from "lucide-react";
+import { Calendar, MapPin, Banana, Music, Users, Star } from "lucide-react";
 
 interface Gig {
   date: string;
   city: string;
   venue: string;
-  ticketUrl?: string;
+  lineup: string;
+  isPrivate?: boolean;
 }
 
 const gigs: Gig[] = [
-  {
-    date: "14.03.2026",
-    city: "Helsinki",
-    venue: "Tiivistämö",
-    ticketUrl: "#"
-  },
-  {
-    date: "28.03.2026",
-    city: "Tampere",
-    venue: "Pakkahuone",
-    ticketUrl: "#"
-  },
-  {
-    date: "11.04.2026",
-    city: "Turku",
-    venue: "Logomo",
-    ticketUrl: "#"
-  },
-  {
-    date: "25.04.2026",
-    city: "Lahti",
-    venue: "Sibeliustalo",
-    ticketUrl: "#"
-  },
-  {
-    date: "09.05.2026",
-    city: "Oulu",
-    venue: "Energia Areena",
-    ticketUrl: "#"
-  }
+  { date: "1.5.", city: "Nummela", venue: "", lineup: "Mölyapinat Duo" },
+  { date: "2.5.", city: "Lappeenranta", venue: "Pääkirjasto", lineup: "Mölyapinat Duo" },
+  { date: "5.5.", city: "Vantaa", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
+  { date: "12.5.", city: "Kerava", venue: "Untola Fest", lineup: "Mölyapinat Duo + Soffi" },
+  { date: "13.5.", city: "Lohja", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
+  { date: "14.5.", city: "Lohja", venue: "(Tarkentuu myöhemmin)", lineup: "Mölyapinat Bändi" },
+  { date: "16.5.", city: "Pielavesi", venue: "Kevätkarkelot", lineup: "Mölyapinat Bändi" },
+  { date: "19.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
+  { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
+  { date: "14.7.", city: "Tampere", venue: "Finlayson", lineup: "Mölyapinat Bändi" }
 ];
 
 const TourCalendar = () => {
   return (
     <section id="tour" className="py-24 pb-48 bg-background relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-10">
+        <Banana className="absolute top-20 left-10 w-32 h-32 rotate-12" />
+        <Star className="absolute bottom-40 right-20 w-24 h-24 -rotate-12" />
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 relative">
-            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun relative z-10">
-              🎪 Keikat & Seikkailut 🎪
+          <div className="inline-block wood-clean rounded-full px-12 py-6 shadow-2xl border-4 border-wood-dark relative overflow-hidden mb-6">
+            <h2 className="font-heading text-4xl md:text-5xl text-wood-dark text-shadow-fun flex items-center gap-4">
+              <Music className="w-10 h-10 text-bright-orange" />
+              Keikkakalenteri
+              <Music className="w-10 h-10 text-bright-orange rotate-180" />
             </h2>
+             {/* Shine effect */}
+             <motion.div 
+               className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+               animate={{ left: "200%" }}
+               transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 1 }}
+             />
           </div>
-          <p className="font-body text-lg md:text-xl text-wood-dark max-w-xl mx-auto font-bold px-4">
-            Tule mukaan banaanitanssiin! Täältä löydät tulevat <span className="text-forest-green">keikkamme.</span>
+          <p className="font-body text-xl md:text-2xl text-wood-dark/80 max-w-2xl mx-auto font-bold">
+            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna. 🍌
           </p>
         </motion.div>
 
-        <div className="grid gap-6 max-w-4xl mx-auto">
+        {/* Desktop Table Header */}
+        <div className="hidden md:grid grid-cols-12 gap-4 px-8 py-4 bg-wood-dark text-white rounded-t-3xl font-heading text-lg shadow-xl mb-2 border-b-4 border-primary/30">
+          <div className="col-span-2 flex items-center gap-2 tracking-wide"><Calendar className="w-5 h-5 text-primary" /> Päivämäärä</div>
+          <div className="col-span-3 flex items-center gap-2 tracking-wide"><MapPin className="w-5 h-5 text-primary" /> Paikkakunta</div>
+          <div className="col-span-4 flex items-center gap-2 tracking-wide"><Star className="w-5 h-5 text-primary" /> Paikka / Tapahtuma</div>
+          <div className="col-span-3 flex items-center gap-2 tracking-wide"><Users className="w-5 h-5 text-primary" /> Kokoonpano</div>
+        </div>
+
+        {/* Gig List */}
+        <div className="flex flex-col gap-3">
           {gigs.map((gig, index) => (
             <motion.div
-              key={gig.date + gig.city}
-              initial={{ opacity: 0, x: -50 }}
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01, x: 5 }}
               className="group"
             >
-              <div className="lauta-clean p-3 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 shadow-xl border-l-8 border-bright-orange w-full">
-                <div className="flex items-center gap-4 md:gap-6 overflow-hidden">
-                  <div className="bg-primary rounded-2xl p-3 md:p-4 text-center min-w-[80px] md:min-w-[100px] shadow-inner border-2 border-wood-dark/10 flex-shrink-0">
-                    <Calendar className="w-6 h-6 md:w-8 md:h-8 mx-auto text-wood-dark mb-1" />
-                    <span className="font-heading text-sm md:text-lg text-wood-dark whitespace-nowrap">
-                      {gig.date}
-                    </span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-heading text-xl md:text-2xl text-wood-dark mb-1 truncate">
-                      {gig.city}
-                    </h3>
-                    <p className="font-body text-forest-green text-base md:text-lg flex items-center gap-2 font-bold truncate">
-                      <MapPin className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-                      {gig.venue}
-                    </p>
+              <div className={`
+                lauta-clean p-6 md:p-8 flex flex-col md:grid md:grid-cols-12 md:items-center gap-4 shadow-lg border-l-8 
+                ${gig.isPrivate ? 'border-sand opacity-90' : 'border-bright-orange'} 
+                ${index === gigs.length - 1 ? 'rounded-b-3xl' : ''}
+                transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-bright-orange/10
+              `}>
+                {/* Mobile Labels + Desktop Columns */}
+                <div className="col-span-2 flex items-center md:block">
+                  <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Päivä:</span>
+                  <div className="bg-primary/20 md:bg-transparent px-3 py-1 rounded-full md:p-0">
+                    <span className="font-heading text-xl md:text-2xl text-wood-dark">{gig.date}</span>
                   </div>
                 </div>
 
-                {gig.ticketUrl && (
-                  <motion.a
-                    href={gig.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-bright-orange text-white font-heading text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3 hover:shadow-2xl transition-all w-full md:w-auto mt-2 md:mt-0"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Info className="w-5 h-5 md:w-6 md:h-6" />
-                    Osta liput! 🍌
-                  </motion.a>
-                )}
+                <div className="col-span-3 flex items-center md:block">
+                  <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Kunta:</span>
+                  <span className="font-heading text-xl text-forest-green">{gig.city}</span>
+                </div>
+
+                <div className="col-span-4 flex items-center md:block">
+                  <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Paikka:</span>
+                  <span className={`font-body text-lg md:text-xl font-bold ${gig.isPrivate ? 'italic text-wood-dark/60' : 'text-wood-dark'}`}>
+                    {gig.venue || "-"}
+                  </span>
+                </div>
+
+                <div className="col-span-3 flex items-center md:block">
+                  <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Kenellä:</span>
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-bright-orange/10 rounded-lg hidden md:block">
+                      <Users className="w-5 h-5 text-bright-orange" />
+                    </div>
+                    <span className="font-heading text-lg md:text-xl text-wood-dark">{gig.lineup}</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {/* Decorative Wave at the bottom */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-32 md:h-48 fill-secondary transform rotate-180 opacity-50">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" />
+        </svg>
+      </div>
+
+      {/* Wave divider from CSS */}
       <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
     </section>
   );

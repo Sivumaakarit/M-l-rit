@@ -82,7 +82,13 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
     >
       <BananaRain />
       <div
-        className={`rounded-3xl p-4 shadow-xl transition-shadow group-hover:shadow-2xl ${member.color}`}
+        className={`rounded-3xl p-4 shadow-xl transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(var(--glow-color),0.4)] ${member.color}`}
+        style={{ 
+          // @ts-ignore - Dynamic variable for the glow color
+          "--glow-color": member.color === 'bg-banana' ? '255, 215, 0' : 
+                          member.color === 'bg-neon-green' ? '50, 205, 50' : 
+                          '255, 127, 80' 
+        }}
       >
         <div className="bg-card rounded-2xl p-4 text-center">
           <div className="relative w-32 h-32 mx-auto mb-4">
@@ -133,7 +139,7 @@ const BandMembers = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3, duration: 1 }}
-              className="absolute -left-48 lg:-left-64 -top-8 whitespace-nowrap hidden sm:block pointer-events-none group-hover/header:opacity-0 transition-opacity duration-300"
+              className="absolute -left-36 lg:-left-48 -top-14 whitespace-nowrap hidden sm:block pointer-events-none group-hover/header:opacity-0 transition-opacity duration-300"
             >
               <div className="flex flex-col items-end gap-2 text-right">
                 <span className="font-heading text-lg lg:text-xl text-destructive animate-pulse text-shadow-fun">
