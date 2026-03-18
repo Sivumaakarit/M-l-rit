@@ -10,7 +10,7 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "29.4.", city: "Mäntsälä", venue: "Möykkä", lineup: "Make Solo" },
+  { date: "29.4.", city: "Mäntsälä", venue: "Yksityistilaisuus", lineup: "Möykkä Make solo", isPrivate: true },
   { date: "1.5.", city: "Nummela", venue: "Tori", lineup: "Mölyapinat Duo" },
   { date: "2.5.", city: "Lappeenranta", venue: "Pääkirjasto", lineup: "Mölyapinat Duo" },
   { date: "5.5.", city: "Vantaa", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
@@ -20,7 +20,7 @@ const gigs: Gig[] = [
   { date: "16.5.", city: "Pielavesi", venue: "Kevätkarkelot", lineup: "Mölyapinat Bändi" },
   { date: "19.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "14.7.", city: "Tampere", venue: "Finlayson", lineup: "Mölyapinat Bändi" }
+  { date: "14.7.", city: "Tampere", venue: "Finlaysonin kesälava", lineup: "Mölyapinat Bändi" }
 ];
 
 const TourCalendar = () => {
@@ -46,15 +46,15 @@ const TourCalendar = () => {
               Keikkakalenteri
               <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange rotate-180" />
             </h2>
-             {/* Shine effect */}
-             <motion.div 
-               className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-               animate={{ left: "200%" }}
-               transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 1 }}
-             />
+            {/* Shine effect */}
+            <motion.div
+              className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+              animate={{ left: "200%" }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
           </div>
           <p className="font-body text-xl md:text-2xl text-wood-dark/80 max-w-2xl mx-auto font-bold">
-            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna - kalenteri päivittyy koko ajan. 🍌
+            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna - kalenteri päivittyy koko ajan 🍌
           </p>
         </motion.div>
 

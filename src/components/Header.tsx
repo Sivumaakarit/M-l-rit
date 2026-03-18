@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImage from "@/assets/logo.webp";
+const logoImage = "/logo.webp";
 import hamburgerIcon from "@/assets/Hampurilainen.webp";
 
 const Header = () => {

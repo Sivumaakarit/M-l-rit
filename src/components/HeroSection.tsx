@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import logoImage from "@/assets/logo.webp";
+const logoImage = "/logo.webp";
 
 const FloatingElements = () => {
   const elements = [
