@@ -124,7 +124,7 @@ const BandMembers = () => {
   const { particles, triggerRain } = useMolyRain();
 
   return (
-    <section id="members" className="pt-24 pb-48 bg-background relative overflow-hidden">
+    <section id="members" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-background relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
@@ -230,7 +230,7 @@ const BandMembers = () => {
       </div>          
 
 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
+      <div className="absolute bottom-0 left-0 w-full wave-divider h-10 md:h-[100px]" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
     </section>
   );
 };

@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
 
           <div className="mt-12 text-slate-400 font-body text-sm uppercase tracking-widest font-bold">
-            Visual Excellence & High Performance Certified
+            Sivumaakarit 2026
           </div>
         </motion.div>
       </div>

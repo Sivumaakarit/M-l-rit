@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] pt-24 md:pt-32 pb-48 bg-gradient-forest flex items-center justify-center"
+      className="relative min-h-[90vh] pt-24 md:pt-32 pb-24 md:pb-48 bg-gradient-forest flex items-center justify-center"
     >
       <FloatingElements />
 
@@ -202,7 +202,7 @@ const HeroSection = () => {
       </div>
 
 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
+      <div className="absolute bottom-0 left-0 w-full wave-divider h-10 md:h-[100px]" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
     </section>
   );
 };

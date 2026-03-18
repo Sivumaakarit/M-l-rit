@@ -28,7 +28,7 @@ const MusicSection = () => {
   const [showSpotify, setShowSpotify] = useState(false);
 
   return (
-    <section id="music" className="py-24 pb-48 bg-secondary relative overflow-hidden">
+    <section id="music" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -220,7 +220,7 @@ const MusicSection = () => {
       </div>
 
 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
+      <div className="absolute bottom-0 left-0 w-full wave-divider h-10 md:h-[100px]" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
     </section>
   );
 };
