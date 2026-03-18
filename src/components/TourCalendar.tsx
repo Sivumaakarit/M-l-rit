@@ -39,11 +39,11 @@ const TourCalendar = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-block wood-clean rounded-full px-12 py-6 shadow-2xl border-4 border-wood-dark relative overflow-hidden mb-6">
-            <h2 className="font-heading text-4xl md:text-5xl text-wood-dark text-shadow-fun flex items-center gap-4">
-              <Music className="w-10 h-10 text-bright-orange" />
+          <div className="inline-block wood-clean rounded-full px-6 py-4 md:px-12 md:py-6 shadow-2xl border-4 border-wood-dark relative overflow-hidden mb-6 max-w-[95vw]">
+            <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl text-wood-dark text-shadow-fun flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+              <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange" />
               Keikkakalenteri
-              <Music className="w-10 h-10 text-bright-orange rotate-180" />
+              <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange rotate-180" />
             </h2>
              {/* Shine effect */}
              <motion.div 
@@ -53,7 +53,7 @@ const TourCalendar = () => {
              />
           </div>
           <p className="font-body text-xl md:text-2xl text-wood-dark/80 max-w-2xl mx-auto font-bold">
-            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna. 🍌
+            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna - kalenteri päivittyy koko ajan. 🍌
           </p>
         </motion.div>
 

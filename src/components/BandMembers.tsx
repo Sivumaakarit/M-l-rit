@@ -222,7 +222,7 @@ const BandMembers = () => {
             {/* Uusi koko leveyden infolaatikko */}
             <div className="mt-8 bg-primary/20 p-6 rounded-3xl border-4 border-dashed border-primary/40 w-full">
               <p className="font-heading text-xl md:text-3xl text-forest-green text-center leading-relaxed font-bold">
-                🍌 <span className="underline decoration-bright-orange decoration-4 underline-offset-8">Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make-Mölyapina myös yksin!</span> 🐒
+                🍌 <span className="underline decoration-bright-orange decoration-4 underline-offset-8">Mölyapinat esiintyvät myös pienemmillä kokoonpanoilla ja Make Mölyapina myös yksin!</span> 🐒
               </p>
             </div>
             </div>
