@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Music, Music2, Share2, Facebook, Instagram } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Music, Music2, Share2, Facebook, Instagram, PlayCircle } from "lucide-react";
 
 const TikTokIcon = () => (
   <svg 
@@ -24,6 +25,8 @@ const SpotifyIcon = () => (
 );
 
 const MusicSection = () => {
+  const [showSpotify, setShowSpotify] = useState(false);
+
   return (
     <section id="music" className="py-24 pb-48 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -52,18 +55,43 @@ const MusicSection = () => {
             viewport={{ once: true }}
             className="lauta-clean p-6 shadow-2xl"
           >
-            <div className="bg-white rounded-2xl overflow-hidden shadow-inner border-4 border-wood-dark/10">
-              <iframe
-                src="https://open.spotify.com/embed/artist/5VWE6cH7u5YksJLpJfBgEm"
-                title="Mölyapinat Spotify-soitin"
-                width="100%"
-                height="400"
-                frameBorder="0"
-                allowTransparency={true}
-                allow="encrypted-media"
-                className="w-full"
-                loading="lazy"
-              />
+            <div className="bg-white rounded-2xl overflow-hidden shadow-inner border-4 border-wood-dark/10 min-h-[400px] flex items-center justify-center relative">
+              {!showSpotify ? (
+                <div 
+                  className="w-full h-full absolute inset-0 bg-slate-900 group cursor-pointer flex flex-col items-center justify-center p-8 text-center transition-all hover:bg-slate-800"
+                  onClick={() => setShowSpotify(true)}
+                >
+                  <div className="bg-neon-green/20 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                    <SpotifyIcon />
+                  </div>
+                  <h4 className="font-heading text-2xl text-white mb-2">Mölyapinat Spotifyssa</h4>
+                  <p className="font-body text-white/60 mb-8 max-w-xs">Lataa soitin ja hyppää Mölymetsän banaanitanssiin! 🍌</p>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-3 bg-neon-green text-slate-900 font-heading text-xl px-8 py-3 rounded-full shadow-xl"
+                  >
+                    <PlayCircle className="w-6 h-6" />
+                    Avaa soitin
+                  </motion.button>
+
+                  <p className="absolute bottom-4 left-0 right-0 text-[10px] text-white/30 px-6 italic">
+                    Klikkaamalla lataat Spotifyn sisältöä ja evästeitä.
+                  </p>
+                </div>
+              ) : (
+                <iframe
+                  src="https://open.spotify.com/embed/artist/5VWE6cH7u5YksJLpJfBgEm"
+                  title="Mölyapinat Spotify-soitin"
+                  width="100%"
+                  height="400"
+                  frameBorder="0"
+                  allowTransparency={true}
+                  allow="encrypted-media"
+                  className="w-full"
+                />
+              )}
             </div>
           </motion.div>
 
