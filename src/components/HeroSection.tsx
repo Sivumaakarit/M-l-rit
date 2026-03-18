@@ -44,6 +44,7 @@ const FloatingElements = () => {
 const HeroSection = () => {
   const [monkeyPos, setMonkeyPos] = useState({ x: 0, y: 0, rotate: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleMouseEnter = () => {
     const side = Math.random() > 0.5 ? 1 : -1;
@@ -82,6 +83,8 @@ const HeroSection = () => {
                 src={logoImage} 
                 alt="Mölyapinat logo" 
                 className="h-20 md:h-48 w-auto drop-shadow-2xl" 
+                width="318"
+                height="192"
                 fetchPriority="high"
               />
             </motion.div>
@@ -162,15 +165,34 @@ const HeroSection = () => {
           className="max-w-4xl mx-auto"
         >
           <div className="lauta-bg p-4 md:p-6 shadow-2xl">
-            <div className="aspect-video rounded-xl overflow-hidden shadow-inner bg-black/10">
-              <iframe
-                src="https://www.youtube.com/embed/-zA1vEvMvxA"
-                title="Mölyapinat - Banaanitanssi"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-                loading="lazy"
-              />
+            <div className="aspect-video rounded-xl overflow-hidden shadow-inner bg-black/10 relative group">
+              {!showVideo ? (
+                <button 
+                  onClick={() => setShowVideo(true)}
+                  className="w-full h-full relative flex items-center justify-center overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
+                  aria-label="Pelaa Banaanitanssi video"
+                >
+                  <img 
+                    src="https://img.youtube.com/vi/-zA1vEvMvxA/maxresdefault.jpg" 
+                    alt="Banaanitanssi esikatselu" 
+                    className="w-full h-full object-cover"
+                    width="800"
+                    height="450"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute w-20 h-20 md:w-24 md:h-24 bg-bright-orange rounded-full flex items-center justify-center shadow-2xl border-4 border-white transform transition-transform group-hover:scale-110">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-2" />
+                  </div>
+                </button>
+              ) : (
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/-zA1vEvMvxA?autoplay=1"
+                  title="Mölyapinat - Banaanitanssi"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              )}
             </div>
             <p className="text-center mt-6 font-heading text-2xl md:text-3xl text-bright-orange [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000]">
               🍌 Katso video ja harjoittele Banaanitanssi 🍌

@@ -97,6 +97,8 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
               alt={member.name}
               className="w-full h-full object-cover rounded-full border-4 border-wood-light shadow-lg"
               loading="lazy"
+              width="128"
+              height="128"
             />
             <motion.div
               className="absolute -top-2 -right-2 text-2xl"

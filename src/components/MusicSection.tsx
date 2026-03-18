@@ -55,6 +55,7 @@ const MusicSection = () => {
             <div className="bg-white rounded-2xl overflow-hidden shadow-inner border-4 border-wood-dark/10">
               <iframe
                 src="https://open.spotify.com/embed/artist/5VWE6cH7u5YksJLpJfBgEm"
+                title="Mölyapinat Spotify-soitin"
                 width="100%"
                 height="400"
                 frameBorder="0"
