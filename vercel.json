@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/(assets|fonts|logo.webp|favicon.ico)(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

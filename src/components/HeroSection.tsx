@@ -83,8 +83,8 @@ const HeroSection = () => {
                 src={logoImage} 
                 alt="Mölyapinat logo" 
                 className="h-20 md:h-48 w-auto drop-shadow-2xl" 
-                width="318"
-                height="192"
+                width="200"
+                height="200"
                 fetchPriority="high"
               />
             </motion.div>
@@ -173,11 +173,12 @@ const HeroSection = () => {
                   aria-label="Pelaa Banaanitanssi video"
                 >
                   <img 
-                    src="https://img.youtube.com/vi/-zA1vEvMvxA/maxresdefault.jpg" 
+                    src="https://img.youtube.com/vi/-zA1vEvMvxA/hqdefault.jpg" 
                     alt="Banaanitanssi esikatselu" 
                     className="w-full h-full object-cover"
-                    width="800"
-                    height="450"
+                    width="480"
+                    height="360"
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                   <div className="absolute w-20 h-20 md:w-24 md:h-24 bg-bright-orange rounded-full flex items-center justify-center shadow-2xl border-4 border-white transform transition-transform group-hover:scale-110">

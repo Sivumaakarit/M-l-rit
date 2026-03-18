@@ -108,6 +108,8 @@ const Header = () => {
                   src={logoImage} 
                   alt="Mölyapinat logo" 
                   className="relative h-8 md:h-12 w-auto object-contain flex-shrink-0" 
+                  width="54"
+                  height="56"
                   fetchPriority="high"
                 />
               </div>
@@ -156,6 +158,8 @@ const Header = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.5 }}
                     className="w-8 h-8 md:w-12 md:h-12 object-contain" 
+                    width="48"
+                    height="48"
                   />
                 )}
               </AnimatePresence>
