@@ -18,9 +18,23 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/apinalogo.png" />
     
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="image" href="/logo.webp" fetchpriority="high" />
+    <style>
+      :root {
+        --background: 45 100% 96%; --foreground: 25 40% 20%;
+        --primary: 48 100% 55%; --wood-dark: 25 35% 22%;
+        --font-body: 'Quicksand', sans-serif;
+      }
+      body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); margin: 0; font-family: var(--font-body); }
+      .wood-clean {
+        background: linear-gradient(to bottom, hsl(35 40% 92%) 0%, hsl(35 40% 95%) 50%, hsl(35 30% 88%) 100%);
+        border: 3px solid hsl(var(--wood-dark)); box-shadow: 4px 4px 0px hsl(var(--wood-dark));
+      }
+      .wood-texture {
+        background: linear-gradient(to bottom, hsl(35 45% 78%) 0%, hsl(35 45% 82%) 15%, hsl(35 45% 75%) 16%, hsl(32 40% 72%) 20%, hsl(35 45% 80%) 50%, hsl(32 40% 74%) 80%, hsl(35 45% 75%) 84%, hsl(35 42% 76%) 100%);
+        background-size: 100% 40px; border: 3px solid hsl(var(--wood-dark)); box-shadow: 4px 4px 0px hsl(var(--wood-dark));
+      }
+    </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap" />

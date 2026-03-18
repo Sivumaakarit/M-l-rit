@@ -15,7 +15,7 @@ const FloatingElements = () => {
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ contain: 'strict' }}>
       {elements.map((element, index) => (
         <motion.div
           key={index}
@@ -23,9 +23,8 @@ const FloatingElements = () => {
           style={{ left: element.left, top: element.top }}
           initial={{ y: 0, rotate: 0 }}
           animate={{
-            y: [-25, 25, -25],
+            y: ["-1.5rem", "1.5rem", "-1.5rem"],
             rotate: [-15, 15, -15],
-            scale: [0.9, 1.1, 0.9],
           }}
           transition={{
             duration: 8,
