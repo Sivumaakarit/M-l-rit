@@ -10,7 +10,8 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "1.5.", city: "Nummela", venue: "", lineup: "Mölyapinat Duo" },
+  { date: "29.4.", city: "Mäntsälä", venue: "Möykkä", lineup: "Make Solo" },
+  { date: "1.5.", city: "Nummela", venue: "Tori", lineup: "Mölyapinat Duo" },
   { date: "2.5.", city: "Lappeenranta", venue: "Pääkirjasto", lineup: "Mölyapinat Duo" },
   { date: "5.5.", city: "Vantaa", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "12.5.", city: "Kerava", venue: "Untola Fest", lineup: "Mölyapinat Duo + Soffi" },
