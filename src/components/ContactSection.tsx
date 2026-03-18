@@ -45,8 +45,6 @@ const ContactSection = () => {
     <section id="contact" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
-      {/* Wave transition from tour section */}
-      <div className="absolute top-0 left-0 w-full wave-divider h-10 md:h-[100px] rotate-180" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

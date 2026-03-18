@@ -26,8 +26,6 @@ const gigs: Gig[] = [
 const TourCalendar = () => {
   return (
     <section id="tour" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-background relative overflow-hidden">
-      {/* Wave transition from music section */}
-      <div className="absolute top-0 left-0 w-full wave-divider h-10 md:h-[100px] rotate-180" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
       {/* Background Decorations */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-10">
         <Banana className="absolute top-20 left-10 w-32 h-32 rotate-12" />
@@ -129,7 +127,7 @@ const TourCalendar = () => {
       </div>
 
       {/* Wave divider from CSS */}
-      <div className="absolute bottom-0 left-0 w-full wave-divider" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
+      <div className="absolute bottom-0 left-0 w-full wave-divider h-10 md:h-[100px]" style={{ '--wave-color': 'hsl(var(--secondary))' } as any}></div>
     </section>
   );
 };
