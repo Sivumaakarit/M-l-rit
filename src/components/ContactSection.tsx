@@ -63,7 +63,7 @@ const ContactSection = () => {
             style={{ transformOrigin: "top center" }}
             className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
-            <h2 className="font-heading text-3xl md:text-5xl text-white text-shadow-fun">
+            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
               🐒 Tilaa Mölyapinat bändi keikalle! 🐒
             </h2>
           </motion.div>
