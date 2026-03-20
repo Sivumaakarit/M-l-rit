@@ -2,5 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://molyapinat.fi/sitemap.xml
-
-Sitemap: https://molyapinat.fi/sitemap.xml
