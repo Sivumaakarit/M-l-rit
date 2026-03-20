@@ -53,18 +53,18 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <motion.div 
+          <motion.div
             onClick={triggerRain}
-            whileHover={{ 
-              rotate: [0, -2, 2, -1, 1, 0], 
-              transition: { duration: 1.2, ease: "easeInOut" } 
+            whileHover={{
+              rotate: [0, -2, 2, -1, 1, 0],
+              transition: { duration: 1.2, ease: "easeInOut" }
             }}
             whileTap={{ scale: 0.95 }}
             style={{ transformOrigin: "top center" }}
             className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all"
           >
             <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
-              🐒 Tilaa Mölyapinat bändi keikalle! 🐒
+              🐒 Tilaa Mölyapinat keikalle! 🐒
             </h2>
           </motion.div>
           <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
@@ -79,10 +79,10 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto"
         >
-            <form
-              onSubmit={handleSubmit}
-              className="lauta-clean p-2 md:p-12 shadow-2xl space-y-6 md:space-y-8"
-            >
+          <form
+            onSubmit={handleSubmit}
+            className="lauta-clean p-2 md:p-12 shadow-2xl space-y-6 md:space-y-8"
+          >
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl px-2 py-4 md:p-6 shadow-inner space-y-6 border-2 md:border-4 border-wood-dark/10">
               <div>
                 <label className="font-heading text-xl text-wood-dark flex items-center gap-3 mb-3">
