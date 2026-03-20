@@ -67,22 +67,15 @@ const ContactSection = () => {
               🐒 Tilaa Mölyapinat keikalle! 🐒
             </h2>
           </motion.div>
-          <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold mb-6">
-            Haluatko meidät esiintymään? <span className="text-forest-green">Laita viestiä:</span>
+          <p className="font-body text-xl md:text-2xl text-wood-dark max-w-4xl mx-auto font-bold mb-8">
+            Haluatko meidät esiintymään? Laita viestiä alle tai sähköpostilla: <br className="md:hidden" />
+            <a 
+              href="mailto:jullenmusiikki@gmail.com" 
+              className="text-forest-green hover:text-bright-orange transition-colors underline decoration-2 underline-offset-4"
+            >
+              jullenmusiikki@gmail.com
+            </a>
           </p>
-          <motion.a
-            href="mailto:jullenmusiikki@gmail.com"
-            className="inline-flex items-center gap-3 text-forest-green hover:text-bright-orange transition-all duration-300 font-heading text-2xl md:text-3xl bg-white/50 backdrop-blur-sm px-8 py-4 rounded-2xl shadow-sm border-2 border-forest-green/20"
-            whileHover={{ 
-              scale: 1.05,
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Mail className="w-6 h-6 md:w-8 md:h-8" />
-            jullenmusiikki@gmail.com
-          </motion.a>
         </motion.div>
 
         <motion.div
