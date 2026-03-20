@@ -61,7 +61,7 @@ const HeroSection = () => {
 
   return (
     <section
-      id="hero"
+      id="alkuun"
       className="relative min-h-[90vh] pt-24 md:pt-32 pb-24 md:pb-48 bg-gradient-forest flex items-center justify-center"
     >
       <FloatingElements />
@@ -80,7 +80,7 @@ const HeroSection = () => {
             >
               <img 
                 src={logoImage} 
-                alt="Mölyapinat logo" 
+                alt="Mölyapinat - energinen lastenmusiikkibändi logo" 
                 className="h-20 md:h-48 w-auto drop-shadow-2xl" 
                 width="200"
                 height="200"
@@ -174,7 +174,7 @@ const HeroSection = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/-zA1vEvMvxA/hqdefault.jpg" 
-                    alt="Banaanitanssi esikatselu" 
+                    alt="Mölyapinat banaanitanssi musiikkivideo esikatselu" 
                     className="w-full h-full object-cover"
                     width="480"
                     height="360"

@@ -28,7 +28,7 @@ const MusicSection = () => {
   const [showSpotify, setShowSpotify] = useState(false);
 
   return (
-    <section id="music" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
+    <section id="musiikki" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

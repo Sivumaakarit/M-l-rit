@@ -94,7 +94,7 @@ const MemberCard = ({ member, index }: { member: BandMember; index: number }) =>
           <div className="relative w-32 h-32 mx-auto mb-4">
             <img
               src={member.image}
-              alt={member.name}
+              alt={`Mölyapinat - ${member.name}`}
               className="w-full h-full object-cover rounded-full border-4 border-wood-light shadow-lg"
               loading="lazy"
               width="128"
@@ -124,7 +124,7 @@ const BandMembers = () => {
   const { particles, triggerRain } = useMolyRain();
 
   return (
-    <section id="members" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-background relative overflow-hidden">
+    <section id="jasenet" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-background relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">

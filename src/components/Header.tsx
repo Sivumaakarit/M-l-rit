@@ -53,11 +53,11 @@ const Header = () => {
   }, [isOpen]);
 
   const navItems = [
-    { label: "Alkuun", href: "#hero" },
-    { label: "Bändi", href: "#members" },
-    { label: "Musiikki", href: "#music" },
-    { label: "Keikat", href: "#tour" },
-    { label: "Yhteystiedot", href: "#contact" },
+    { label: "Alkuun", href: "#alkuun" },
+    { label: "Bändi", href: "#jasenet" },
+    { label: "Musiikki", href: "#musiikki" },
+    { label: "Keikat", href: "#keikat" },
+    { label: "Yhteystiedot", href: "#yhteystiedot" },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -96,12 +96,12 @@ const Header = () => {
       }`}>
         <div className="container mx-auto px-4 py-2 md:px-6 md:py-4">
           <div className="flex items-center justify-between gap-4">
-            <motion.a
-              href="#hero"
-              className="font-heading text-2xl md:text-3xl text-slate-900 hover:scale-105 transition-transform flex items-center gap-3 group flex-shrink-0"
-              whileHover={{ rotate: [-1, 1, -1, 0] }}
-              onClick={(e) => scrollToSection(e, "#hero")}
-            >
+          <motion.a
+            href="#alkuun"
+            className="font-heading text-2xl md:text-3xl text-slate-900 hover:scale-105 transition-transform flex items-center gap-3 group flex-shrink-0"
+            whileHover={{ rotate: [-1, 1, -1, 0] }}
+            onClick={(e) => scrollToSection(e, "#alkuun")}
+          >
               <div className="relative flex-shrink-0">
                 <div className="absolute inset-0 bg-primary blur-md opacity-0 group-hover:opacity-40 transition-opacity" />
                 <img 

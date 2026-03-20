@@ -42,7 +42,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
+    <section id="yhteystiedot" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
