@@ -16,7 +16,7 @@ const gigs: Gig[] = [
   { date: "5.5.", city: "Vantaa", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "12.5.", city: "Kerava", venue: "Untola Fest", lineup: "Mölyapinat Duo + Soffi" },
   { date: "13.5.", city: "Lohja", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "14.5.", city: "Lohja", venue: "(Tarkentuu myöhemmin)", lineup: "Mölyapinat Bändi" },
+  { date: "14.5.", city: "Lohja", venue: "Aplicon kevätmarkkinat", lineup: "Mölyapinat Bändi" },
   { date: "16.5.", city: "Pielavesi", venue: "Kevätkarkelot", lineup: "Mölyapinat Bändi" },
   { date: "19.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
