@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Music, Music2, Share2, Facebook, Instagram, PlayCircle } from "lucide-react";
 
 const TikTokIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className="w-6 h-6"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -14,9 +14,9 @@ const TikTokIcon = () => (
 );
 
 const SpotifyIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className="w-6 h-6"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -57,7 +57,7 @@ const MusicSection = () => {
           >
             <div className="bg-white rounded-2xl overflow-hidden shadow-inner border-4 border-wood-dark/10 min-h-[400px] flex items-center justify-center relative">
               {!showSpotify ? (
-                <div 
+                <div
                   className="w-full h-full absolute inset-0 bg-slate-900 group cursor-pointer flex flex-col items-center justify-center p-8 text-center transition-all hover:bg-slate-800"
                   onClick={() => setShowSpotify(true)}
                 >
@@ -66,7 +66,7 @@ const MusicSection = () => {
                   </div>
                   <h4 className="font-heading text-2xl text-white mb-2">Mölyapinat Spotifyssa</h4>
                   <p className="font-body text-white/60 mb-8 max-w-xs">Lataa soitin ja hyppää Mölymetsän banaanitanssiin! 🍌</p>
-                  
+
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -107,7 +107,7 @@ const MusicSection = () => {
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-              <motion.a 
+              <motion.a
                 href="https://youtu.be/QZPYsE5D0qo?si=4nvqeYMgZ3nEV16m"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -123,7 +123,7 @@ const MusicSection = () => {
                 </div>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 href="https://open.spotify.com/artist/5VWE6cH7u5YksJLpJfBgEm"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -139,7 +139,7 @@ const MusicSection = () => {
                 </div>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 href="https://facebook.com/molyapinat"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -151,11 +151,11 @@ const MusicSection = () => {
                 </div>
                 <div>
                   <span className="font-heading text-base md:text-lg text-wood-dark block leading-tight">Facebook</span>
-                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Meikkis somessa!</span>
+                  <span className="font-body text-forest-green font-bold text-[10px] md:text-xs">Meikkikset somessa!</span>
                 </div>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 href="https://instagram.com/molyapinat"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -171,7 +171,7 @@ const MusicSection = () => {
                 </div>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 href="https://www.tiktok.com/@molyapinat"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -187,7 +187,7 @@ const MusicSection = () => {
                 </div>
               </motion.a>
 
-              <motion.button 
+              <motion.button
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
@@ -219,7 +219,7 @@ const MusicSection = () => {
         </div>
       </div>
 
-{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <div className="absolute bottom-0 left-0 w-full wave-divider h-10 md:h-[100px]" style={{ '--wave-color': 'hsl(var(--background))' } as any}></div>
     </section>
   );
