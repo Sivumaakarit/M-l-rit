@@ -14,22 +14,16 @@ const Index = () => {
   
   useEffect(() => {
     if (hash) {
-      // Estetään selaimen oletus-skrollaus refreshatessa
       if ('scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'manual';
       }
 
       const targetId = hash.replace("#", "");
-      let attempts = 0;
-      const maxAttempts = 30; // 3 sekuntia yhteensä 100ms välein
       
-      const scrollInterval = setInterval(() => {
+      const scrollToHash = () => {
         const element = document.getElementById(targetId);
-        attempts++;
-        
         if (element) {
-          // Lasketaan tavoitekohta (huomioidaan kiinteä header)
-          const headerOffset = 120; // Kasvatettu hieman varmuuden vuoksi
+          const headerOffset = 120;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.scrollY - headerOffset;
           
@@ -37,15 +31,23 @@ const Index = () => {
             top: offsetPosition,
             behavior: "smooth"
           });
-
-          // Pysäytetään haku, kun elementti löytyy
-          clearInterval(scrollInterval);
-        } else if (attempts >= maxAttempts) {
-          clearInterval(scrollInterval);
         }
-      }, 100);
-      
-      return () => clearInterval(scrollInterval);
+      };
+
+      // Ajetaan scrollaus useammassa vaiheessa:
+      // 1. Heti jos mahdollista
+      scrollToHash();
+      // 2. Suspense-latauksen ja alustavan renderöinnin jälkeen
+      const t1 = setTimeout(scrollToHash, 300);
+      // 3. Kuvien, iframejen ja fonttien latautumisen jälkeen (layout shift -varmistus)
+      const t2 = setTimeout(scrollToHash, 1000);
+      const t3 = setTimeout(scrollToHash, 2500);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
     }
   }, [hash]);
 
