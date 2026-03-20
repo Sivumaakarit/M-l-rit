@@ -18,35 +18,42 @@ const Index = () => {
         window.history.scrollRestoration = 'manual';
       }
 
-      const targetId = hash.replace("#", "");
+      const id = hash.replace("#", "");
+      let lastY = 0;
+      let stableCount = 0;
       
-      const scrollToHash = () => {
-        const element = document.getElementById(targetId);
+      const scrollInterval = setInterval(() => {
+        const element = document.getElementById(id);
         if (element) {
           const headerOffset = 120;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          const y = element.getBoundingClientRect().top + window.scrollY - headerOffset;
           
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
+          // Scrollataan vain jos paikka on muuttunut tai olemme alussa
+          if (Math.abs(y - lastY) > 5) {
+            window.scrollTo({ top: y, behavior: 'auto' });
+            stableCount = 0;
+          } else {
+            stableCount++;
+          }
+          
+          lastY = y;
+          
+          // Jos paikka on pysynyt täsmälleen samana 5 peräkkäisellä tarkistuksella (0.5s), 
+          // voimme olettaa että Suspense on renderöinyt ja kuvat ovat asettuneet paikoilleen.
+          if (stableCount >= 5) {
+            clearInterval(scrollInterval);
+          }
         }
-      };
+      }, 100);
 
-      // Ajetaan scrollaus useammassa vaiheessa:
-      // 1. Heti jos mahdollista
-      scrollToHash();
-      // 2. Suspense-latauksen ja alustavan renderöinnin jälkeen
-      const t1 = setTimeout(scrollToHash, 300);
-      // 3. Kuvien, iframejen ja fonttien latautumisen jälkeen (layout shift -varmistus)
-      const t2 = setTimeout(scrollToHash, 1000);
-      const t3 = setTimeout(scrollToHash, 2500);
+      // Turvamekanismi: lopetetaan yritykset viimeistään 4 sekunnin kuluttua
+      const timeout = setTimeout(() => {
+        clearInterval(scrollInterval);
+      }, 4000);
 
       return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        clearTimeout(t3);
+        clearInterval(scrollInterval);
+        clearTimeout(timeout);
       };
     }
   }, [hash]);
