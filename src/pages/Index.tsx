@@ -14,23 +14,31 @@ const Index = () => {
   
   useEffect(() => {
     if (hash) {
+      // Estetään selaimen oletus-skrollaus refreshatessa
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+
       const targetId = hash.replace("#", "");
       let attempts = 0;
-      const maxAttempts = 20; // 2 seconds total with 100ms interval
+      const maxAttempts = 30; // 3 sekuntia yhteensä 100ms välein
       
       const scrollInterval = setInterval(() => {
         const element = document.getElementById(targetId);
         attempts++;
         
         if (element) {
-          const headerOffset = 100;
+          // Lasketaan tavoitekohta (huomioidaan kiinteä header)
+          const headerOffset = 120; // Kasvatettu hieman varmuuden vuoksi
           const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
           
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth"
           });
+
+          // Pysäytetään haku, kun elementti löytyy
           clearInterval(scrollInterval);
         } else if (attempts >= maxAttempts) {
           clearInterval(scrollInterval);
