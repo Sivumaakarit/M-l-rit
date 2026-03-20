@@ -11,10 +11,6 @@ const Footer = lazy(() => import("@/components/Footer"));
 const Index = () => {
   return (
     <main className="min-h-screen">
-      {/* SEO & Meta-tiedot */}
-      <title>Mölyapinat - Parasta lastenmusiikkia!</title>
-      <meta name="description" content="Mölyapinat on vauhdikas lastenmusiikkiyhtye, joka tuo iloa ja banaaninmakuista menoa jokaiseen päivään. Tilaa meidät keikalle!" />
-      
       {/* Schema.org JSON-LD */}
       <script type="application/ld+json">
         {JSON.stringify({
