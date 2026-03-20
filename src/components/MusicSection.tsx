@@ -39,7 +39,7 @@ const MusicSection = () => {
         >
           <div className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6">
             <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
-              🐒 Kuuntele Mölyapinat Musiikkia 🐒
+              🐒 Kuuntele Mölyapinoiden musiikkia 🐒
             </h2>
           </div>
           <p className="font-body text-xl text-wood-dark max-w-xl mx-auto font-bold">
