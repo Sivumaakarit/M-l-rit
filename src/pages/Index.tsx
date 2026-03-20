@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 
@@ -9,6 +10,37 @@ const ContactSection = lazy(() => import("@/components/ContactSection"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
+  const { hash } = useLocation();
+  
+  useEffect(() => {
+    if (hash) {
+      const targetId = hash.replace("#", "");
+      let attempts = 0;
+      const maxAttempts = 20; // 2 seconds total with 100ms interval
+      
+      const scrollInterval = setInterval(() => {
+        const element = document.getElementById(targetId);
+        attempts++;
+        
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          clearInterval(scrollInterval);
+        } else if (attempts >= maxAttempts) {
+          clearInterval(scrollInterval);
+        }
+      }, 100);
+      
+      return () => clearInterval(scrollInterval);
+    }
+  }, [hash]);
+
   return (
     <main className="min-h-screen">
       {/* Schema.org JSON-LD */}
