@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Banana, Music, Users, Star } from "lucide-react";
+import { Calendar, MapPin, Banana, Music, Users, Star, Mail } from "lucide-react";
 
 interface Gig {
   date: string;
@@ -117,6 +117,30 @@ const TourCalendar = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center wood-clean p-8 md:p-12 rounded-3xl shadow-xl max-w-2xl mx-auto"
+        >
+          <h3 className="font-heading text-2xl md:text-3xl text-wood-dark mb-6">
+            🐒 Tilaa Mölyapinat keikalle! 🐒
+          </h3>
+          <p className="font-body text-lg text-wood-dark/70 mb-8 font-bold italic">
+            Eikö listassa ole sopivaa päivää? Haluatko meidät piristämään juuri sinun juhlaasi?
+          </p>
+          <motion.a 
+            href="mailto:jullenmusiikki@gmail.com"
+            className="inline-flex items-center gap-3 bg-forest-green text-white font-heading text-xl md:text-2xl px-10 py-5 rounded-2xl shadow-lg border-b-4 border-forest-green/30 transition-all"
+            whileHover={{ scale: 1.05, y: -4, rotate: [-1, 1, -1, 0] }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Mail className="w-6 h-6 md:w-8 md:h-8 mr-2" />
+            jullenmusiikki@gmail.com
+          </motion.a>
+        </motion.div>
       </div>
 
       {/* Decorative Wave at the bottom */}
