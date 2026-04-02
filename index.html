@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Mölyapinat - Energinen lastenmusiikkibändi</title>
-    
-    <meta name="description" content="Mölyapinat on energinen lastenmusiikkibändi keikalle, synttäreille ja koko perheen tapahtumiin Suomessa. Pyydä tarjous ja nauti iloisesta musiikista!" />
+    <title>Mölyapinat - Energinen lastenmusiikkibändi keikalle ja tapahtumiin</title>
+    <meta name="description" content="Mölyapinat on energinen lastenmusiikkibändi, joka tarjoaa osallistavia esityksiä ja tarttuvaa musiikkia koko perheelle ympäri Suomen. Tilaa meidät keikalle!" />
+    <link rel="canonical" href="https://molyapinat.fi/" />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/apinalogo.png" />
@@ -21,22 +21,89 @@
     <meta name="twitter:image" content="/apinalogo.png" />
     
     <link rel="preload" as="image" href="/logo.webp" fetchpriority="high" />
+    
+    <!-- 2026 SEO Triple Stack: Organization, LocalBusiness, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://molyapinat.fi/#organization",
+          "name": "Mölyapinat",
+          "url": "https://molyapinat.fi",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://molyapinat.fi/logo.webp",
+            "width": "600",
+            "height": "600"
+          },
+          "sameAs": [
+            "https://facebook.com/molyapinat",
+            "https://instagram.com/molyapinat",
+            "https://www.tiktok.com/@molyapinat",
+            "https://open.spotify.com/artist/5VWE6cH7u5YksJLpJfBgEm"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://molyapinat.fi/#localbusiness",
+          "name": "Mölyapinat Lastenmusiikki",
+          "image": "https://molyapinat.fi/logo.webp",
+          "description": "Mölyapinat on energinen lastenmusiikkibändi koko perheen tapahtumiin.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Helsinki",
+            "addressCountry": "FI"
+          },
+          "url": "https://molyapinat.fi"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://molyapinat.fi/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Millaista musiikkia Mölyapinat soittaa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mölyapinat soittaa energistä ja osallistavaa lastenmusiikkia, jossa yhdistyvät tarttuvat melodiat ja hauskat tarinat Mölymetsän asukkaista."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Miten voin tilata Mölyapinat keikalle?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Voit pyytää tarjouksen suoraan verkkosivujemme kautta tai ottamalla yhteyttä sähköpostitse. Keikkailemme ympäri Suomea!"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <style>
       :root {
-        --background: 45 100% 96%; --foreground: 25 40% 20%;
-        --primary: 48 100% 55%; --wood-dark: 25 35% 22%;
+        --background: 45 100% 96%;
+        --foreground: 25 40% 20%;
+        --primary: 48 100% 55%;
+        --primary-foreground: 25 50% 15%;
+        --secondary: 150 40% 90%;
+        --secondary-foreground: 25 40% 20%;
+        --accent: 120 80% 50%;
+        --accent-foreground: 25 40% 15%;
+        --wood-dark: 25 35% 22%;
         --font-body: 'Quicksand', sans-serif;
+        --radius: 1.5rem;
       }
       body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); margin: 0; font-family: var(--font-body); }
-      .wood-clean {
-        background: linear-gradient(to bottom, hsl(35 40% 92%) 0%, hsl(35 40% 95%) 50%, hsl(35 30% 88%) 100%);
-        border: 3px solid hsl(var(--wood-dark)); box-shadow: 4px 4px 0px hsl(var(--wood-dark));
-      }
-      .wood-texture {
-        background: linear-gradient(to bottom, hsl(35 45% 78%) 0%, hsl(35 45% 82%) 15%, hsl(35 45% 75%) 16%, hsl(32 40% 72%) 20%, hsl(35 45% 80%) 50%, hsl(32 40% 74%) 80%, hsl(35 45% 75%) 84%, hsl(35 42% 76%) 100%);
-        background-size: 100% 40px; border: 3px solid hsl(var(--wood-dark)); box-shadow: 4px 4px 0px hsl(var(--wood-dark));
+      .text-shadow-fun {
+        text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
       }
     </style>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap" />
@@ -54,42 +121,43 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #f7f2ea;
+        background-color: #f7fefc;
         z-index: 9999;
         font-family: 'Quicksand', sans-serif;
       ">
         <img src="/logo.webp" alt="Mölyapinat" style="
           width: 50vw; 
-          max-width: 200px; 
+          max-width: 220px; 
           height: auto; 
-          margin-bottom: 20px;
-          filter: drop-shadow(4px 4px 0px rgba(71, 56, 42, 0.2));
+          margin-bottom: 24px;
+          filter: drop-shadow(6px 6px 0px rgba(21, 45, 33, 0.15));
         ">
         <div style="
-          width: 150px;
-          height: 10px;
-          background: rgba(106, 153, 78, 0.2);
-          border-radius: 5px;
+          width: 180px;
+          height: 12px;
+          background: rgba(22, 101, 52, 0.1);
+          border-radius: 12px;
           overflow: hidden;
           position: relative;
+          border: 2px solid rgba(21, 45, 33, 0.05);
         ">
           <div id="loader-bar" style="
             position: absolute;
             height: 100%;
-            width: 30%;
-            background: #6a994e;
-            border-radius: 5px;
+            width: 40%;
+            background: #16a34a;
+            border-radius: 12px;
           "></div>
         </div>
-        <p style="color: #47382a; margin-top: 15px; font-weight: bold; font-size: 1.2rem;">Ladataan Mölymetsää...</p>
+        <p style="color: #111827; margin-top: 20px; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em;">Mölymetsä herää eloon...</p>
         
         <style>
           @keyframes slide {
             0% { transform: translateX(-100%); }
-            100% { transform: translateX(400%); }
+            100% { transform: translateX(350%); }
           }
           #loader-bar {
-            animation: slide 1.5s infinite ease-in-out;
+            animation: slide 1.2s infinite ease-in-out;
           }
         </style>
       </div>

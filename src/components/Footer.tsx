@@ -48,8 +48,17 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="mt-12 text-slate-400 font-body text-sm uppercase tracking-widest font-bold">
-            Sivumaakarit 2026
+          <div className="mt-12 flex flex-col items-center gap-2">
+            <a 
+              href="https://sivumaakarit.fi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-400 font-body text-sm uppercase tracking-widest font-bold hover:text-primary transition-colors flex items-center gap-2 group"
+            >
+              Sivumaakarit 2026
+              <span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
+            </a>
+            <p className="text-[10px] text-slate-400/60 font-body">Premium Web Architect & AI Optimization</p>
           </div>
         </motion.div>
       </div>

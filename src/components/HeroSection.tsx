@@ -78,13 +78,13 @@ const HeroSection = () => {
               animate={{ rotate: [0, -5, 5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <img 
-                src={logoImage} 
-                alt="Mölyapinat - energinen lastenmusiikkibändi logo" 
-                className="h-20 md:h-48 w-auto drop-shadow-2xl" 
+              <img
+                src="/apinalogo.png"
+                alt="Mölyapinat-yhtyeen virallinen logo, jossa on iloinen apinahahmo"
+                className="h-24 md:h-48 w-auto drop-shadow-2xl"
+                fetchPriority="high"
                 width="200"
                 height="200"
-                fetchPriority="high"
               />
             </motion.div>
           </div>
@@ -154,7 +154,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="font-body text-xl md:text-2xl text-wood-dark max-w-2xl mx-auto font-bold leading-relaxed">
-            Mölyapinat on energinen lastenmusiikkibändi, joka saa koko perheen liikkeelle. Keikoillamme yhdistyvät iloiset laulut, vauhdikas vuorovaikutus sekä ripaus teatteria! 🍌
+            Mölyapinat on energinen lastenmusiikkibändi, joka tarjoaa osallistavia esityksiä, tarttuvaa musiikkia ja teatraalisia seikkailuja koko perheelle ympäri Suomen. 🍌
           </p>
         </motion.div>
 

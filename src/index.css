@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Mölyapinat Original Polished Palette */
+    /* Reverted to Original Polished Palette */
     --background: 45 100% 96%;
     --foreground: 25 40% 20%;
 
@@ -39,12 +39,12 @@
 
     --radius: 1.5rem;
 
-    /* Custom Colors */
+    /* Custom Design Tokens */
     --banana: 48 100% 60%;
     --neon-green: 120 80% 50%;
     --bright-orange: 25 100% 55%;
     --wood-light: 35 40% 80%;
-    --wood-dark: 25 35% 22%; /* Softened from 20 40% 12% for better clarity */
+    --wood-dark: 25 35% 22%;
     --mint: 150 40% 90%;
     --sand: 45 50% 92%;
     --forest-green: 140 50% 28%;

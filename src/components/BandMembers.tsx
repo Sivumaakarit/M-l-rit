@@ -141,13 +141,13 @@ const BandMembers = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 3, duration: 1 }}
-              className="absolute -left-36 lg:-left-48 -top-14 whitespace-nowrap hidden sm:block pointer-events-none group-hover/header:opacity-0 transition-opacity duration-300"
+              className="absolute -left-28 lg:-left-36 -top-14 whitespace-nowrap hidden sm:block pointer-events-none group-hover/header:opacity-0 transition-opacity duration-300"
             >
               <div className="flex flex-col items-end gap-2 text-right">
-                <span className="font-heading text-lg lg:text-xl text-destructive animate-pulse text-shadow-fun">
+                <span className="font-heading text-lg lg:text-xl text-destructive animate-pulse text-shadow-fun pr-4">
                   Älä vaan paina tästä!
                 </span>
-                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mr-6">
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" className="-rotate-12 mr-16 lg:mr-20">
                   <path 
                     d="M10 10 Q30 10 50 30 M50 30 L35 30 M50 30 L50 15" 
                     stroke="currentColor" 
