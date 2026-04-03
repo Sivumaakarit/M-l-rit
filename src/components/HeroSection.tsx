@@ -77,6 +77,7 @@ const HeroSection = () => {
             <motion.div
               animate={{ rotate: [0, -5, 5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="will-change-transform"
             >
               <img
                 src="/logo.webp"

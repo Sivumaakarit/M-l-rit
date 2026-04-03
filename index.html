@@ -20,6 +20,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/apinalogo.png" />
     
+    <link rel="canonical" href="https://molyapinat.fi" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -105,9 +106,12 @@
         --font-body: 'Quicksand', sans-serif;
         --radius: 1.5rem;
       }
-      body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); margin: 0; font-family: var(--font-body); }
+      body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); margin: 0; font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
       .text-shadow-fun {
-        text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        text-shadow: 2px 2px 0px hsla(var(--wood-dark) / 0.3);
+      }
+      .bg-gradient-forest {
+        background: linear-gradient(180deg, #d1eedf 0%, #a8d5ba 100%);
       }
     </style>
 
