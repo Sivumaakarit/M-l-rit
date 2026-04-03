@@ -64,7 +64,7 @@ const MusicSection = () => {
                   <div className="bg-neon-green/20 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
                     <SpotifyIcon />
                   </div>
-                  <h4 className="font-heading text-2xl text-white mb-2">Mölyapinat Spotifyssa</h4>
+                  <h3 className="font-heading text-2xl text-white mb-2">Mölyapinat Spotifyssa</h3>
                   <p className="font-body text-white/60 mb-8 max-w-xs">Lataa soitin ja hyppää Mölymetsän banaanitanssiin! 🍌</p>
 
                   <motion.button
