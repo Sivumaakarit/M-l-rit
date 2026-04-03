@@ -79,12 +79,13 @@ const HeroSection = () => {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               <img
-                src="/apinalogo.png"
+                src="/logo.webp"
                 alt="Mölyapinat-yhtyeen virallinen logo, jossa on iloinen apinahahmo"
                 className="h-24 md:h-48 w-auto drop-shadow-2xl"
                 fetchPriority="high"
-                width="200"
-                height="200"
+                loading="eager"
+                width="400"
+                height="400"
               />
             </motion.div>
           </div>
