@@ -180,6 +180,7 @@ const HeroSection = () => {
                     width="480"
                     height="360"
                     loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                   <div className="absolute w-20 h-20 md:w-24 md:h-24 bg-bright-orange rounded-full flex items-center justify-center shadow-2xl border-4 border-white transform transition-transform group-hover:scale-110">
