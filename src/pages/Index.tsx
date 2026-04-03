@@ -2,12 +2,12 @@ import { lazy, Suspense, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import BandMembers from "@/components/BandMembers";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
-const BandMembers = lazy(() => import("@/components/BandMembers"));
 const MusicSection = lazy(() => import("@/components/MusicSection"));
 const TourCalendar = lazy(() => import("@/components/TourCalendar"));
-const ContactSection = lazy(() => import("@/components/ContactSection"));
-const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   const { hash } = useLocation();
