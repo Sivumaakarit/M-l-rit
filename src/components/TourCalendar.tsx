@@ -10,18 +10,15 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "5.5.", city: "Vantaa", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "12.5.", city: "Kerava", venue: "Untola Fest", lineup: "Mölyapinat Duo + Soffi" },
-  { date: "13.5.", city: "Lohja", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "14.5.", city: "Lohja", venue: "Aplicon kevätmarkkinat", lineup: "Mölyapinat Bändi" },
-  { date: "16.5.", city: "Pielavesi", venue: "Kevätkarkelot", lineup: "Mölyapinat Bändi" },
   { date: "19.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "21.5.", city: "Raasepori", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "21.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
+  { date: "6.6.", city: "Vantaa", venue: "Perhepiknik, Koskimyllyn puisto", lineup: "Mölyapinat Duo" },
   { date: "1.7.", city: "Alavus", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "14.7.", city: "Tampere", venue: "Finlaysonin kesälava", lineup: "Mölyapinat Bändi" },
-  { date: "16.7.", city: "Heinävesi", venue: "Iltatori", lineup: "Mölyapinat Duo" }
+  { date: "16.7.", city: "Heinävesi", venue: "Iltatori", lineup: "Mölyapinat Duo" },
+  { date: "3.10.", city: "Järvenpää", venue: "Skidimessut", lineup: "Mölyapinat Bändi" }
 ];
 
 const TourCalendar = () => {
