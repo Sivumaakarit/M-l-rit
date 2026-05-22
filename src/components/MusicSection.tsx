@@ -243,7 +243,7 @@ const MusicSection = () => {
                 </div>
                 <span className="text-wood-dark/40 font-heading text-xs">|</span>
                 <span className="font-heading text-xs text-wood-dark group-hover:text-bright-orange transition-colors">
-                  Paina tästä muihin palveluihin 🎶
+                  tästä muihin palveluihin 🎶
                 </span>
               </motion.a>
             </div>
