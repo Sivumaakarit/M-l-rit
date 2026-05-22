@@ -141,7 +141,7 @@ const HeroSection = () => {
                 }}
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 whileTap={{ scale: 0.95 }}
-                className="wood-clean px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-xl border-3 border-wood-dark flex items-center gap-3 cursor-pointer relative group max-w-[280px] min-[375px]:max-w-[320px] md:max-w-xs w-auto hover:bg-banana/10 transition-colors overflow-hidden"
+                className="wood-clean px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-xl border-3 border-wood-dark hover:border-bright-orange flex items-center gap-3 cursor-pointer relative group max-w-[280px] min-[375px]:max-w-[320px] md:max-w-xs w-auto hover:bg-banana/10 transition-all duration-300 overflow-hidden"
               >
                 {/* Premium Shimmer Light Kiiltoefekti */}
                 <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] animate-shimmer pointer-events-none z-20" />
@@ -155,11 +155,14 @@ const HeroSection = () => {
 
                 {/* Tekstit - Max 2 riviä */}
                 <div className="text-left">
-                  <h3 className="font-heading text-sm md:text-base text-wood-dark leading-tight">
+                  <h3 className="font-heading text-sm md:text-base text-wood-dark leading-tight group-hover:text-bright-orange transition-colors">
                     Uusi sinkku julkaistu! 💿
                   </h3>
-                  <p className="font-body text-[10px] md:text-xs text-forest-green font-bold flex items-center gap-1 mt-0.5">
-                    Paina tästä ja lue lisää 🍌
+                  <p className="font-body text-xs md:text-sm text-forest-green font-bold flex items-center gap-1 mt-0.5 group-hover:text-bright-orange/90 transition-colors">
+                    <span>Lue lisää 🍌</span>
+                    <svg className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </p>
                 </div>
               </motion.a>
