@@ -145,18 +145,42 @@ const HeroSection = () => {
               >
                 {/* Premium Shimmer Light Kiiltoefekti */}
                 <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] animate-shimmer pointer-events-none z-20" />
-                {/* Vihreä Spotify-kuvake hohteella */}
+                {/* Keltainen banaanihohde */}
                 <div className="relative flex-shrink-0">
-                  <div className="absolute inset-0 bg-neon-green/40 blur-md rounded-full animate-ping scale-125" />
-                  <div className="bg-neon-green text-slate-900 p-2 rounded-full border-2 border-wood-dark relative z-10 group-hover:scale-110 transition-transform">
-                    <SpotifyIcon className="w-4 h-4 md:w-5 md:h-5" />
+                  <div className="absolute inset-0 bg-banana/30 blur-md rounded-full animate-pulse scale-125" />
+                  
+                  {/* Pyörivä vinyyli / Spinning Banana Vinyl */}
+                  <div className="relative w-10 h-10 md:w-11 md:h-11 flex-shrink-0 z-10">
+                    <motion.div
+                      animate={{
+                        rotate: 360
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        ease: "linear",
+                        duration: 8
+                      }}
+                      className="w-full h-full bg-slate-900 rounded-full border-2 border-wood-dark shadow-md flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-300"
+                    >
+                      <div className="absolute inset-[2px] border border-white/5 rounded-full" />
+                      <div className="absolute inset-[4px] border border-white/5 rounded-full" />
+                      <div className="absolute inset-[6px] border border-white/5 rounded-full" />
+                      <div className="w-4 h-4 md:w-4.5 md:h-4.5 bg-primary rounded-full border border-wood-dark flex items-center justify-center">
+                        <span className="text-[8px] md:text-[9px] select-none leading-none flex items-center justify-center mt-[-0.5px]">
+                          🍌
+                        </span>
+                      </div>
+                    </motion.div>
+                    <div className="absolute -top-0.5 -right-0.5 text-[10px] md:text-xs filter drop-shadow animate-bounce">
+                      ⚡
+                    </div>
                   </div>
                 </div>
 
                 {/* Tekstit - Max 2 riviä */}
                 <div className="text-left">
                   <h3 className="font-heading text-sm md:text-base text-wood-dark leading-tight group-hover:text-bright-orange transition-colors">
-                    Uusi sinkku julkaistu! 💿
+                    Uusi sinkku julkaistu!
                   </h3>
                   <p className="font-body text-xs md:text-sm text-forest-green font-bold flex items-center gap-1 mt-0.5 group-hover:text-bright-orange/90 transition-colors">
                     <span>Lue lisää 🍌</span>
