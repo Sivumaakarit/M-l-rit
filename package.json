@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "bash /Users/eskomaki/.gemini/antigravity/skills/sivumaakarit_deploy/scripts/deploy.sh . "
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
