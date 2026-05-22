@@ -233,7 +233,7 @@ const MusicSection = () => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center justify-center gap-3.5 bg-wood-light/20 hover:bg-banana/25 px-4 py-2.5 rounded-xl border border-wood-dark/15 transition-all duration-300 shadow-md group w-full max-w-sm"
+                className="flex items-center justify-center gap-3.5 bg-wood-light/20 hover:bg-banana/25 px-4 py-2.5 rounded-xl border border-wood-dark/30 transition-all duration-300 shadow-md group w-full max-w-sm"
               >
                 <div className="flex items-center gap-3">
                   <AppleMusicIcon className="w-5 h-5 filter drop-shadow-sm hover:scale-115 transition-transform" />
@@ -241,8 +241,7 @@ const MusicSection = () => {
                   <YoutubeMusicIcon className="w-5 h-5 filter drop-shadow-sm hover:scale-115 transition-transform" />
                   <TidalIcon className="w-6 h-6 filter drop-shadow-sm hover:scale-115 transition-transform" />
                 </div>
-                <span className="text-wood-dark/40 font-heading text-xs">|</span>
-                <span className="font-heading text-xs text-wood-dark group-hover:text-bright-orange transition-colors">
+                <span className="font-heading text-sm text-wood-dark group-hover:text-bright-orange transition-colors">
                   tästä muihin palveluihin 🎶
                 </span>
               </motion.a>
