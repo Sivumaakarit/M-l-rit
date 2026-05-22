@@ -2,6 +2,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 const logoImage = "/logo.webp";
 
+const SpotifyIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.508 17.304c-.216.354-.672.468-1.026.252-2.862-1.746-6.462-2.142-10.704-1.176-.408.096-.816-.162-.912-.57-.096-.408.162-.816.57-.912 4.644-1.062 8.622-.612 11.82 1.338.354.216.468.672.252 1.026zm1.47-3.258c-.276.45-.858.594-1.308.318-3.276-2.016-8.274-2.598-12.144-1.422-.51.156-1.044-.144-1.194-.654-.15-.51.144-1.044.654-1.194 4.41-1.338 9.924-.702 13.686 1.614.45.276.594.858.318 1.308zm.138-3.39c-3.93-2.334-10.422-2.55-14.19-1.41-.606.186-1.248-.168-1.434-.774-.186-.606.168-1.248.774-1.434 4.332-1.314 11.49-1.062 16.038 1.638.546.33.726 1.044.396 1.59-.33.546-1.044.726-1.59.396z" />
+  </svg>
+);
+
+
 const FloatingElements = () => {
   const elements = [
     { emoji: "🍌", left: "5%", top: "20%", delay: 0 },
@@ -59,6 +71,21 @@ const HeroSection = () => {
     setIsHovered(true);
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <section
       id="alkuun"
@@ -66,28 +93,76 @@ const HeroSection = () => {
     >
       <FloatingElements />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-[45]">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative z-[45]"
         >
-          <div className="hidden md:flex justify-center mb-8">
+          <div className="relative flex flex-col items-center justify-center mb-8 z-[45] max-w-4xl mx-auto w-full">
+            {/* Logo - TÄYDELLISESTI KESKITETTY */}
             <motion.div
-              animate={{ rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="will-change-transform"
+              animate={{ rotate: [0, -4, 4, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="will-change-transform hidden md:flex justify-center"
             >
               <img
                 src="/logo.webp"
                 alt="Mölyapinat-yhtyeen virallinen logo, jossa on iloinen apinahahmo"
-                className="h-24 md:h-48 w-auto drop-shadow-2xl"
+                className="h-28 md:h-48 w-auto drop-shadow-2xl"
                 fetchPriority="high"
                 loading="eager"
                 width="400"
                 height="400"
               />
+            </motion.div>
+
+            {/* Hanging Spotify Sign - Asetetaan absoluuttisesti sivuun tietokoneella (ei siirrä logoa!), ja pinoontuu mobiilissa logon alle */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center mt-1 md:mt-0 md:absolute md:-top-11 md:left-16 lg:left-10 xl:left-6 z-[45]"
+            >
+
+              {/* Puinen Kyltti */}
+              <motion.a
+                href="#uusi-julkaisu"
+                onClick={(e) => scrollToSection(e, "#uusi-julkaisu")}
+                initial={{ rotate: -2, y: 0 }}
+                animate={{ 
+                  rotate: [-3.5, 3.5, -3.5],
+                  y: [0, -6, 0]
+                }}
+                transition={{
+                  rotate: { repeat: Infinity, duration: 5, ease: "easeInOut" },
+                  y: { repeat: Infinity, duration: 3.5, ease: "easeInOut" }
+                }}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                whileTap={{ scale: 0.95 }}
+                className="wood-clean px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-xl border-3 border-wood-dark flex items-center gap-3 cursor-pointer relative group max-w-[280px] min-[375px]:max-w-[320px] md:max-w-xs w-auto hover:bg-banana/10 transition-colors overflow-hidden"
+              >
+                {/* Premium Shimmer Light Kiiltoefekti */}
+                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] animate-shimmer pointer-events-none z-20" />
+                {/* Vihreä Spotify-kuvake hohteella */}
+                <div className="relative flex-shrink-0">
+                  <div className="absolute inset-0 bg-neon-green/40 blur-md rounded-full animate-ping scale-125" />
+                  <div className="bg-neon-green text-slate-900 p-2 rounded-full border-2 border-wood-dark relative z-10 group-hover:scale-110 transition-transform">
+                    <SpotifyIcon className="w-4 h-4 md:w-5 md:h-5" />
+                  </div>
+                </div>
+
+                {/* Tekstit - Max 2 riviä */}
+                <div className="text-left">
+                  <h3 className="font-heading text-sm md:text-base text-wood-dark leading-tight">
+                    Uusi sinkku julkaistu! 💿
+                  </h3>
+                  <p className="font-body text-[10px] md:text-xs text-forest-green font-bold flex items-center gap-1 mt-0.5">
+                    Paina tästä ja lue lisää 🍌
+                  </p>
+                </div>
+              </motion.a>
             </motion.div>
           </div>
 
@@ -160,6 +235,8 @@ const HeroSection = () => {
           </p>
         </motion.div>
 
+
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -167,6 +244,7 @@ const HeroSection = () => {
           className="max-w-4xl mx-auto"
         >
           <div className="lauta-bg p-4 md:p-6 shadow-2xl">
+
             <div className="aspect-video rounded-xl overflow-hidden shadow-inner bg-black/10 relative group">
               {!showVideo ? (
                 <button 

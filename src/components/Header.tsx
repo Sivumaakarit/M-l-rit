@@ -84,7 +84,9 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 px-4 pt-2 md:pt-4"
+      className={`fixed top-0 left-0 right-0 px-4 pt-2 md:pt-4 transition-all duration-300 ${
+        isOpen || scrolled ? "z-50" : "z-30"
+      }`}
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -120 }}
       transition={{ duration: 1.0, ease: "easeInOut" }}

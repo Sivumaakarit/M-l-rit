@@ -10,9 +10,6 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "19.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "21.5.", city: "Raasepori", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "21.5.", city: "Kerava", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "6.6.", city: "Vantaa", venue: "Perhepiknik, Koskimyllyn puisto", lineup: "Mölyapinat Duo" },
   { date: "1.7.", city: "Alavus", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },

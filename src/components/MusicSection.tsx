@@ -47,7 +47,106 @@ const MusicSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        {/* UUTISOSIO / UUSIN JULKAISU - SPOTLIGHT-KORTTI */}
+        <motion.div
+          id="uusi-julkaisu"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -8, scale: 1.01 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          onClick={() => {
+            setShowSpotify(true);
+            const element = document.getElementById("musiikki-soitin");
+            if (element) {
+              const headerOffset = 100;
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.scrollY - headerOffset;
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+            }
+          }}
+          className="lauta-clean p-6 md:p-8 max-w-4xl mx-auto mb-16 cursor-pointer relative overflow-hidden flex flex-col md:flex-row items-center gap-8 shadow-2xl border-4 border-wood-dark/20 transition-all duration-300 hover:shadow-bright-orange/10"
+        >
+          {/* Pyörivä vinyyli / Spinning Banana Vinyl */}
+          <div className="relative w-28 h-28 md:w-32 md:h-32 flex-shrink-0 mx-auto md:mx-0">
+            <motion.div
+              animate={{
+                rotate: 360
+              }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 12
+              }}
+              className="w-full h-full bg-slate-900 rounded-full border-4 border-wood-dark shadow-xl flex items-center justify-center relative overflow-hidden"
+            >
+              <div className="absolute inset-2 border border-white/5 rounded-full" />
+              <div className="absolute inset-4 border border-white/5 rounded-full" />
+              <div className="absolute inset-6 border border-white/5 rounded-full" />
+              <div className="absolute inset-8 border border-white/5 rounded-full" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full border-2 border-wood-dark flex items-center justify-center">
+                <span className="text-xl md:text-2xl select-none">
+                  🍌
+                </span>
+              </div>
+            </motion.div>
+            <div className="absolute top-1 right-1 text-2xl filter drop-shadow">
+              ⚡
+            </div>
+          </div>
+
+          {/* Tekstisisältö oikealla */}
+          <div className="flex-grow text-center md:text-left">
+            <div className="inline-flex items-center gap-2 bg-bright-orange text-white font-heading text-xs px-3 py-1 rounded-full uppercase tracking-wider animate-pulse border-2 border-wood-dark shadow mb-3">
+              Uutuus! 💿
+            </div>
+            <h3 className="font-heading text-2xl md:text-3xl text-wood-dark leading-tight mb-2">
+              Mölyapinat - Kolme banaania kulhossa! 🎶
+            </h3>
+            <p className="font-body text-base text-wood-dark/80 font-bold max-w-xl leading-relaxed">
+              Mölymetsän keinuvin uusi hitti on nyt julkaistu! Mutta mihin kummaan ne banaanit katoavat?
+            </p>
+
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-5">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowSpotify(true);
+                  const element = document.getElementById("musiikki-soitin");
+                  if (element) {
+                    const headerOffset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth"
+                    });
+                  }
+                }}
+                className="bg-neon-green text-slate-900 font-heading px-6 py-2.5 rounded-full shadow-lg hover:scale-105 transition-transform flex items-center gap-2 text-sm font-bold border-2 border-wood-dark"
+              >
+                <PlayCircle className="w-5 h-5" />
+                Kuuntele alta 🎵
+              </button>
+              <motion.a
+                href="https://open.spotify.com/album/2ktaRAxxPhajYRs0QdOdpd?si=szE5A6JuSs2l0Q7xcGtU-g"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white text-wood-dark border-2 border-neon-green font-heading px-6 py-2 rounded-full shadow-lg hover:border-bright-orange transition-all flex items-center gap-2 text-sm font-bold"
+              >
+                <SpotifyIcon />
+                Kuuntele Spotifyssa 🎧
+              </motion.a>
+            </div>
+          </div>
+        </motion.div>
+
+        <div id="musiikki-soitin" className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
