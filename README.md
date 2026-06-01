@@ -1,73 +1,81 @@
-# Welcome to your Lovable project
+# 🐒 Mölyapinat 🐒
 
-## Project info
+Tervetuloa Mölyapinat-lastenmusiikkibändin virallisille verkkosivuille! Mölyapinat tarjoavat lastenmusiikkia suurella sydämellä ja kovalla metelillä. 🍌
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Sivusto on moderni, nopea ja responsiivinen yhden sivun verkkosovellus (Single-Page Application), joka on optimoitu sekä kävijöille että hakukoneille.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌟 Ominaisuudet
 
-**Use Lovable**
+- **Dynaaminen keikkakalenteri**: Mölyapinoiden tulevat esiintymiset ja menneet keikat selkeästi ja leikkisästi ryhmiteltyinä.
+- **Musiikkiosio**: Mahdollisuus kuunnella bändin sinkkuja ja katsella musiikkivideoita suoraan sivustolta.
+- **Bändin esittely**: Leikkisät kortit Mölyapinoiden jäsenistä ja heidän soittimistaan.
+- **Yhteydenottolomake**: Suora ja helppo keikkakyselyjärjestelmä integroituna Formspree-palveluun.
+- **Tietosuojaseloste (GDPR)**: Sisäänrakennettu, tyylikäs ja saavutettava tietosuojaseloste, joka avautuu suoraan sivustolla modaalina (sekä alapalkista että lomakkeesta).
+- **Evästesuostumus ja -asetukset**: Traficomin ja GDPR:n säädökset täyttävä, animoitu evästebanneri ja hienojakoinen evästeasetusten hallinta.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Teknologiapino
 
-**Use your preferred IDE**
+Tämä sivusto on rakennettu moderneilla verkkoteknologioilla korkean suorituskyvyn varmistamiseksi:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Ydin**: [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Kääntäjä & Kehitysympäristö**: [Vite](https://vitejs.dev/)
+- **Tyylittely**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI-komponentit**: [shadcn/ui](https://ui.shadcn.com/) (Radix Primitives)
+- **Animaatiot**: [Framer Motion](https://www.framer.com/motion/)
+- **Ikonit**: [Lucide React](https://lucide.dev/)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 💻 Paikallinen kehitys
 
+Seuraa näitä ohjeita ajaaksesi ja kehittääksesi sivustoa paikallisesti:
+
+### 1. Asenna riippuvuudet
+Varmista, että sinulla on [Node.js](https://nodejs.org/) asennettuna. Suorita sitten projektin juuressa:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
 ```
 
-**Edit a file directly in GitHub**
+### 2. Käynnistä kehityspalvelin
+Käynnistä paikallinen kehityspalvelin automaattisella päivityksellä (Hot Module Replacement):
+```sh
+npm run dev
+```
+Avaa sen jälkeen selaimessa osoite: [http://localhost:8080/](http://localhost:8080/)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Rakenna tuotantoversio
+Rakenna sivusto valmiiksi tuotantoa varten (dist-kansioon):
+```sh
+npm run build
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🚀 Julkaisu (Deploy)
 
-## What technologies are used for this project?
+Projektissa on valmis julkaisuskripti `deploy.sh`, joka automatisoi laadunvarmistuksen, Git-tallennuksen ja julkaisun:
 
-This project is built with:
+```sh
+# Aja julkaisu antamalla commit-viesti argumenttina
+bash deploy.sh "feat: uusi päivitys sivustolle"
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Tämä skripti tekee automaattisesti seuraavat vaiheet:
+1. **Laadunvarmistus**: Ajaa tuotantobuildin paikallisesti varmistaakseen, ettei koodissa ole kääntymisvirheitä.
+2. **Kooditallennus (Git)**: Tallentaa kaikki muutokset paikalliseen repositoryyn ja tekee commitin.
+3. **Päivitys GitHubiin**: Työntää koodin GitHub-repositorioomme.
+4. **Vercel-julkaisu**: Julkaisee sivuston automaattisesti livenä Verceliin.
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🔗 Linkit
 
-## Can I connect a custom domain to my Lovable project?
+- **Kotisivut livenä**: [https://molyapinat.fi](https://molyapinat.fi)
+- **GitHub**: [https://github.com/Sivumaakarit/M-l-rit](https://github.com/Sivumaakarit/M-l-rit)
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+*Sivuston ylläpidosta ja kehityksestä vastaa [Sivumaakarit](https://sivumaakarit.fi) – Premium Web Architecture & AI Optimization.*
