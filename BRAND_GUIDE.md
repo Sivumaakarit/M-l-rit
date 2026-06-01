@@ -104,4 +104,46 @@ Mölyapinat rakastavat emojeita. Niitä käytetään aina tekstin alussa, lopuss
 > Pistäkäämme yhdessä kunnon mölyt pystyyn! 🎸🌴
 
 ---
+
+## 🖼️ Juliste- ja printtimainosohjeistus (Poster & Print Guidelines)
+
+Tämä osio antaa suorat ohjeet graafiselle suunnittelijalle tai tekoälylle (kuten Midjourney, DALL-E) uuden julisteen, kansikuvan tai printtimainoksen luomiseen.
+
+### 1. Mintunvihreä (`#D1EEDF`) – Se tärkein taustaväri 🌴
+Mölyapinoiden visuaalinen perusta nojaa vahvasti **raikkaaseen mintunvihreään taustaan**. 
+- **Miksi?** Mintunvihreä tausta antaa parhaan mahdollisen **kontrastin bändin keltaisille (banaanit) ja oransseille (logo, painikkeet) elementeille**. Keltainen ja oranssi "pomppaavat" upeasti vihreältä pohjalta, mikä tekee mainoksesta erittäin huomiota herättävän.
+- **Käyttö**: Käytä julisteiden taustana joko tasaista mintunvihreää `#D1EEDF` tai pehmeää pystysuuntaista liukuväriä mintunvihreästä hieman lämpimämpään lehtivihreään (`#A8D5BA`).
+
+### 2. Asettelu ja sommittelu (Layout Structure)
+Kun teet julistetta tai mainosta, noudata tätä kolmiosaista rakennetta:
+
+```
+┌────────────────────────────────────────┐
+│  [ KAARUVA TAI VINO OTSIKKO ] 🍌       │  <-- Keltainen tai oranssi Luckiest Guy, tumma reuna
+├────────────────────────────────────────┤
+│                                        │
+│          PÄÄKUVA / KUVITUS             │  <-- Mölyapinat soittimineen
+│        (esim. mintulla pohjalla)       │
+│                                        │
+├────────────────────────────────────────┤
+│  ┌──────────────────────────────────┐  │
+│  │   [ PYÖRISTETTY TIETOLAATIKKO ]  │  │  <-- Puukuviollinen kyltti tai vaalea hiekan sävy
+│  └──────────────────────────────────┘  │
+└────────────────────────────────────────┘
+```
+
+- **Yläosa (Otsikko)**: Aseta pääotsikko (esim. *"KEIKALLA MÖLYMETSÄSSÄ"* tai bändin nimi) hieman vinoon tai kaarevaan linjaan. Käytä aina `Luckiest Guy` -fonttia, keltaista tai oranssia väriä ja paksua lankunruskeaa (`#4A3525`) ääriviivaa ja varjoa.
+- **Keskiosa (Kuvitus)**:
+  - **Kuva**: Mölyapinat (apinat, bändin jäsenet soittimineen) sijoitetaan keskiöön.
+  - **Tehosteet**: Ympärille voi ripotella leijuvia banaaneja (`🍌`) ja nuotteja (`🎵`), jotka tuovat kuvaan dynaamisuutta ja leikkisyyttä.
+- **Alaosa (Tiedot)**:
+  - **Tietolaatikot**: Keikan päivämäärät, paikat ja kellonajat sijoitetaan pyöristetyille laatikkoelementeille.
+  - **Tyyli**: Suosi laatikon taustana joko vaaleaa puukuviointia (`wood-clean` / `#D4C3A3`) tai vaaleaa hiekansävyä `#FFFDF5`, jossa on tummanruskeat reunaviivat. Tämä takaa sen, että tärkeät tiedot ovat helppolukuisia.
+
+### 3. Prompt-ohje tekoälylle (esim. kansikuvan tai julisteen luontiin)
+Jos haluat luoda uuden taustakuvan tai kuvituksen tekoälyllä, käytä tätä valmista pohjaa:
+
+> *A fun, playful children's illustration of cool cartoon monkeys playing instruments (guitar, drums, microphone) in a vibrant jungle setting. Primary background color is a fresh, light mint green (#D1EEDF) with lush tropical leaves. Scattered floating yellow bananas and musical notes in the air. Warm lighting, thick friendly outlines, bold organic shapes with heavily rounded corners. Cartoonish, warm, energetic, and highly appealing to kids, professional quality vector style.*
+
+---
 *Mölyapinat – Lastenmusiikkia suurella sydämellä ja kovalla metelillä!*
