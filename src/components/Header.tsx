@@ -58,6 +58,7 @@ const Header = () => {
     { label: "Musiikki", href: "#musiikki" },
     { label: "Keikat", href: "#keikat" },
     { label: "Yhteystiedot", href: "#yhteystiedot" },
+    { label: "Järjestäjille", href: "#jarjestajille" },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -119,7 +120,7 @@ const Header = () => {
             </motion.a>
 
             {/* Desktop-valikko */}
-            <ul className="hidden md:flex items-center gap-8">
+            <ul className="hidden md:flex items-center gap-8 flex-shrink-0">
               {navItems.map((item) => (
                 <li key={item.label}>
                   <a
@@ -137,7 +138,7 @@ const Header = () => {
             {/* MOBIILIPAINIKE */}
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-slate-900/5 border-2 border-slate-900/10 hover:bg-slate-900/10 transition-all focus:outline-none"
+              className="hidden max-md:flex items-center justify-center w-12 h-12 rounded-xl bg-slate-900/5 border-2 border-slate-900/10 hover:bg-slate-900/10 transition-all focus:outline-none"
               aria-label={isOpen ? "Sulje valikko" : "Avaa valikko"}
             >
               <AnimatePresence mode="wait">
