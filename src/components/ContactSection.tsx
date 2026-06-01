@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Send, User, Mail, MessageSquare, ChevronDown, Download } from "lucide-react";
+import { Send, User, Mail, MessageSquare, ChevronDown, Download, X } from "lucide-react";
 import { toast } from "sonner";
 import { useMolyRain, MolyRainDisplay } from "./MolyRain";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -435,7 +435,7 @@ const ContactSection = () => {
                               <img 
                                 src={textLogoSrc} 
                                 alt={item.title} 
-                                className="w-full h-auto max-h-full object-contain transition-transform duration-300 group-hover:scale-105" 
+                                className="w-full h-auto max-h-full object-contain transition-transform duration-300 group-hover:scale-[1.42] scale-[1.32]" 
                               />
                             ) : (
                               <div className="animate-pulse bg-slate-200 w-full h-full rounded-lg" />
@@ -559,9 +559,10 @@ const ContactSection = () => {
                 {/* Sulkemispainike */}
                 <button
                   onClick={() => setActiveLightboxImg(null)}
-                  className="absolute top-4 right-4 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center text-xl font-bold border-2 border-white/20 transition-all cursor-pointer shadow-lg active:scale-95"
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full bg-bright-orange hover:bg-bright-orange/90 text-white flex items-center justify-center border-3 border-wood-dark transition-all cursor-pointer shadow-xl active:scale-95 hover:scale-105 group"
+                  aria-label="Sulje esikatselu"
                 >
-                  ✖️
+                  <X className="w-6 h-6 stroke-[3] transition-transform group-hover:rotate-90 duration-300" />
                 </button>
               </motion.div>
             </motion.div>
