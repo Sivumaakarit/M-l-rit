@@ -496,7 +496,7 @@ const ContactSection = () => {
                               className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
                             >
                               <Download className="w-4 h-4 stroke-[2.5]" />
-                              Lataa lankku
+                              Lataa HQ
                             </button>
                           ) : item.isTextLogo ? (
                             <button
@@ -504,7 +504,7 @@ const ContactSection = () => {
                               className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
                             >
                               <Download className="w-4 h-4 stroke-[2.5]" />
-                              Lataa logo
+                              Lataa HQ
                             </button>
                           ) : (
                             <a
