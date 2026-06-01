@@ -3,9 +3,13 @@ import { useState } from "react";
 import { Send, User, Mail, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { useMolyRain, MolyRainDisplay } from "./MolyRain";
+import { Checkbox } from "@/components/ui/checkbox";
+import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 
 const ContactSection = () => {
   const { particles, triggerRain } = useMolyRain();
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,6 +25,11 @@ const ContactSection = () => {
       return;
     }
 
+    if (!acceptedPrivacy) {
+      toast.error("Sinun täytyy hyväksyä tietosuojaseloste lähettääksesi viestin! 🔒");
+      return;
+    }
+
     try {
       const response = await fetch("https://formspree.io/f/xeerkkak", {
         method: "POST",
@@ -33,6 +42,7 @@ const ContactSection = () => {
       if (response.ok) {
         toast.success("Kiitos viestistäsi! 🍌 Palaamme asiaan pian!");
         setFormData({ name: "", email: "", message: "" });
+        setAcceptedPrivacy(false);
       } else {
         toast.error("Hups! Jotain meni vikaan. Yritä myöhemmin uudelleen.");
       }
@@ -142,6 +152,30 @@ const ContactSection = () => {
               </div>
             </div>
 
+            {/* Tietosuojan hyväksyntä valintaruudulla */}
+            <div className="flex items-start gap-3 p-4 bg-white/70 backdrop-blur-sm rounded-2xl border-2 border-wood-dark/10 shadow-sm">
+              <Checkbox 
+                id="privacy-accept" 
+                checked={acceptedPrivacy}
+                onCheckedChange={(checked) => setAcceptedPrivacy(checked === true)}
+                className="w-6 h-6 rounded-lg border-2 border-wood-dark data-[state=checked]:bg-bright-orange data-[state=checked]:border-wood-dark mt-1 shrink-0 transition-transform active:scale-90"
+              />
+              <label 
+                htmlFor="privacy-accept"
+                className="font-body text-sm md:text-base text-wood-dark leading-relaxed cursor-pointer select-none"
+              >
+                Hyväksyn, että Mölyapinat käsittelee tietojani keikkakyselyn hoitamiseksi{" "}
+                <button
+                  type="button"
+                  onClick={() => setIsPrivacyOpen(true)}
+                  className="text-forest-green hover:text-bright-orange transition-colors font-bold underline decoration-2 underline-offset-2"
+                >
+                  tietosuojaselosteen
+                </button>{" "}
+                mukaisesti. 🐒
+              </label>
+            </div>
+
             <motion.button
               type="submit"
               className="w-full bg-bright-orange text-white font-heading text-2xl py-5 rounded-2xl shadow-xl flex items-center justify-center gap-4 hover:shadow-2xl transition-all"
@@ -154,6 +188,8 @@ const ContactSection = () => {
           </form>
         </motion.div>
       </div>
+
+      <PrivacyPolicyModal isOpen={isPrivacyOpen} onOpenChange={setIsPrivacyOpen} />
     </section>
   );
 };

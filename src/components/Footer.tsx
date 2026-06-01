@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 
 const Footer = () => {
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   return (
     <footer className="bg-background py-16 border-t-4 border-primary/20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
@@ -49,6 +51,21 @@ const Footer = () => {
           </div>
 
           <div className="mt-12 flex flex-col items-center gap-2">
+            <div className="flex gap-4 items-center mb-2">
+              <button 
+                onClick={() => setIsPrivacyOpen(true)}
+                className="text-slate-500 font-body text-xs hover:text-primary transition-colors hover:underline cursor-pointer font-semibold"
+              >
+                Tietosuojaseloste
+              </button>
+              <span className="w-1 h-1 rounded-full bg-slate-400" />
+              <button 
+                onClick={() => window.dispatchEvent(new Event("open-cookie-settings"))}
+                className="text-slate-500 font-body text-xs hover:text-primary transition-colors hover:underline cursor-pointer font-semibold"
+              >
+                Evästeasetukset
+              </button>
+            </div>
             <a 
               href="https://sivumaakarit.fi" 
               target="_blank" 
@@ -62,6 +79,8 @@ const Footer = () => {
           </div>
         </motion.div>
       </div>
+
+      <PrivacyPolicyModal isOpen={isPrivacyOpen} onOpenChange={setIsPrivacyOpen} />
 
       {/* Takaisin ylös -painike */}
       <BackToTop />
