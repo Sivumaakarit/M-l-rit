@@ -13,8 +13,9 @@ const promoItems = [
     description: "Painolaatuinen kuva keikkajulisteisiin ja markkinointiin.",
     fileName: "molyapinat2kp18.jpg",
     filePath: "/molyapinat2kp18.jpg",
+    previewPath: "/molyapinat-promo-preview.webp",
     specs: "JPG • 3.5 MB • Korkearesoluutio",
-    thumbnail: "/molyapinat2kp18.jpg",
+    thumbnail: "/molyapinat-promo-thumb.webp",
     isWoodPlank: false,
     isTextLogo: false,
     isApinaLogo: false
@@ -35,8 +36,9 @@ const promoItems = [
     description: "Aurinkolasillinen apinalogo (päänkuva) ilman taustaa.",
     fileName: "molyapinat-apinalogo.png",
     filePath: "/logo.png",
+    previewPath: "/logo.webp",
     specs: "PNG • 742 KB • Läpinäkyvä",
-    thumbnail: "/logo.png",
+    thumbnail: "/logo.webp",
     isWoodPlank: false,
     isTextLogo: false,
     isApinaLogo: true
@@ -444,7 +446,7 @@ const ContactSection = () => {
                           </div>
                         ) : item.isApinaLogo ? (
                           <div 
-                            onClick={() => setActiveLightboxImg(item.filePath)}
+                            onClick={() => setActiveLightboxImg(item.previewPath || item.filePath)}
                             className="w-28 h-28 md:w-32 md:h-32 rounded-xl border-2 border-wood-dark/15 overflow-hidden flex-shrink-0 flex items-center justify-center relative cursor-zoom-in group p-3"
                             style={{ 
                               backgroundImage: 'conic-gradient(#e5e7eb 25%, transparent 25% 50%, #e5e7eb 50% 75%, transparent 75%)', 
@@ -463,7 +465,7 @@ const ContactSection = () => {
                           </div>
                         ) : (
                           <div 
-                            onClick={() => setActiveLightboxImg(item.filePath)}
+                            onClick={() => setActiveLightboxImg(item.previewPath || item.filePath)}
                             className="w-28 h-28 md:w-32 md:h-32 rounded-xl border-2 border-wood-dark/15 overflow-hidden bg-slate-100 flex-shrink-0 flex items-center justify-center relative cursor-zoom-in group"
                           >
                             <img 
