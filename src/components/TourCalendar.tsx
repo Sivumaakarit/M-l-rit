@@ -10,12 +10,14 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "26.5.", city: "Helsinki", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
-  { date: "6.6.", city: "Vantaa", venue: "Perhepiknik, Koskimyllyn puisto", lineup: "Mölyapinat Duo" },
-  { date: "1.7.", city: "Alavus", venue: "Yksityistilaisuus", lineup: "Mölyapinat Duo", isPrivate: true },
   { date: "14.7.", city: "Tampere", venue: "Finlaysonin kesälava", lineup: "Mölyapinat Bändi" },
   { date: "16.7.", city: "Heinävesi", venue: "Iltatori", lineup: "Mölyapinat Duo" },
-  { date: "3.10.", city: "Järvenpää", venue: "Skidimessut", lineup: "Mölyapinat Bändi" }
+  { date: "8.8.", city: "Hämeenlinna", venue: "Kaurialan stadion", lineup: "Mölyapinat Duo" },
+  { date: "30.8.", city: "Anttola", venue: "Tori", lineup: "Mölyapinat Bändi" },
+  { date: "4.9.", city: "Hartola", venue: "Keskusta markkinaetkot", lineup: "Mölyapinat Bändi" },
+  { date: "3.10.", city: "Järvenpää", venue: "Skidimessut", lineup: "Mölyapinat Bändi" },
+  { date: "17.10.", city: "Lohja", venue: "Harjula", lineup: "Mölyapinat Bändi" },
+  { date: "28.11.", city: "Helsinki", venue: "Kauppakeskus Malmin Nova", lineup: "Mölyapinat Bändi" }
 ];
 
 const TourCalendar = () => {
