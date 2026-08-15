@@ -10,9 +10,6 @@ interface Gig {
 }
 
 const gigs: Gig[] = [
-  { date: "14.7.", city: "Tampere", venue: "Finlaysonin kesälava", lineup: "Mölyapinat Bändi" },
-  { date: "16.7.", city: "Heinävesi", venue: "Iltatori", lineup: "Mölyapinat Duo" },
-  { date: "8.8.", city: "Hämeenlinna", venue: "Kaurialan stadion", lineup: "Mölyapinat Duo" },
   { date: "30.8.", city: "Anttola", venue: "Tori", lineup: "Mölyapinat Bändi" },
   { date: "4.9.", city: "Hartola", venue: "Keskusta markkinaetkot", lineup: "Mölyapinat Bändi" },
   { date: "3.10.", city: "Järvenpää", venue: "Skidimessut", lineup: "Mölyapinat Bändi" },
