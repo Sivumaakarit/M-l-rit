@@ -30,15 +30,25 @@ export default async function handler(req: any, res: any) {
     const orderTitle = product_title || "Mölyapinat Lasten T-paita";
     const orderTag = order_type || "Pikatilaus";
 
+    let cleanZip = String(recipient.zip || "").trim();
+    // Poistetaan maakoodi alusta (FI-, FIN-) ja ylimääräiset välilyönnit
+    cleanZip = cleanZip.replace(/^(FI|FIN)[ -]?/i, "").replace(/\s+/g, "");
+    // Jos suomalainen postinumero on annettu 4-numeroisena (esim. 4200), lisätään etunolla (04200)
+    if (/^\d{4}$/.test(cleanZip)) {
+      cleanZip = cleanZip.padStart(5, "0");
+    }
+
+    const countryCode = (recipient.country_code || "FI").toUpperCase();
+
     const printfulOrderPayload = {
       recipient: {
-        name: recipient.name,
-        address1: recipient.address1,
-        city: recipient.city,
-        zip: recipient.zip,
-        country_code: recipient.country_code || "FI",
-        phone: recipient.phone || "",
-        email: recipient.email || "jullenmusiikki@gmail.com",
+        name: recipient.name.trim(),
+        address1: recipient.address1.trim(),
+        city: recipient.city.trim(),
+        zip: cleanZip,
+        country_code: countryCode,
+        phone: recipient.phone ? String(recipient.phone).trim() : "",
+        email: recipient.email ? String(recipient.email).trim() : "jullenmusiikki@gmail.com",
       },
       items: [
         {
@@ -79,7 +89,11 @@ export default async function handler(req: any, res: any) {
 
     if (!printfulResponse.ok) {
       console.error("Printful API manual order error:", printfulResult);
-      return res.status(400).json({ error: "Printful order creation failed", details: printfulResult });
+      const detailedMessage = 
+        printfulResult?.error?.message || 
+        (typeof printfulResult?.result === "string" ? printfulResult?.result : null) || 
+        "Printful order creation failed";
+      return res.status(400).json({ error: detailedMessage, details: printfulResult });
     }
 
     let finalStatus = printfulResult?.result?.status;

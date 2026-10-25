@@ -236,6 +236,11 @@ export default function AdminReport() {
 
     setIsSubmittingOrder(true);
 
+    let formattedZip = recipientZip.trim().replace(/^(FI|FIN)[ -]?/i, "").replace(/\s+/g, "");
+    if (/^\d{4}$/.test(formattedZip)) {
+      formattedZip = formattedZip.padStart(5, "0");
+    }
+
     try {
       // Lähetetään tilaus serverless funktiolle api/manual-order.ts
       const response = await fetch("/api/manual-order", {
@@ -246,7 +251,7 @@ export default function AdminReport() {
           recipient: {
             name: recipientName.trim(),
             address1: recipientAddress.trim(),
-            zip: recipientZip.trim(),
+            zip: formattedZip,
             city: recipientCity.trim(),
             country_code: "FI",
             phone: recipientPhone.trim(),
@@ -262,7 +267,10 @@ export default function AdminReport() {
       const resData = await response.json();
 
       if (!response.ok) {
-        const errorMsg = resData?.error || resData?.details?.error?.message || "Tilauksen lähetys Printfuliin epäonnistui.";
+        let errorMsg = resData?.error || resData?.details?.error?.message || (typeof resData?.details?.result === "string" ? resData.details.result : null) || "Tilauksen lähetys Printfuliin epäonnistui.";
+        if (errorMsg.includes("Postal/Zip code is invalid")) {
+          errorMsg = `Postinumero "${recipientZip}" ei kelpaa Printfulille. Suomessa postinumeron tulee olla tarkalleen 5 numeroa (esim. 04200 tai 00100).`;
+        }
         throw new Error(errorMsg);
       }
 
@@ -857,14 +865,24 @@ export default function AdminReport() {
                     <div className="grid grid-cols-2 gap-2">
                       <div>
                         <label className="block text-[11px] font-semibold text-slate-400 mb-1">
-                          Postinumero *
+                          Postinumero * <span className="text-[10px] text-slate-500 font-normal">(5 numeroa)</span>
                         </label>
                         <input
                           type="text"
                           required
                           value={recipientZip}
                           onChange={(e) => setRecipientZip(e.target.value)}
+                          onBlur={() => {
+                            let clean = recipientZip.trim().replace(/^(FI|FIN)[ -]?/i, "").replace(/\s+/g, "");
+                            if (/^\d{4}$/.test(clean)) {
+                              clean = clean.padStart(5, "0");
+                            }
+                            if (clean !== recipientZip) {
+                              setRecipientZip(clean);
+                            }
+                          }}
                           placeholder="04200"
+                          maxLength={10}
                           className="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs sm:text-sm outline-none focus:border-amber-400"
                         />
                       </div>
