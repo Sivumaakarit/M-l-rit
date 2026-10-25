@@ -261,6 +261,11 @@ export default function AdminReport() {
 
       const resData = await response.json();
 
+      if (!response.ok) {
+        const errorMsg = resData?.error || resData?.details?.error?.message || "Tilauksen lähetys Printfuliin epäonnistui.";
+        throw new Error(errorMsg);
+      }
+
       const newOrderRecord: ManualOrderRecord = {
         id: resData?.orderId ? `PF-${resData.orderId}` : `PIKA-${Date.now().toString().slice(-4)}`,
         date: new Date().toISOString().replace("T", " ").slice(0, 16),
@@ -295,31 +300,10 @@ export default function AdminReport() {
       setRecipientPhone("");
       setRecipientEmail("");
     } catch (err: any) {
-      console.warn("Pikatilaus lokaalitilassa tallennettu paikallisesti:", err);
-      // Lokaalitestitilassa luodaan silti tallenne
-      const newOrderRecord: ManualOrderRecord = {
-        id: `PIKA-${Date.now().toString().slice(-4)}`,
-        date: new Date().toISOString().replace("T", " ").slice(0, 16),
-        recipientName: recipientName.trim(),
-        address: recipientAddress.trim(),
-        postalCode: recipientZip.trim(),
-        city: recipientCity.trim(),
-        item: productTitle,
-        size: selectedSize,
-        orderType: orderType,
-        cost: 12.60,
-        status: "Testitilaus (Lokaali)",
-      };
-      setManualOrders([newOrderRecord, ...manualOrders]);
-      toast.success("Pikatilaus kirjattu (Testitila)!", {
-        description: `Paita koossa ${selectedSize} kirjattu vastaanottajalle ${recipientName}.`,
+      console.error("Pikatilausvirhe:", err);
+      toast.error("Pikatilauksen lähetys epäonnistui!", {
+        description: err.message || "Tarkista verkkiyhteys tai vastaanottajan tiedot ja yritä uudelleen.",
       });
-      setRecipientName("");
-      setRecipientAddress("");
-      setRecipientZip("");
-      setRecipientCity("");
-      setRecipientPhone("");
-      setRecipientEmail("");
     } finally {
       setIsSubmittingOrder(false);
     }

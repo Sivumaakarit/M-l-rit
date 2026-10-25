@@ -9,7 +9,7 @@ export default async function handler(req: any, res: any) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-    const { password, recipient, sync_variant_id, order_type, product_title } = body;
+    const { password, recipient, sync_variant_id, order_type, product_title, auto_confirm } = body;
 
     // Turvatarkistus: vaatii ylläpidon salasanan
     if (password !== "Huhtikuu26") {
