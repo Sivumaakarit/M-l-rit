@@ -159,10 +159,12 @@ Eskolle ja bändin vastuuhenkilöille on luotu oma suojattu työkalu:
 
 ### ⚙️ Miten tilaustapaa vaihdetaan (Luonnos vs Suora tuotanto):
 1. **Verkkokaupan tilaukset (Stripe-maksu):**  
-   - `.env.local` / Vercel Environment Variables: `PRINTFUL_AUTO_CONFIRM=false` (Oletus: luonnostila, jolloin Esko saa sähköpostiinsa ilmoituksen ja käy tarkistamassa/kuittaamassa tai perumassa Printfulissa).  
-   - Kun halutaan 100 % suora automaatio ilman kuittauksia: vaihdetaan Vercelin asetuksissa `PRINTFUL_AUTO_CONFIRM=true`.
+   - Tuotannossa aktiivisena: `PRINTFUL_AUTO_CONFIRM=true` (Tilaukset menevät heti tehtaalle valmistukseen).
+   - Jos halutaan palauttaa luonnostila (Draft): vaihdetaan Vercelin Environment Variables -asetuksissa `PRINTFUL_AUTO_CONFIRM=false`.
 2. **Pikatilaukset hallintapaneelista (`/hallinta`):**  
-   - Lomakkeessa on suora valintaruutu: *”Vahvista tilaus heti tuotantoon (Auto-confirm)”*. Jos ruutua ei valita, tilaus syntyy Printfuliin turvallisena luonnoksena.
+   - Lomakkeessa on suora valintaruutu: *”Vahvista tilaus heti tuotantoon (Auto-confirm)”* (oletuksena päällä). Jos rasti poistetaan, tilaus syntyy Printfuliin turvallisena luonnoksena ja voidaan perua ilman kuluja.
+3. **Kooditason varalinkki:**  
+   - `ShopSection.tsx` sisältää aina `DEFAULT_STRIPE_PAYMENT_LINK` -varalinkin, jotta "Stripe-maksulinkkiä ei ole määritetty!" -virhettä ei voi tulla.
 
 ---
 

@@ -176,14 +176,27 @@ Taustakoodi (`api/stripe-webhook.ts`) on rakennettu universaaliksi. Kun haluat l
 
 ---
 
-## 6. Yhteenveto Ennen Julkaisua
+## 6. Julkaisun ja Ympäristömuuttujien Checklist
 
-1. Printfulin Y-tunnuskäsittely on tilassa **`Pending`**.
-2. Kun tila muuttuu tilaan **`Approved`**, kauppa on 100 % valmis julkaistavaksi.
-3. Julkaisukomento Verceliin:
+1. **Printful ALV 0 % -status:** Tilassa **`Approved`** (EU Reverse Charge aktiivinen, veroton tuotantohinta 8,11 € + toimitus 4,49 € = 12,60 €).
+2. **Kooditason varalinkki:** `ShopSection.tsx` sisältää aina `DEFAULT_STRIPE_PAYMENT_LINK` -varalinkin, jotta ostaminen toimii aina virheettömästi.
+3. **Vercelin ympäristömuuttujat:**  
+   Muista että `.env.local` ei siirry Gitiin. Ympäristömuuttujat lisätään Verceliin komennolla:
+   ```bash
+   echo -n "https://buy.stripe.com/..." | npx vercel env add VITE_STRIPE_PAYMENT_LINK production
+   echo -n "oma_printful_api_avain" | npx vercel env add PRINTFUL_API_KEY production
+   echo -n "oma_printful_api_avain" | npx vercel env add VITE_PRINTFUL_API_KEY production
+   echo -n "18892987" | npx vercel env add VITE_PRINTFUL_STORE_ID production
+   echo -n "re_..." | npx vercel env add RESEND_API_KEY production
+   echo -n "true" | npx vercel env add PRINTFUL_AUTO_CONFIRM production
+   ```
+4. **Vercel SPA-reititys (`vercel.json`):**  
+   Sisältää rewriten `{"source": "/((?!api/.*).*)", "destination": "/index.html"}`, jotta `/hallinta` toimii suorilla osoitteilla ilman 404-virheitä.
+5. **Julkaisukomento Verceliin:**
    ```bash
    git add .
    git commit -m "feat: complete automated print-on-demand store with accounting dashboard"
    git push origin main
    npx vercel --prod --yes
    ```
+
