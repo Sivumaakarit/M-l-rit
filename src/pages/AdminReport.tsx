@@ -54,56 +54,9 @@ interface ManualOrderRecord {
   status: string;
 }
 
-// Oletusmyynnit havainnollistamiseen
-const INITIAL_SALES_ORDERS: OrderRecord[] = [
-  {
-    id: "MOLY-2026-001",
-    date: "2026-10-20 14:15",
-    customer: "Testi Tilaaja (Kerava)",
-    item: "Mölyapinat T-paita",
-    size: "M",
-    grossAmount: 24.90,
-    vatAmount: 5.06,
-    netAmount: 19.84,
-    stripeFee: 0.62,
-    printfulCost: 12.60,
-    netProfit: 6.62,
-    paymentMethod: "MobilePay",
-    status: "Toimitettu",
-  },
-  {
-    id: "MOLY-2026-002",
-    date: "2026-10-20 17:40",
-    customer: "Fanipostia (Helsinki)",
-    item: "Mölyapinat T-paita",
-    size: "S",
-    grossAmount: 24.90,
-    vatAmount: 5.06,
-    netAmount: 19.84,
-    stripeFee: 0.62,
-    printfulCost: 12.60,
-    netProfit: 6.62,
-    paymentMethod: "Korttimaksu (Visa)",
-    status: "Valmistuksessa",
-  }
-];
-
-// Esimerkkipikatilaukset (lahjat, koon vaihdot, promopaidat)
-const INITIAL_MANUAL_ORDERS: ManualOrderRecord[] = [
-  {
-    id: "MOLY-PIKA-01",
-    date: "2026-10-20 18:30",
-    recipientName: "Julle (Kerava)",
-    address: "Keskuskatu 1",
-    postalCode: "04200",
-    city: "Kerava",
-    item: "Mölyapinat T-paita",
-    size: "L",
-    orderType: "Bänditilaus (Oma paita)",
-    cost: 12.60,
-    status: "Tehtaalla",
-  }
-];
+// Oletusmyynnit tuotantoon: täysin tyhjä, alkaa nollista
+const INITIAL_SALES_ORDERS: OrderRecord[] = [];
+const INITIAL_MANUAL_ORDERS: ManualOrderRecord[] = [];
 
 const AVAILABLE_SIZES = ["XS", "S", "M", "L", "XL"];
 const ORDER_TYPES = [
@@ -122,10 +75,19 @@ export default function AdminReport() {
   // Välilehdet: "sales" (myynnit & kirjanpito) tai "quick_order" (pikatilaukset & lahjat)
   const [activeTab, setActiveTab] = useState<"sales" | "quick_order">("sales");
 
-  const [orders] = useState<OrderRecord[]>(INITIAL_SALES_ORDERS);
+  const [orders, setOrders] = useState<OrderRecord[]>([]);
+  const [isLoadingOrders, setIsLoadingOrders] = useState(false);
   const [manualOrders, setManualOrders] = useState<ManualOrderRecord[]>(() => {
     const saved = localStorage.getItem("moly_manual_orders");
-    return saved ? JSON.parse(saved) : INITIAL_MANUAL_ORDERS;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed.filter((o: any) => o.id !== "MOLY-PIKA-01" && !o.recipientName?.includes("Julle"));
+      } catch {
+        return [];
+      }
+    }
+    return [];
   });
 
   // Pikatilauslomakkeen tila
@@ -166,11 +128,68 @@ export default function AdminReport() {
     };
   }, []);
 
-  // Tarkistetaan onko käyttäjä jo kirjautunut tällä istunnolla
+  // Hakee reaaliaikaiset tilaukset Printful-rajapinnasta
+  const fetchLiveOrders = async () => {
+    setIsLoadingOrders(true);
+    try {
+      const res = await fetch("/api/get-orders?password=Huhtikuu26");
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.orders) {
+          const mapped: OrderRecord[] = data.orders.map((o: any) => {
+            const gross = parseFloat(o.retail_costs?.total || "24.90");
+            const vat = parseFloat(((gross * 25.5) / 125.5).toFixed(2));
+            const net = parseFloat((gross - vat).toFixed(2));
+            const printful = parseFloat(o.costs?.total || "12.60");
+            const profit = parseFloat((net - 0.62 - printful).toFixed(2));
+            const itemName = o.items?.[0]?.name || "Mölyapinat T-paita";
+            const sizePart = itemName.includes("/") ? itemName.split("/")[1].trim() : "S";
+
+            return {
+              id: `PF-${o.id}`,
+              date: o.created ? new Date(o.created * 1000).toISOString().replace("T", " ").slice(0, 16) : "",
+              customer: `${o.recipient?.name || "Asiakas"} (${o.recipient?.city || ""})`,
+              item: "Mölyapinat T-paita",
+              size: sizePart,
+              grossAmount: gross,
+              vatAmount: vat,
+              netAmount: net,
+              stripeFee: 0.62,
+              printfulCost: printful,
+              netProfit: profit,
+              paymentMethod: "Stripe / MobilePay",
+              status: o.status === "fulfilled" ? "Toimitettu" : o.status === "draft" ? "Luonnos" : "Valmistuksessa",
+            };
+          });
+          setOrders(mapped);
+        }
+      }
+    } catch (err) {
+      console.warn("Could not fetch live orders:", err);
+    } finally {
+      setIsLoadingOrders(false);
+    }
+  };
+
+  // Tarkistetaan onko käyttäjä jo kirjautunut tällä istunnolla ja siivotaan vanhat esimerkkidatat
   useEffect(() => {
     const savedAuth = sessionStorage.getItem("moly_admin_authenticated");
     if (savedAuth === "true") {
       setIsAuthenticated(true);
+      fetchLiveOrders();
+    }
+
+    // Puhdistetaan vanhat mallitilaukset localStoragesta
+    const savedManual = localStorage.getItem("moly_manual_orders");
+    if (savedManual) {
+      try {
+        const parsed = JSON.parse(savedManual);
+        const cleaned = parsed.filter((o: any) => o.id !== "MOLY-PIKA-01" && !o.recipientName?.includes("Julle"));
+        if (cleaned.length !== parsed.length) {
+          localStorage.setItem("moly_manual_orders", JSON.stringify(cleaned));
+          setManualOrders(cleaned);
+        }
+      } catch (e) {}
     }
   }, []);
 
@@ -185,6 +204,7 @@ export default function AdminReport() {
       setIsAuthenticated(true);
       setAuthError(false);
       sessionStorage.setItem("moly_admin_authenticated", "true");
+      fetchLiveOrders();
       toast.success("Kirjauduttu sisään onnistuneesti!", {
         description: "Tervetuloa Mölyapinoiden hallintaan.",
       });
@@ -641,9 +661,20 @@ export default function AdminReport() {
                   <h2 className="text-base font-bold text-white">Toteutuneet verkkokauppamyynnit</h2>
                   <p className="text-xs text-slate-400">Asiakastilaukset Stripe-kassan kautta</p>
                 </div>
-                <span className="text-xs text-slate-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
-                  {orders.length} myyntiä kirjattu
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={fetchLiveOrders}
+                    disabled={isLoadingOrders}
+                    className="p-1.5 rounded-lg bg-slate-950 text-slate-400 hover:text-white border border-slate-800 transition-colors cursor-pointer disabled:opacity-50"
+                    title="Päivitä tilaukset Printfulista"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isLoadingOrders ? "animate-spin text-amber-400" : ""}`} />
+                  </button>
+                  <span className="text-xs text-slate-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
+                    {orders.length} myyntiä kirjattu
+                  </span>
+                </div>
               </div>
 
               <div className="overflow-x-auto">
@@ -661,34 +692,42 @@ export default function AdminReport() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800">
-                    {orders.map((order) => (
-                      <tr key={order.id} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="py-3.5 px-4 font-mono font-bold text-white">{order.id}</td>
-                        <td className="py-3.5 px-4 text-slate-400">{order.date}</td>
-                        <td className="py-3.5 px-4 font-medium text-white">
-                          {order.item} <span className="text-amber-400 font-bold ml-1">({order.size})</span>
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium">
-                            {order.paymentMethod}
-                          </span>
-                        </td>
-                        <td className="py-3.5 px-4 font-semibold text-white">
-                          {order.grossAmount.toFixed(2)} €
-                        </td>
-                        <td className="py-3.5 px-4 text-rose-300">
-                          -{(order.stripeFee + order.printfulCost).toFixed(2)} €
-                        </td>
-                        <td className="py-3.5 px-4 font-bold text-emerald-400 text-right">
-                          +{order.netProfit.toFixed(2)} €
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800/50">
-                            {order.status}
-                          </span>
+                    {orders.length === 0 ? (
+                      <tr>
+                        <td colSpan={8} className="py-12 text-center text-slate-500 text-xs">
+                          {isLoadingOrders ? "Haetaan tilauksia Printfulista..." : "Ei vielä myyntejä. Uudet verkkokaupan tilaukset kirjautuvat tähän reaaliajassa! 🍌"}
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      orders.map((order) => (
+                        <tr key={order.id} className="hover:bg-slate-800/40 transition-colors">
+                          <td className="py-3.5 px-4 font-mono font-bold text-white">{order.id}</td>
+                          <td className="py-3.5 px-4 text-slate-400">{order.date}</td>
+                          <td className="py-3.5 px-4 font-medium text-white">
+                            {order.item} <span className="text-amber-400 font-bold ml-1">({order.size})</span>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-medium">
+                              {order.paymentMethod}
+                            </span>
+                          </td>
+                          <td className="py-3.5 px-4 font-semibold text-white">
+                            {order.grossAmount.toFixed(2)} €
+                          </td>
+                          <td className="py-3.5 px-4 text-rose-300">
+                            -{(order.stripeFee + order.printfulCost).toFixed(2)} €
+                          </td>
+                          <td className="py-3.5 px-4 font-bold text-emerald-400 text-right">
+                            +{order.netProfit.toFixed(2)} €
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800/50">
+                              {order.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -985,30 +1024,38 @@ export default function AdminReport() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800">
-                    {manualOrders.map((ord) => (
-                      <tr key={ord.id} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="py-3 px-4 font-mono font-bold text-white">{ord.id}</td>
-                        <td className="py-3 px-4 text-slate-400">{ord.date}</td>
-                        <td className="py-3 px-4">
-                          <div className="font-bold text-white">{ord.recipientName}</div>
-                          <div className="text-[11px] text-slate-400">{ord.address}, {ord.postalCode} {ord.city}</div>
-                        </td>
-                        <td className="py-3 px-4 font-bold text-amber-400">{ord.size}</td>
-                        <td className="py-3 px-4">
-                          <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-[11px] font-medium">
-                            {ord.orderType}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-slate-400 font-medium">
-                          {ord.cost.toFixed(2)} €
-                        </td>
-                        <td className="py-3 px-4">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-950 text-amber-300 border border-amber-800/50">
-                            {ord.status}
-                          </span>
+                    {manualOrders.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="py-12 text-center text-slate-500 text-xs">
+                          Ei vielä pikatilauksia. Tekemäsi bänditilaukset ja lahjat näkyvät tässä! 📦
                         </td>
                       </tr>
-                    ))}
+                    ) : (
+                      manualOrders.map((ord) => (
+                        <tr key={ord.id} className="hover:bg-slate-800/40 transition-colors">
+                          <td className="py-3 px-4 font-mono font-bold text-white">{ord.id}</td>
+                          <td className="py-3 px-4 text-slate-400">{ord.date}</td>
+                          <td className="py-3 px-4">
+                            <div className="font-bold text-white">{ord.recipientName}</div>
+                            <div className="text-[11px] text-slate-400">{ord.address}, {ord.postalCode} {ord.city}</div>
+                          </td>
+                          <td className="py-3 px-4 font-bold text-amber-400">{ord.size}</td>
+                          <td className="py-3 px-4">
+                            <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-[11px] font-medium">
+                              {ord.orderType}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-slate-400 font-medium">
+                            {ord.cost.toFixed(2)} €
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-950 text-amber-300 border border-amber-800/50">
+                              {ord.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
