@@ -136,8 +136,9 @@ export const ShopSection = () => {
   const price = "24,90 €";
   const activeVariant = SIZES.find((s) => s.size === selectedSize) || SIZES[1];
 
-  // Jos ympäristömuuttujissa on oikea Stripe-linkki, ohjataan suoraan sinne
-  const stripePaymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK || "";
+  // Jos ympäristömuuttujissa on oikea Stripe-linkki, ohjataan sinne, muuten oletuslinkkiin
+  const DEFAULT_STRIPE_PAYMENT_LINK = "https://buy.stripe.com/6oU3cvc7M9rq81B3KMcZa00";
+  const stripePaymentLink = import.meta.env.VITE_STRIPE_PAYMENT_LINK || DEFAULT_STRIPE_PAYMENT_LINK;
 
   // Ostoskorin toiminnot
   const handleAddToCart = (sizeToOrder: string) => {
