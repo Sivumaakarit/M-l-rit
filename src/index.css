@@ -183,7 +183,7 @@
   }
 
   .back-to-top {
-    @apply fixed bottom-8 right-8 z-50 w-16 h-16 flex items-center justify-center text-3xl shadow-2xl transition-all duration-500;
+    @apply fixed bottom-6 left-6 md:bottom-8 md:left-8 z-40 w-14 h-14 md:w-16 md:h-16 flex items-center justify-center text-2xl md:text-3xl shadow-2xl transition-all duration-500 cursor-pointer;
   }
 }
 

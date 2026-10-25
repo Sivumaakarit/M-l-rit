@@ -61,6 +61,7 @@ export default {
         mint: "hsl(var(--mint))",
         sand: "hsl(var(--sand))",
         forest: "hsl(var(--forest-green))",
+        "forest-green": "hsl(var(--forest-green))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

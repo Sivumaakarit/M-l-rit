@@ -57,6 +57,7 @@ const Header = () => {
     { label: "Bändi", href: "#jasenet" },
     { label: "Musiikki", href: "#musiikki" },
     { label: "Keikat", href: "#keikat" },
+    { label: "Kauppa", href: "#kauppa" },
     { label: "Yhteystiedot", href: "#yhteystiedot" },
     { label: "Järjestäjille", href: "#jarjestajille" },
   ];

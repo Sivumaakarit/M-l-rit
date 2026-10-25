@@ -3,18 +3,36 @@ import { Calendar, MapPin, Banana, Music, Users, Star, Mail } from "lucide-react
 
 interface Gig {
   date: string;
+  year?: number;
   city: string;
   venue: string;
   lineup: string;
   isPrivate?: boolean;
+  link?: string;
 }
 
 const gigs: Gig[] = [
-  { date: "30.8.", city: "Anttola", venue: "Tori", lineup: "Mölyapinat Bändi" },
-  { date: "4.9.", city: "Hartola", venue: "Keskusta markkinaetkot", lineup: "Mölyapinat Bändi" },
-  { date: "3.10.", city: "Järvenpää", venue: "Skidimessut", lineup: "Mölyapinat Bändi" },
-  { date: "17.10.", city: "Lohja", venue: "Harjula", lineup: "Mölyapinat Bändi" },
-  { date: "28.11.", city: "Helsinki", venue: "Kauppakeskus Malmin Nova", lineup: "Mölyapinat Bändi" }
+  { 
+    date: "21.11.", 
+    year: 2026, 
+    city: "Tampere", 
+    venue: "Kauppakeskus DUO Hervanta", 
+    lineup: "Mölyapinat Duo" 
+  },
+  { 
+    date: "28.11.", 
+    year: 2026, 
+    city: "Helsinki", 
+    venue: "Kauppakeskus Malmin Nova", 
+    lineup: "Mölyapinat Bändi" 
+  },
+  { 
+    date: "28.3.", 
+    year: 2027, 
+    city: "Turku", 
+    venue: "Tallink Baltic Princess (Turku–Tukholma–Turku)", 
+    lineup: "Mölyapinat Bändi" 
+  }
 ];
 
 const TourCalendar = () => {
@@ -37,7 +55,7 @@ const TourCalendar = () => {
           <div className="inline-block wood-clean rounded-full px-6 py-4 md:px-12 md:py-6 shadow-2xl border-4 border-wood-dark relative overflow-hidden mb-6 max-w-[95vw]">
             <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl text-wood-dark text-shadow-fun flex items-center justify-center gap-2 md:gap-4 flex-wrap">
               <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange" />
-              Mölyapinat Keikkakalenteri 2026
+              Mölyapinat Keikkakalenteri
               <Music className="w-6 h-6 md:w-10 md:h-10 text-bright-orange rotate-180" />
             </h2>
             {/* Shine effect */}
@@ -48,7 +66,7 @@ const TourCalendar = () => {
             />
           </div>
           <p className="font-body text-xl md:text-2xl text-wood-dark/80 max-w-2xl mx-auto font-bold">
-            Tule mukaan banaanitanssiin! Täältä löydät meidät tänä vuonna - kalenteri päivittyy koko ajan 🍌
+            Tule mukaan banaanitanssiin! Täältä löydät tulevat keikkamme – kalenteri päivittyy koko ajan 🍌
           </p>
         </motion.div>
 
@@ -62,22 +80,40 @@ const TourCalendar = () => {
 
         {/* Gig List */}
         <div className="flex flex-col gap-3">
-          {gigs.map((gig, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.01, x: 5 }}
-              className="group"
-            >
-              <div className={`
-                lauta-clean p-6 md:p-8 flex flex-col md:grid md:grid-cols-12 md:items-center gap-4 shadow-lg border-l-8 
-                ${gig.isPrivate ? 'border-sand opacity-90' : 'border-bright-orange'} 
-                ${index === gigs.length - 1 ? 'rounded-b-3xl' : ''}
-                transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-bright-orange/10
-              `}>
+          {gigs.map((gig, index) => {
+            const isNewYear = index > 0 && gig.year && gig.year !== gigs[index - 1]?.year;
+
+            return (
+              <div key={index} className="flex flex-col gap-3">
+                {/* Tyylikäs vuosierotin, kun vuosi vaihtuu */}
+                {isNewYear && (
+                  <div className="pt-6 pb-2 flex items-center justify-center gap-3">
+                    <div className="h-0.5 flex-1 bg-gradient-to-r from-transparent via-bright-orange/40 to-transparent" />
+                    <div className="wood-clean px-6 py-2 rounded-full border-2 border-wood-dark shadow-md flex items-center gap-2">
+                      <Banana className="w-5 h-5 text-bright-orange rotate-12" />
+                      <span className="font-heading text-lg md:text-xl text-wood-dark tracking-wide">
+                        Vuosi {gig.year}
+                      </span>
+                      <Banana className="w-5 h-5 text-bright-orange -rotate-12" />
+                    </div>
+                    <div className="h-0.5 flex-1 bg-gradient-to-r from-transparent via-bright-orange/40 to-transparent" />
+                  </div>
+                )}
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.01, x: 5 }}
+                  className="group"
+                >
+                  <div className={`
+                    lauta-clean p-6 md:p-8 flex flex-col md:grid md:grid-cols-12 md:items-center gap-4 shadow-lg border-l-8 
+                    ${gig.isPrivate ? 'border-sand opacity-90' : 'border-bright-orange'} 
+                    ${index === gigs.length - 1 ? 'rounded-b-3xl' : ''}
+                    transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-bright-orange/10
+                  `}>
                 {/* Mobile Labels + Desktop Columns */}
                 <div className="col-span-2 flex items-center md:block">
                   <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Päivä:</span>
@@ -93,9 +129,15 @@ const TourCalendar = () => {
 
                 <div className="col-span-4 flex items-center md:block">
                   <span className="md:hidden font-heading text-sm text-wood-dark/50 w-24">Paikka:</span>
-                  <span className={`font-body text-lg md:text-xl font-bold ${gig.isPrivate ? 'italic text-wood-dark/60' : 'text-wood-dark'}`}>
-                    {gig.venue || "-"}
-                  </span>
+                  {gig.link ? (
+                    <a href={gig.link} target="_blank" rel="noopener noreferrer" className={`font-body text-lg md:text-xl font-bold underline hover:text-bright-orange transition-colors ${gig.isPrivate ? 'italic text-wood-dark/60' : 'text-wood-dark'}`}>
+                      {gig.venue || "-"}
+                    </a>
+                  ) : (
+                    <span className={`font-body text-lg md:text-xl font-bold ${gig.isPrivate ? 'italic text-wood-dark/60' : 'text-wood-dark'}`}>
+                      {gig.venue || "-"}
+                    </span>
+                  )}
                 </div>
 
                 <div className="col-span-3 flex items-center md:block">
@@ -109,8 +151,10 @@ const TourCalendar = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
+          </div>
+        );
+      })}
+    </div>
       </div>
 
       {/* Decorative Wave at the bottom */}

@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 
 const MusicSection = lazy(() => import("@/components/MusicSection"));
 const TourCalendar = lazy(() => import("@/components/TourCalendar"));
+const ShopSection = lazy(() => import("@/components/ShopSection"));
 
 const Index = () => {
   const { hash } = useLocation();
@@ -69,6 +70,7 @@ const Index = () => {
         <BandMembers />
         <MusicSection />
         <TourCalendar />
+        <ShopSection />
         <ContactSection />
         <Footer />
       </Suspense>

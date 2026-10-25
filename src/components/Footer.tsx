@@ -90,22 +90,32 @@ const Footer = () => {
 
 const BackToTop = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 400);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleModal = (e: any) => setIsModalOpen(!!e.detail?.open);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("modal-open-change", handleModal);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("modal-open-change", handleModal);
+    };
   }, []);
 
   return (
     <AnimatePresence>
-      {scrolled && (
+      {scrolled && !isModalOpen && (
         <motion.button
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className={`back-to-top rounded-2xl ${scrolled ? 'glass-bg' : 'wood-texture'} hover:scale-110 active:scale-95`}
+          aria-label="Palaa sivun alkuun"
         >
           🔝
         </motion.button>

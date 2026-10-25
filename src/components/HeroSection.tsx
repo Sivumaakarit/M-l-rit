@@ -118,79 +118,7 @@ const HeroSection = () => {
               />
             </motion.div>
 
-            {/* Hanging Spotify Sign - Asetetaan absoluuttisesti sivuun tietokoneella (ei siirrä logoa!), ja pinoontuu mobiilissa logon alle */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center mt-1 md:mt-0 md:absolute md:-top-11 md:left-16 lg:left-10 xl:left-6 z-[45]"
-            >
 
-              {/* Puinen Kyltti */}
-              <motion.a
-                href="#uusi-julkaisu"
-                onClick={(e) => scrollToSection(e, "#uusi-julkaisu")}
-                initial={{ rotate: -2, y: 0 }}
-                animate={{ 
-                  rotate: [-3.5, 3.5, -3.5],
-                  y: [0, -6, 0]
-                }}
-                transition={{
-                  rotate: { repeat: Infinity, duration: 5, ease: "easeInOut" },
-                  y: { repeat: Infinity, duration: 3.5, ease: "easeInOut" }
-                }}
-                whileHover={{ scale: 1.05, rotate: 1 }}
-                whileTap={{ scale: 0.95 }}
-                className="wood-clean px-4 py-2.5 md:px-5 md:py-3.5 rounded-2xl shadow-xl border-3 border-wood-dark hover:border-bright-orange flex items-center gap-3 cursor-pointer relative group max-w-[280px] min-[375px]:max-w-[320px] md:max-w-xs w-auto hover:bg-banana/10 transition-all duration-300 overflow-hidden"
-              >
-                {/* Premium Shimmer Light Kiiltoefekti */}
-                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] animate-shimmer pointer-events-none z-20" />
-                {/* Keltainen banaanihohde */}
-                <div className="relative flex-shrink-0">
-                  <div className="absolute inset-0 bg-banana/30 blur-md rounded-full animate-pulse scale-125" />
-                  
-                  {/* Pyörivä vinyyli / Spinning Banana Vinyl */}
-                  <div className="relative w-10 h-10 md:w-11 md:h-11 flex-shrink-0 z-10">
-                    <motion.div
-                      animate={{
-                        rotate: 360
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        ease: "linear",
-                        duration: 8
-                      }}
-                      className="w-full h-full bg-slate-900 rounded-full border-2 border-wood-dark shadow-md flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-300"
-                    >
-                      <div className="absolute inset-[2px] border border-white/5 rounded-full" />
-                      <div className="absolute inset-[4px] border border-white/5 rounded-full" />
-                      <div className="absolute inset-[6px] border border-white/5 rounded-full" />
-                      <div className="w-4 h-4 md:w-4.5 md:h-4.5 bg-primary rounded-full border border-wood-dark flex items-center justify-center">
-                        <span className="text-[8px] md:text-[9px] select-none leading-none flex items-center justify-center mt-[-0.5px]">
-                          🍌
-                        </span>
-                      </div>
-                    </motion.div>
-                    <div className="absolute -top-0.5 -right-0.5 text-[10px] md:text-xs filter drop-shadow animate-bounce">
-                      ⚡
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tekstit - Max 2 riviä */}
-                <div className="text-left">
-                  <h3 className="font-heading text-sm md:text-base text-wood-dark leading-tight group-hover:text-bright-orange transition-colors">
-                    Uusi sinkku julkaistu!
-                  </h3>
-                  <p className="font-body text-xs md:text-sm text-forest-green font-bold flex items-center gap-1 mt-0.5 group-hover:text-bright-orange/90 transition-colors">
-                    <span>Lue lisää 🍌</span>
-                    <svg className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </p>
-                </div>
-              </motion.a>
-            </motion.div>
           </div>
 
           <h1 className="font-heading text-[10vw] min-[375px]:text-5xl md:text-6xl lg:text-7xl text-wood-dark mb-6 drop-shadow-sm flex items-center justify-center gap-4 flex-wrap">

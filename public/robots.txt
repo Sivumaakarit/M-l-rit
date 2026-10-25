@@ -1,3 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /hallinta
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /hallinta
+
 User-agent: OAI-SearchBot
 Allow: /
 

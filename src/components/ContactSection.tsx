@@ -7,15 +7,69 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PrivacyPolicyModal } from "./PrivacyPolicyModal";
 import { useLocation } from "react-router-dom";
 
-const promoItems = [
+interface PromoItem {
+  title: string;
+  description: string;
+  fileName: string;
+  filePath: string;
+  downloadLabel?: string;
+  secondaryDownload?: {
+    filePath: string;
+    fileName: string;
+    label: string;
+  };
+  svgPath?: string;
+  svgFileName?: string;
+  previewPath?: string;
+  specs: string;
+  thumbnail: string;
+  isWoodPlank?: boolean;
+  isTextLogo?: boolean;
+  isApinaLogo?: boolean;
+  isTransparentLogo?: boolean;
+}
+
+const promoItems: PromoItem[] = [
   {
-    title: "Mölyapinat Promokuva 🐒",
+    title: "Mölyapinat Promokuva 1 🐒",
     description: "Painolaatuinen kuva keikkajulisteisiin ja markkinointiin.",
     fileName: "molyapinat2kp18.jpg",
     filePath: "/molyapinat2kp18.jpg",
     previewPath: "/molyapinat-promo-preview.webp",
-    specs: "JPG • 3.5 MB • Korkearesoluutio",
+    specs: "JPG • 3.5 MB • Painolaatu",
     thumbnail: "/molyapinat-promo-thumb.webp",
+    downloadLabel: "Lataa HQ",
+    isWoodPlank: false,
+    isTextLogo: false,
+    isApinaLogo: false
+  },
+  {
+    title: "Mölyapinat Promokuva 2 🐒",
+    description: "Optimoitu WebP-promokuva keikkamarkkinointiin ja julisteisiin.",
+    fileName: "molyapinat-promo2.webp",
+    filePath: "/molyapinat-promo2.webp",
+    previewPath: "/molyapinat-promo2.webp",
+    specs: "WEBP • 161 KB • Web-optimoitu",
+    thumbnail: "/molyapinat-promo2-thumb.webp",
+    downloadLabel: "Lataa WebP",
+    isWoodPlank: false,
+    isTextLogo: false,
+    isApinaLogo: false
+  },
+  {
+    title: "Mölyapinat Promokuva 3 🐒",
+    description: "Painolaatuinen kuva keikkajulisteisiin ja laadukkaaseen markkinointiin.",
+    fileName: "molyapinat-promo3.png",
+    filePath: "/molyapinat-promo3.png",
+    previewPath: "/molyapinat-promo3.webp",
+    specs: "PNG (8.4 MB HQ) • WEBP (425 KB)",
+    thumbnail: "/molyapinat-promo3-thumb.webp",
+    downloadLabel: "Lataa HQ",
+    secondaryDownload: {
+      filePath: "/molyapinat-promo3.webp",
+      fileName: "molyapinat-promo3.webp",
+      label: "Lataa WebP"
+    },
     isWoodPlank: false,
     isTextLogo: false,
     isApinaLogo: false
@@ -24,20 +78,23 @@ const promoItems = [
     title: "Mölyapinat Tekstilogo",
     description: "Tekstilogo varjoilla ja läpinäkyvällä taustalla.",
     fileName: "molyapinat-tekstilogo.png",
-    filePath: "generate-text",
+    filePath: "/molyapinat-tekstilogo.png",
+    previewPath: "/molyapinat-tekstilogo.webp",
     specs: "PNG • 3000x720 px • Läpinäkyvä",
-    thumbnail: "generate-text",
+    thumbnail: "/molyapinat-tekstilogo.webp",
     isWoodPlank: false,
-    isTextLogo: true,
-    isApinaLogo: false
+    isTextLogo: false,
+    isTransparentLogo: true
   },
   {
     title: "Mölyapinat Apinalogo 🐒",
     description: "Aurinkolasillinen apinalogo (päänkuva) ilman taustaa.",
     fileName: "molyapinat-apinalogo.png",
     filePath: "/logo.png",
+    svgPath: "/molyapinat-apinalogo.svg",
+    svgFileName: "molyapinat-apinalogo.svg",
     previewPath: "/logo.webp",
-    specs: "PNG • 742 KB • Läpinäkyvä",
+    specs: "PNG (742 KB) • SVG (Vektori) • Läpinäkyvä",
     thumbnail: "/logo.webp",
     isWoodPlank: false,
     isTextLogo: false,
@@ -47,12 +104,15 @@ const promoItems = [
     title: "Mölyapinat Lankkulogo",
     description: "Yläpalkin tyylinen puulankkulogo läpinäkyvällä taustalla.",
     fileName: "molyapinat-lankkulogo.png",
-    filePath: "generate-wood-full",
-    specs: "PNG • 2650x800 px • Läpinäkyvä",
-    thumbnail: "generate-wood",
-    isWoodPlank: true,
-    plankType: "full",
-    isApinaLogo: false
+    filePath: "/molyapinat-lankkulogo.png",
+    svgPath: "/molyapinat-lankkulogo.svg",
+    svgFileName: "molyapinat-lankkulogo.svg",
+    previewPath: "/molyapinat-lankkulogo.webp",
+    specs: "PNG (2650x800) • SVG (Vektori) • Läpinäkyvä",
+    thumbnail: "/molyapinat-lankkulogo.webp",
+    isWoodPlank: false,
+    isTextLogo: false,
+    isTransparentLogo: true
   }
 ];
 
@@ -62,8 +122,6 @@ const ContactSection = () => {
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const [isPromoOpen, setIsPromoOpen] = useState(false);
   const [activeLightboxImg, setActiveLightboxImg] = useState<string | null>(null);
-  const [woodPlankSrc, setWoodPlankSrc] = useState<string | null>(null);
-  const [textLogoSrc, setTextLogoSrc] = useState<string | null>(null);
 
   const { hash } = useLocation();
 
@@ -72,210 +130,6 @@ const ContactSection = () => {
       setIsPromoOpen(true);
     }
   }, [hash]);
-
-  useEffect(() => {
-    const generateAssets = async () => {
-      // Wait for fonts to load so "Luckiest Guy" renders perfectly in canvas
-      if (typeof document !== "undefined" && document.fonts) {
-        try {
-          await document.fonts.ready;
-        } catch (e) {
-          console.warn("Font loading wait failed:", e);
-        }
-      }
-      
-      const textCanvas = generateTextLogoCanvas();
-      setTextLogoSrc(textCanvas.toDataURL("image/png"));
-
-      const woodCanvas = await generateWoodPlankLogoCanvas();
-      setWoodPlankSrc(woodCanvas.toDataURL("image/png"));
-    };
-
-    generateAssets();
-  }, []);
-
-
-
-  const generateTextLogoCanvas = (): HTMLCanvasElement => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 3000;
-    canvas.height = 720;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return canvas;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.font = 'bold 380px "Luckiest Guy", cursive, sans-serif'; // Even bolder and larger!
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    const textX = canvas.width / 2;
-    const textY = canvas.height / 2;
-
-    // Draw shadow like text-shadow-fun (rgba(74, 53, 37, 0.3) matching hsla(var(--wood-dark) / 0.3))
-    ctx.fillStyle = "rgba(74, 53, 37, 0.3)";
-    ctx.fillText("Mölyapinat", textX + 12, textY + 12);
-
-    // Draw solid text color like yläpalkki (slate-900)
-    ctx.fillStyle = "#0f172a";
-    ctx.fillText("Mölyapinat", textX, textY);
-
-    return canvas;
-  };
-
-  const generateWoodPlankLogoCanvas = (): Promise<HTMLCanvasElement> => {
-    return new Promise((resolve) => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 2650;
-      canvas.height = 800;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        resolve(canvas);
-        return;
-      }
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw shadow (perfectly centered Y-shaved canvas margins, slimmer bottom edge)
-      ctx.fillStyle = "rgba(74, 53, 37, 0.35)";
-      ctx.beginPath();
-      if ('roundRect' in ctx) {
-        (ctx as any).roundRect(58, 88, canvas.width - 86, 522, 120);
-      } else {
-        ctx.rect(58, 88, canvas.width - 86, 522);
-      }
-      ctx.fill();
-
-      // Wood texture gradient - beautiful premium light cream/beige wood matching .wood-clean (slimmer Y-span 80-610)
-      const woodGrad = ctx.createLinearGradient(0, 80, 0, 610);
-      woodGrad.addColorStop(0, "#f4ede2");       // slightly lighter: premium delicate warm cream
-      woodGrad.addColorStop(0.15, "#f7f0e9");    // balanced lighter top highlight
-      woodGrad.addColorStop(0.16, "#f2eae0");    // soft plank edge
-      woodGrad.addColorStop(0.2, "#eddccb");     // hsl(35 30% 88%)
-      woodGrad.addColorStop(0.5, "#f9f6f1");     // soft warm lighter highlight
-      woodGrad.addColorStop(0.8, "#f1e5d7");     // natural grain
-      woodGrad.addColorStop(0.84, "#eddccb");    // soft plank edge
-      woodGrad.addColorStop(1, "#eedfcb");       // warm backing
-
-      ctx.fillStyle = woodGrad;
-      ctx.strokeStyle = "#4A3525";
-      ctx.lineWidth = 30;
-
-      ctx.beginPath();
-      if ('roundRect' in ctx) {
-        (ctx as any).roundRect(50, 80, canvas.width - 86, 530, 120);
-      } else {
-        ctx.rect(50, 80, canvas.width - 86, 530);
-      }
-      ctx.fill();
-      ctx.stroke();
-
-      // Draw horizontal planks line (replicates multiple planks with soft, elegant dark lines, Y-spaced for 530px height)
-      ctx.strokeStyle = "rgba(74, 53, 37, 0.08)";
-      ctx.lineWidth = 14;
-      ctx.beginPath();
-      ctx.moveTo(50, 225);
-      ctx.lineTo(canvas.width - 36, 225);
-      ctx.moveTo(50, 370);
-      ctx.lineTo(canvas.width - 36, 370);
-      ctx.moveTo(50, 515);
-      ctx.lineTo(canvas.width - 36, 515);
-      ctx.stroke();
-
-      // Soft wood grain accents (rich variation without looking dark, Y-spaced for 530px height)
-      ctx.strokeStyle = "rgba(74, 53, 37, 0.04)";
-      ctx.lineWidth = 12;
-      ctx.beginPath();
-      ctx.moveTo(50, 150);
-      ctx.lineTo(canvas.width - 36, 150);
-      ctx.moveTo(50, 295);
-      ctx.lineTo(canvas.width - 36, 295);
-      ctx.moveTo(50, 445);
-      ctx.lineTo(canvas.width - 36, 445);
-      ctx.moveTo(50, 575);
-      ctx.lineTo(canvas.width - 36, 575);
-      ctx.stroke();
-
-      // Additional thin soft grain accents
-      ctx.strokeStyle = "rgba(74, 53, 37, 0.02)";
-      ctx.lineWidth = 6;
-      ctx.beginPath();
-      ctx.moveTo(50, 250);
-      ctx.lineTo(canvas.width - 36, 250);
-      ctx.moveTo(50, 480);
-      ctx.lineTo(canvas.width - 36, 480);
-      ctx.stroke();
-
-      const logoImg = new Image();
-      logoImg.crossOrigin = "anonymous";
-      logoImg.src = "/logo.webp";
-
-      logoImg.onload = () => {
-        const imgSize = 420; // Just a little bit larger!
-        const imgX = 110; // shifted left for tighter fit
-        const imgY = 130; // shifted up visually to align perfectly with text (due to transparent asset padding)
-        ctx.drawImage(logoImg, imgX, imgY, imgSize, imgSize);
-
-        ctx.font = 'bold 345px "Luckiest Guy", cursive, sans-serif'; // Grew text size slightly more as requested
-        ctx.textBaseline = "middle"; // perfectly center text vertically
-        const textX = imgX + imgSize + 45; // shifted slightly left towards the logo
-        const textY = 386; // shifted slightly down for beautiful vertical parity
-
-        // Text Shadow
-        ctx.fillStyle = "rgba(74, 53, 37, 0.3)";
-        ctx.fillText("Mölyapinat", textX + 15, textY + 15);
-
-        // Text Fill - using slate-900 to match the exact header brand look
-        ctx.fillStyle = "#0f172a";
-        ctx.fillText("Mölyapinat", textX, textY);
-
-        resolve(canvas);
-      };
-
-      logoImg.onerror = () => {
-        ctx.font = 'bold 345px "Luckiest Guy", sans-serif';
-        ctx.textBaseline = "middle";
-        ctx.textAlign = "center";
-        const textX = canvas.width / 2;
-        const textY = 386;
-        
-        ctx.fillStyle = "rgba(74, 53, 37, 0.3)";
-        ctx.fillText("Mölyapinat", textX + 15, textY + 15);
-        
-        ctx.fillStyle = "#0f172a";
-        ctx.fillText("Mölyapinat", textX, textY);
-
-        resolve(canvas);
-      };
-    });
-  };
-
-  const downloadTextLogo = () => {
-    const canvas = generateTextLogoCanvas();
-    const link = document.createElement("a");
-    link.download = "molyapinat-tekstilogo.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-    toast.success("Tekstilogo ladattu jättikoossa! 🍌");
-  };
-
-  const downloadWoodPlankLogo = async (type?: string) => {
-    const canvas = await generateWoodPlankLogoCanvas();
-    const link = document.createElement("a");
-    link.download = "molyapinat-lankkulogo.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-    toast.success("Lankkulogo ladattu jättikoossa! 🍌");
-  };
-
-  const previewTextLogo = () => {
-    const canvas = generateTextLogoCanvas();
-    setActiveLightboxImg(canvas.toDataURL("image/png"));
-  };
-
-  const previewWoodPlankLogo = async () => {
-    const canvas = await generateWoodPlankLogoCanvas();
-    setActiveLightboxImg(canvas.toDataURL("image/png"));
-  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -318,42 +172,10 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="yhteystiedot" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-secondary relative overflow-hidden">
+    <section id="yhteystiedot" className="pt-12 md:pt-24 pb-24 md:pb-48 bg-background relative overflow-hidden">
       <MolyRainDisplay particles={particles} />
 
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            onClick={triggerRain}
-            whileHover={{
-              rotate: [0, -2, 2, -1, 1, 0],
-              transition: { duration: 1.2, ease: "easeInOut" }
-            }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformOrigin: "top center" }}
-            className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all"
-          >
-            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
-              🐒 Tilaa Mölyapinat keikalle! 🐒
-            </h2>
-          </motion.div>
-          <p className="font-body text-xl md:text-2xl text-wood-dark max-w-4xl mx-auto font-bold mb-8">
-            Haluatko meidät esiintymään? Laita viestiä alle tai sähköpostilla: <br className="md:hidden" />
-            <a 
-              href="mailto:jullenmusiikki@gmail.com" 
-              className="text-forest-green hover:text-bright-orange transition-colors underline decoration-2 underline-offset-4"
-            >
-              jullenmusiikki@gmail.com
-            </a>
-          </p>
-        </motion.div>
-
         {/* MÖLY-MEDIAKIT ALASVETO JÄRJESTÄJILLE */}
         <div id="jarjestajille" className="max-w-2xl mx-auto mb-16 scroll-margin-top-[120px]">
           <motion.button
@@ -398,56 +220,10 @@ const ContactSection = () => {
                         className="flex flex-col md:flex-row items-center gap-5 p-4 bg-background/50 border-2 border-wood-dark/15 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
                       >
                         {/* Esikatselukuva */}
-                        {item.isWoodPlank ? (
-                          <div 
-                            onClick={previewWoodPlankLogo}
-                            className="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center relative p-1.5 border-2 border-wood-dark/15 cursor-zoom-in group select-none"
-                            style={{ 
-                              backgroundImage: 'conic-gradient(#e5e7eb 25%, transparent 25% 50%, #e5e7eb 50% 75%, transparent 75%)', 
-                              backgroundSize: '16px 16px', 
-                              backgroundColor: '#ffffff' 
-                            }}
-                          >
-                            {woodPlankSrc ? (
-                              <img 
-                                src={woodPlankSrc} 
-                                alt={item.title} 
-                                className="w-full h-auto max-h-full object-contain transition-transform duration-300 group-hover:scale-105" 
-                              />
-                            ) : (
-                              <div className="animate-pulse bg-slate-200 w-full h-full rounded-lg" />
-                            )}
-                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-xl">
-                              <span className="text-white text-xs font-bold font-body px-2.5 py-1 bg-black/40 rounded-full backdrop-blur-xs">Esikatsele</span>
-                            </div>
-                          </div>
-                        ) : item.isTextLogo ? (
-                          <div 
-                            onClick={previewTextLogo}
-                            className="w-28 h-28 md:w-32 md:h-32 rounded-xl border-2 border-wood-dark/15 overflow-hidden flex-shrink-0 flex items-center justify-center relative cursor-zoom-in group p-1.5"
-                            style={{ 
-                              backgroundImage: 'conic-gradient(#e5e7eb 25%, transparent 25% 50%, #e5e7eb 50% 75%, transparent 75%)', 
-                              backgroundSize: '16px 16px', 
-                              backgroundColor: '#ffffff' 
-                            }}
-                          >
-                            {textLogoSrc ? (
-                              <img 
-                                src={textLogoSrc} 
-                                alt={item.title} 
-                                className="w-full h-auto max-h-full object-contain transition-transform duration-300 group-hover:scale-[1.42] scale-[1.32]" 
-                              />
-                            ) : (
-                              <div className="animate-pulse bg-slate-200 w-full h-full rounded-lg" />
-                            )}
-                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-xl">
-                              <span className="text-white text-xs font-bold font-body px-2.5 py-1 bg-black/40 rounded-full backdrop-blur-xs">Esikatsele</span>
-                            </div>
-                          </div>
-                        ) : item.isApinaLogo ? (
+                        {item.isTransparentLogo || item.isApinaLogo ? (
                           <div 
                             onClick={() => setActiveLightboxImg(item.previewPath || item.filePath)}
-                            className="w-28 h-28 md:w-32 md:h-32 rounded-xl border-2 border-wood-dark/15 overflow-hidden flex-shrink-0 flex items-center justify-center relative cursor-zoom-in group p-3"
+                            className="w-28 h-28 md:w-32 md:h-32 rounded-xl border-2 border-wood-dark/15 overflow-hidden flex-shrink-0 flex items-center justify-center relative cursor-zoom-in group p-2"
                             style={{ 
                               backgroundImage: 'conic-gradient(#e5e7eb 25%, transparent 25% 50%, #e5e7eb 50% 75%, transparent 75%)', 
                               backgroundSize: '16px 16px', 
@@ -457,7 +233,7 @@ const ContactSection = () => {
                             <img 
                               src={item.thumbnail} 
                               alt={item.title} 
-                              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 select-none" 
+                              className="w-full h-auto max-h-full object-contain transition-transform duration-300 group-hover:scale-105 select-none" 
                             />
                             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-xl">
                               <span className="text-white text-xs font-bold font-body px-2.5 py-1 bg-black/40 rounded-full backdrop-blur-xs">Esikatsele</span>
@@ -489,31 +265,33 @@ const ContactSection = () => {
                         </div>
 
                         {/* Lataustoiminnot */}
-                        <div className="flex flex-col gap-2.5 w-full md:w-auto">
-                          {item.isWoodPlank ? (
-                            <button
-                              onClick={() => downloadWoodPlankLogo(item.plankType)}
-                              className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
-                            >
-                              <Download className="w-4 h-4 stroke-[2.5]" />
-                              Lataa HQ
-                            </button>
-                          ) : item.isTextLogo ? (
-                            <button
-                              onClick={downloadTextLogo}
-                              className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
-                            >
-                              <Download className="w-4 h-4 stroke-[2.5]" />
-                              Lataa HQ
-                            </button>
-                          ) : (
+                        <div className="flex flex-col sm:flex-row md:flex-col gap-2 w-full md:w-auto shrink-0">
+                          <a
+                            href={item.filePath}
+                            download={item.fileName}
+                            className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
+                          >
+                            <Download className="w-4 h-4 stroke-[2.5]" />
+                            {item.svgPath ? "Lataa PNG" : item.downloadLabel || "Lataa HQ"}
+                          </a>
+                          {item.svgPath && (
                             <a
-                              href={item.filePath}
-                              download={item.fileName}
-                              className="flex items-center justify-center gap-2 bg-bright-orange text-white hover:brightness-105 active:scale-95 font-body font-bold text-sm px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
+                              href={item.svgPath}
+                              download={item.svgFileName || "logo.svg"}
+                              className="flex items-center justify-center gap-2 bg-forest-green text-white hover:brightness-105 active:scale-95 font-body font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
                             >
                               <Download className="w-4 h-4 stroke-[2.5]" />
-                              Lataa HQ
+                              Lataa SVG
+                            </a>
+                          )}
+                          {item.secondaryDownload && (
+                            <a
+                              href={item.secondaryDownload.filePath}
+                              download={item.secondaryDownload.fileName}
+                              className="flex items-center justify-center gap-2 bg-forest-green text-white hover:brightness-105 active:scale-95 font-body font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl shadow-md transition-all cursor-pointer whitespace-nowrap"
+                            >
+                              <Download className="w-4 h-4 stroke-[2.5]" />
+                              {item.secondaryDownload.label}
                             </a>
                           )}
                         </div>
@@ -531,6 +309,38 @@ const ContactSection = () => {
             )}
           </AnimatePresence>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-10 md:mb-14"
+        >
+          <motion.div
+            onClick={triggerRain}
+            whileHover={{
+              rotate: [0, -2, 2, -1, 1, 0],
+              transition: { duration: 1.2, ease: "easeInOut" }
+            }}
+            whileTap={{ scale: 0.95 }}
+            style={{ transformOrigin: "top center" }}
+            className="inline-block wood-clean rounded-3xl px-10 py-5 shadow-xl mb-6 overflow-hidden cursor-pointer active:brightness-95 transition-all"
+          >
+            <h2 className="font-heading text-3xl md:text-5xl text-wood-dark text-shadow-fun">
+              🐒 Tilaa Mölyapinat keikalle! 🐒
+            </h2>
+          </motion.div>
+          <p className="font-body text-xl md:text-2xl text-wood-dark max-w-4xl mx-auto font-bold mb-4">
+            Haluatko meidät esiintymään? Laita viestiä alle tai sähköpostilla: <br className="md:hidden" />
+            <a 
+              href="mailto:jullenmusiikki@gmail.com" 
+              className="text-forest-green hover:text-bright-orange transition-colors underline decoration-2 underline-offset-4"
+            >
+              jullenmusiikki@gmail.com
+            </a>
+          </p>
+        </motion.div>
 
         {/* LIGHTBOX MODAL */}
         <AnimatePresence>
