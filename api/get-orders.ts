@@ -33,9 +33,9 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: "Printful orders fetch failed", details: pfData });
     }
 
-    // Suodatetaan pois vanhat testinäytteet (is_sample: true)
+    // Suodatetaan pois vanhat testinäytteet ja perutut tilaukset
     const rawOrders = pfData?.result || [];
-    const realOrders = rawOrders.filter((o: any) => !o.is_sample);
+    const realOrders = rawOrders.filter((o: any) => !o.is_sample && o.status !== "canceled");
 
     return res.status(200).json({
       success: true,
